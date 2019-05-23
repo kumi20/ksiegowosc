@@ -37,6 +37,7 @@ import { PanelComponent } from './book/panel/panel.component';
 import { NavbarComponent } from './book/navbar/navbar.component';
 import { SettingsComponent } from './book/settings/settings.component';
 import { MyProfileComponent } from './book/my-profile/my-profile.component';
+import { ContentComponent } from './book/content/content.component';
 
 
 
@@ -65,7 +66,8 @@ export function getAuthServiceConfigs() {
         PanelComponent,
         NavbarComponent,
         SettingsComponent,
-        MyProfileComponent
+        MyProfileComponent,
+        ContentComponent
 	],
 	imports: [
 		BrowserModule,
