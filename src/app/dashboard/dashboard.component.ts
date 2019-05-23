@@ -13,7 +13,10 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy{
   @ViewChildren('dynamiCom') dynamiCom;  
   id: number = 1;
   private sub: any;
-    
+  statusLista: Array<any> = [
+        {value:'6020084026', label: 'zrealizowane'},
+        {value:'6020084027', label: 'wykonane przez klienta'},
+    ];    
     
   constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) { }
     
@@ -26,11 +29,7 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy{
             }
       });
       
-      this.CmsService.get(`mbopn/getOfers.php`).subscribe(
-        response=>{
-            console.log('respone', response['length'])
-        }
-      )
+
   }
     
   ngAfterViewInit(){
@@ -44,7 +43,6 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy{
  }    
     
     test(){
-        this.event.wyswietlInfo('success', 'test error');
+        this.event.showInfo('success', 'test error');
     }   
-    
 }

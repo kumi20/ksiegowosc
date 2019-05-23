@@ -23,7 +23,7 @@ export class NewsletterComponent implements OnInit {
   }
 
   save(){
-     if (this.email == '') this.event.wyswietlInfo('info', 'Podaj adres email');
+     if (this.email == '') this.event.showInfo('info', 'Podaj adres email');
       else{
           this.event.klepsydraStart();
           this.CmsService.get(`template/newsletter/post.php?email=${this.email}`).subscribe(
@@ -34,7 +34,7 @@ export class NewsletterComponent implements OnInit {
                 },
                 error =>{
                     this.event.klepsydraStop();
-                    this.event.wyswietlInfo('error','Błąd zapisu danych');
+                    this.event.showInfo('error','Błąd zapisu danych');
                 }
           )
       }

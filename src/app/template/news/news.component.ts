@@ -58,7 +58,7 @@ export class NewsComponentView implements OnInit {
             },
             error=>{
                 this.event.klepsydraStop();
-                this.event.wyswietlInfo('error','Błąd pobierania danych');
+                this.event.showInfo('error','Błąd pobierania danych');
             }
       )
   }  

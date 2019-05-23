@@ -21,10 +21,37 @@ import { routerModule} from './app.routing';
 
 import { AuthGuard } from './auth.guard';
 
+import {
+    SocialLoginModule,
+    AuthServiceConfig,
+    FacebookLoginProvider,
+} from "angular-6-social-login";
+
 import { DashboardComponent} from './dashboard/dashboard.component';
 import { DynamicComponentComponent } from './dynamic-component/dynamic-component.component';
 import { WraperComponentComponent } from './wraper-component/wraper-component.component';
 import { TemplateModule } from './template/template.module';
+import { CompanyComponent } from './company/company.component';
+import { HeaderComponent } from './header/header.component';
+import { PanelComponent } from './book/panel/panel.component';
+import { NavbarComponent } from './book/navbar/navbar.component';
+import { SettingsComponent } from './book/settings/settings.component';
+import { MyProfileComponent } from './book/my-profile/my-profile.component';
+
+
+
+// Configs 
+export function getAuthServiceConfigs() {
+  let config = new AuthServiceConfig(
+      [
+        {
+          id: FacebookLoginProvider.PROVIDER_ID,
+          provider: new FacebookLoginProvider("128072974397769")
+        }
+      ]
+  );
+  return config;
+}
 
 
 @NgModule({
@@ -32,7 +59,13 @@ import { TemplateModule } from './template/template.module';
 		AppComponent,
         DashboardComponent,
         DynamicComponentComponent,
-        WraperComponentComponent
+        WraperComponentComponent,
+        CompanyComponent,
+        HeaderComponent,
+        PanelComponent,
+        NavbarComponent,
+        SettingsComponent,
+        MyProfileComponent
 	],
 	imports: [
 		BrowserModule,
@@ -47,8 +80,14 @@ import { TemplateModule } from './template/template.module';
         GoogleAnalyticsModule.forRoot(),
         MDBBootstrapModule.forRoot(),
         MDBBootstrapModulePro.forRoot(),
+        SocialLoginModule
 	],
-	providers: [ApiService, EventService, AuthGuard],
+	providers: [ApiService, EventService, AuthGuard,
+               {
+                  provide: AuthServiceConfig,
+                  useFactory: getAuthServiceConfigs
+                }
+               ],
 	bootstrap: [AppComponent],
 	schemas: [NO_ERRORS_SCHEMA],
 })

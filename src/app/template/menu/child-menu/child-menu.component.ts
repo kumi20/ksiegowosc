@@ -26,7 +26,7 @@ export class ChildMenuComponent implements OnInit {
             this.event.klepsydraStop();
         },
           error=>{
-              this.event.wyswietlInfo('error', 'Błąd pobierania danych');
+              this.event.showInfo('error', 'Błąd pobierania danych');
               this.event.klepsydraStop();
           }
       )

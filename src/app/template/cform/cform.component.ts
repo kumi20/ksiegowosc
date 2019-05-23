@@ -28,12 +28,12 @@ export class CformTemplateComponent implements OnInit {
   }
     
     send(event){
-        if (event.email == '' || event.message == '') this.event.wyswietlInfo('info','Proszę podać email i treśc wiadomości');
+        if (event.email == '' || event.message == '') this.event.showInfo('info','Proszę podać email i treśc wiadomości');
         else{
             this.event.klepsydraStart();
             this.CmsService.post(`template/cform/sendMail.php?id=${this.idtresci}`, event).subscribe(
                 response=>{
-                    this.event.wyswietlInfo('success', 'Wiadomość została wysłana');
+                    this.event.showInfo('success', 'Wiadomość została wysłana');
                     this.cform.controls['name'].setValue("");
                     this.cform.controls['email'].setValue("");
                     this.cform.controls['message'].setValue("");
@@ -42,7 +42,7 @@ export class CformTemplateComponent implements OnInit {
                 },
                 error =>{
                     this.event.klepsydraStop();
-                    this.event.wyswietlInfo('error','Błąd wysyłania wiadomości');
+                    this.event.showInfo('error','Błąd wysyłania wiadomości');
                 }
             )
         }

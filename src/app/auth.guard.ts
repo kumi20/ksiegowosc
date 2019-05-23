@@ -7,7 +7,7 @@ export class AuthGuard implements CanActivate {
     constructor(private _router: Router) { }
  
     canActivate() {
-        if (window.localStorage.getItem('userQumiToken')) {
+        if (window.localStorage.getItem('ksiegaQumiToken')) {
             return true;
         }
  

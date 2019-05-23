@@ -8,7 +8,7 @@ import { EventService } from './event.service';
 export class ApiService {
 
   domanie = 'http://kumi20.webd.pl'; 
-  uri =  this.domanie + '/api/mbopn/';
+  uri =  this.domanie + '/api/ksiega/';
     
     
   uriGallery = this.domanie + '/cms/assets/gallery';
@@ -24,24 +24,60 @@ export class ApiService {
     return this._http.get<any[]|any>(this.uri+uri)
     .pipe(
         catchError((err, caught)=>{
-            this.event.wyswietlInfo('error',err.message);
+            this.event.showInfo('error',err.message);
+            throw new Error(err.message)
+        })
+    )
+  }    
+    
+  getAuthorization(uri){
+    return this._http.get<any[]|any>(this.uri+uri,{headers: {
+          'AuthorizationToken':localStorage.getItem('ksiegaQumiToken')
+      }})
+    .pipe(
+        catchError((err, caught)=>{
+            this.event.showInfo('error',err.message);
             throw new Error(err.message)
         })
     )
   }
     
   post(uri, json){      
-      return this._http.post<any[]|any>(this.uri+uri, json, {headers: {
-          'AuthorizationToken':localStorage.getItem('userQumiToken')
-      }})
+      return this._http.post<any[]|any>(this.uri+uri, json)
       .pipe(
         catchError((err, caught)=>{
-            this.event.wyswietlInfo('error',err.message);
+            this.event.showInfo('error',err.message);
             throw new Error(err.message)
         })
     )
   }    
+    
+  postAuthorization(uri, json){      
+      return this._http.post<any[]|any>(this.uri+uri, json, {headers: {
+          'AuthorizationToken':localStorage.getItem('ksiegaQumiToken')
+      }})
+      .pipe(
+        catchError((err, caught)=>{
+            this.event.showInfo('error',err.message);
+            throw new Error(err.message)
+        })
+    )
+  }  
+    
+  logOn(user, psw){
+      const json = JSON.stringify({
+          'user': user,
+          'psw': psw
+      });
 
+      return this._http.post<any[]|any>(this.uri + 'logON.php', json)
+      .pipe(
+        catchError((err, caught)=>{
+            this.event.showInfo('error',err.message);
+            throw new Error(err.message)
+        })
+     )
+  }    
 
 }
 

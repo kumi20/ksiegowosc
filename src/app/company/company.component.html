@@ -1,0 +1,60 @@
+    <div class="container">
+            
+        <div class="row">
+            <div class="col-md-6">
+                <div class="md-form">
+                    <input type="text" class="form-control" (keyup.enter)="onEnterNip($event)" [(ngModel)]="company.nip">
+                    <label class="active">NIP:</label>
+                </div>  
+            </div>
+            <div class="col-md-6">
+                <div class="md-form">
+                    <input type="text" class="form-control" [(ngModel)]="company.name" [disabled]="disableInput">
+                    <label class="active">Nazwa:</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="md-form">
+                    <input type="text" class="form-control" [(ngModel)]="company.street" [disabled]="disableInput">
+                    <label class="active">Ulica:</label>
+                </div>                
+            </div>
+            <div class="col-md-3">                 
+                <div class="md-form">
+                    <input type="text" class="form-control" [(ngModel)]="company.home_number" [disabled]="disableInput">
+                    <label class="active">Nr domu:</label>
+                </div>
+            </div>
+            <div class="col-md-3">                 
+                <div class="md-form">
+                    <input type="text" class="form-control" [(ngModel)]="company.local_number" [disabled]="disableInput">
+                    <label class="active">Nr mieszkania:</label>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="md-form">
+                    <input type="text" class="form-control" [(ngModel)]="company.post_code" [disabled]="disableInput">
+                    <label class="active">Kod pocztowy:</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="md-form">
+                    <input type="text" class="form-control" [(ngModel)]="company.city" [disabled]="disableInput">
+                    <label class="active">Miejscowość:</label>
+                </div>                
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                 <button (click)="save()" class="btn o-button--primary">zapisz</button>
+            </div>
+        </div>
+    </div>

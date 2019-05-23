@@ -8,7 +8,7 @@ export class EventService {
   constructor(private toastrService: ToastService) {}
 
 
-  wyswietlInfo(typ, tresc){
+  showInfo(typ, tresc){
     switch(typ){
         case 'info': this.toastrService.info(tresc); break;
         case 'success': this.toastrService.success(tresc); break;

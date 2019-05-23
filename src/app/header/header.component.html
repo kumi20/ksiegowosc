@@ -1,0 +1,85 @@
+<header id="top">
+    <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
+        <mdb-navbar-brand>
+            <a class="logo navbar-brand waves-light" mdbWavesEffect href="#"><strong>MDB</strong></a>
+        </mdb-navbar-brand>
+        <links>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active waves-light" mdbWavesEffect>
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+            </ul>
+            
+            <div class="form-inline">
+                <div class="md-form my-0">
+                    <i class="fa fa-user navbar-icon" mdbTooltip="Zaloguj" placement="bottom" (click)="login.show()" mdbWavesEffect></i>
+                </div>
+            </div>
+        </links>
+    </mdb-navbar>
+    
+    <div class="view" style="background-image: url('./assets/img/header.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+        <div class="mask d-flex justify-content-center align-items-center">
+        </div>
+    </div>
+</header>
+
+
+
+
+<div mdbModal #login="mdb-modal" class="modal fade top"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <!--Content-->
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header text-center">
+        <h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3" id="myModalLabel">
+          <strong>Zaloguj się</strong>
+        </h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="login.hide()" id="btn_close_login">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!--Body-->
+      <div class="modal-body mx-4">
+        <!--Body-->
+        <form [formGroup]="userAuthorization" (ngSubmit)="logON(userAuthorization.value)">
+            <div class="md-form mb-5">
+              <input type="email" id="Form-email1" class="form-control" formControlName="email" mdbActive>
+              <label data-error="wrong" data-success="right" for="Form-email1">Twój email</label>
+            </div>
+
+            <div class="md-form pb-3">
+              <input type="password" id="Form-pass1" class="form-control" formControlName="psw" mdbActive>
+              <label data-error="wrong" data-success="right" for="Form-pass1" >Twoje hasło</label>
+              <p class="font-small blue-text d-flex justify-content-end">Zapomniałem
+                <a href="#" class="blue-text ml-1"> hasło?</a>
+              </p>
+            </div>
+
+            <div class="text-center mb-3">
+              <button mdbBtn type="submit" class="btn blue-gradient" rounded="true" [disabled]="!userAuthorization.valid" mdbWavesEffect>Zaloguj się</button>
+            </div>
+        </form> 
+          
+        <div class="alert alert-danger" *ngIf="errorLogin.length > 0">
+            <strong>Błąd!</strong> {{errorLogin}}.
+        </div>
+          
+        <p class="font-small dark-grey-text text-right d-flex justify-content-center mb-3 pt-2"> zaloguj się przez:</p>
+
+        <div class="row my-3 d-flex justify-content-center">    
+            <button type="button" mdbBtn class="btn btn-fb waves-light" (click)="socialSignIn('facebook')" mdbWavesEffect><i class="fa fa-facebook-f left white-color"  ></i>Facebook</button>
+        </div>
+      </div>
+      <!--Footer-->
+      <div class="modal-footer mx-5 pt-3 mb-1">
+        <p class="font-small grey-text d-flex justify-content-end">Not a member?
+          <a href="#" class="blue-text ml-1"> Sign Up</a>
+        </p>
+      </div>
+    </div>
+      
+    <!--/.Content-->
+  </div>
+</div>

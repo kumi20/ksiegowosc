@@ -48,7 +48,7 @@ export class PoolComponent implements OnInit {
             },
             error=>{
                 this.event.klepsydraStop();
-                this.event.wyswietlInfo('error','Błąd pobierania danych');
+                this.event.showInfo('error','Błąd pobierania danych');
             }
       );
   }
@@ -68,20 +68,20 @@ export class PoolComponent implements OnInit {
                                     this.chartDatasets.push({data: [Number(el.poll_vote_votecount)],label: el.poll_vote_name})
                                 })
                                 
-                                this.event.wyswietlInfo('info','Głos został oddany');
+                                this.event.showInfo('info','Głos został oddany');
                                 localStorage.setItem('votePoll',this.idtresci);
                                 this.votePoll = true;
                             },
                             error=>{
                                 this.event.klepsydraStop();
-                                this.event.wyswietlInfo('error','Błąd pobierania danych');
+                                this.event.showInfo('error','Błąd pobierania danych');
                             }
                       );
                     
                 },
                 error=>{
                     this.event.klepsydraStop();
-                    this.event.wyswietlInfo('error', 'Błąd zapisu danych');
+                    this.event.showInfo('error', 'Błąd zapisu danych');
                 }
             )
         }

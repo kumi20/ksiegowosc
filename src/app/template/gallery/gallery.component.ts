@@ -38,7 +38,7 @@ export class GalleryComponent implements OnInit {
             this.event.klepsydraStop();
           },
           error =>{
-            this.event.wyswietlInfo('error','Błąd pobierania galerii');
+            this.event.showInfo('error','Błąd pobierania galerii');
             this.event.klepsydraStop();
           }
         )
