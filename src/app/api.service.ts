@@ -7,17 +7,32 @@ import { EventService } from './event.service';
 @Injectable()
 export class ApiService {
 
-  domanie = 'http://kumi20.webd.pl'; 
+  domanie = 'http://127.0.0.1'; 
   uri =  this.domanie + '/api/ksiega/';
     
     
   uriGallery = this.domanie + '/cms/assets/gallery';
 
   sourceImageNews = this.domanie + '/source/';
+    
+    
+   month: Array<any> = [
+      {value:'01', label: 'styczeń'},
+      {value:'02', label: 'luty'},
+      {value:'03', label: 'marzec'},
+      {value:'04', label: 'kwiecień'},
+      {value:'05', label: 'maj'},
+      {value:'06', label: 'czerwiec'},
+      {value:'07', label: 'lipiec'},
+      {value:'08', label: 'sierpień'},
+      {value:'09', label: 'wrzesień'},
+      {value:'10', label: 'październik'},
+      {value:'11', label: 'listopad'},
+      {value:'12', label: 'grudzień'}
+    ];
 
 
   constructor(private _http:HttpClient, public event: EventService) { 
-
   }
     
   get(uri){
@@ -32,7 +47,7 @@ export class ApiService {
     
   getAuthorization(uri){
     return this._http.get<any[]|any>(this.uri+uri,{headers: {
-          'AuthorizationToken':localStorage.getItem('ksiegaQumiToken')
+          'Authorizationtoken':localStorage.getItem('ksiegaQumiToken')
       }})
     .pipe(
         catchError((err, caught)=>{
@@ -54,7 +69,7 @@ export class ApiService {
     
   postAuthorization(uri, json){      
       return this._http.post<any[]|any>(this.uri+uri, json, {headers: {
-          'AuthorizationToken':localStorage.getItem('ksiegaQumiToken')
+          'Authorizationtoken':localStorage.getItem('ksiegaQumiToken')
       }})
       .pipe(
         catchError((err, caught)=>{
@@ -77,7 +92,18 @@ export class ApiService {
             throw new Error(err.message)
         })
      )
-  }    
+  } 
+    
+    
+  getYear(){
+    return this._http.get<any[]|any>(this.uri+'get_year.php')
+    .pipe(
+        catchError((err, caught)=>{
+            this.event.showInfo('error',err.message);
+            throw new Error(err.message)
+        })
+    )
+  }   
 
 }
 

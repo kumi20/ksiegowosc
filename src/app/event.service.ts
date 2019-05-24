@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
 import { ToastService } from './typescripts/pro/alerts'
 import { MDBSpinningPreloader } from './typescripts/pro';
+import { ApiService } from './api.service';
+
 
 @Injectable()
 export class EventService {
+    
+  constructor(private toastrService: ToastService) {
 
-  constructor(private toastrService: ToastService) {}
-
-
+  }
+  
+    
   showInfo(typ, tresc){
     switch(typ){
         case 'info': this.toastrService.info(tresc); break;
@@ -23,4 +27,5 @@ export class EventService {
     klepsydraStop(){
       document.getElementById('klepsydra').style.display = 'none';
     }
+    
 }

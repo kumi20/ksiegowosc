@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GoogleAnalyticsService } from 'angular-ga';
+import { ApiService } from './api.service';
+
 
 @Component({
   selector: 'app-root',
@@ -7,11 +9,12 @@ import { GoogleAnalyticsService } from 'angular-ga';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
-  title = 'app'; 
+  title = 'app';    
     
    constructor(private gaService: GoogleAnalyticsService){}
     
    ngOnInit(){
        //this.gaService.configure(this.googleAnalitycs);
    }
+       
 }

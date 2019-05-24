@@ -1,10 +1,57 @@
 <mdb-card class="card">  
-  <mdb-card-header class="card-header">KPiR</mdb-card-header>
+  <mdb-card-header class="card-header">Statystyki KPiR</mdb-card-header>
   <mdb-card-body class="card-body">
-    <mdb-card-title>
-      <h5>Special title treatment</h5>
-    </mdb-card-title>
-    <mdb-card-text>With supporting text below as a natural lead-in to additional content.</mdb-card-text>
-    <a href="" mdbBtn color="primary">Go somewhere!</a>
+    <mdb-card-text>    
+        <div class="row">
+            <div class="col-md-6">
+                <div class="gradient-card-header blue-gradient"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
+
+                        <div style="display: block" *ngIf='chartDatasets.length > 0'>
+                            <canvas mdbChart 
+                                [chartType]="chartType"
+                                [datasets]="chartDatasets" 
+                                [labels]="chartLabels"
+                                [colors]="chartColors"
+                                [options]="chartOptions"
+                                [legend]="true"
+                                (chartHover)="chartHovered($event)" 
+                                >
+                            </canvas>
+                        </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <p><strong>Rok:</strong><mdb-select class="select" [options]="year" [filterEnabled]="true" placeholder="-- wybierz rok --" [(ngModel)]="actualYear" (selected)="changeYear($event)" #yearList></mdb-select></p>
+                <p><strong>Przychód:</strong> {{yearStatistic.incomeYear| currency:'PLN '}}</p>
+                <p><strong>Koszt uzyskania przychodu:</strong> {{yearStatistic.expenditureYear| currency:'PLN '}}</p>
+                <p class="revenueYear"><strong>Dochód:</strong> {{yearStatistic.revenueYear| currency:'PLN '}}</p>
+            </div>
+        </div>
+    </mdb-card-text>
   </mdb-card-body>
 </mdb-card>
+
+<div class="row margin-top">
+    <div class="col-md-6">
+        <mdb-card class="card">  
+            <mdb-card-header class="card-header">Sprzedaż: nieopłacone faktury</mdb-card-header>
+                <mdb-card-body class="card-body">
+                    <mdb-card-text>  
+                        <button class="btn blue-gradient" rounded="true" mdbWavesEffect>Nowa faktura</button>
+                    </mdb-card-text>
+            </mdb-card-body>
+        </mdb-card>
+    </div>
+    
+    <div class="col-md-6">
+        <mdb-card class="card">  
+            <mdb-card-header class="card-header">Zakupy: nieopłacone rachunki</mdb-card-header>
+                <mdb-card-body class="card-body">
+                    <mdb-card-text>
+                        <button class="btn blue-gradient" rounded="true" mdbWavesEffect>Nowa faktura</button>
+                    </mdb-card-text>
+            </mdb-card-body>
+        </mdb-card>
+    </div>
+</div>
