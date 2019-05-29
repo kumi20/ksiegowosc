@@ -38,6 +38,7 @@ import { NavbarComponent } from './book/navbar/navbar.component';
 import { SettingsComponent } from './book/settings/settings.component';
 import { MyProfileComponent } from './book/my-profile/my-profile.component';
 import { ContentComponent } from './book/content/content.component';
+import { IncomeComponent } from './book/income/income.component';
 
 
 
@@ -67,7 +68,8 @@ export function getAuthServiceConfigs() {
         NavbarComponent,
         SettingsComponent,
         MyProfileComponent,
-        ContentComponent
+        ContentComponent,
+        IncomeComponent
 	],
 	imports: [
 		BrowserModule,

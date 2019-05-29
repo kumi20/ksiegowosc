@@ -643,7 +643,7 @@ export class MDBDatePickerComponent implements OnChanges, ControlValueAccessor, 
     }
 
     // hide calendar when date was clicked
-    // this.showSelector = false;
+     this.showSelector = false;
   }
 
   updateDateValue(date: IMyDate, clear: boolean): void {

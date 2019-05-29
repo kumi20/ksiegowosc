@@ -7,7 +7,7 @@ import { EventService } from './event.service';
 @Injectable()
 export class ApiService {
 
-  domanie = 'http://127.0.0.1'; 
+  domanie = 'http://kumi20.webd.pl'; 
   uri =  this.domanie + '/api/ksiega/';
     
     

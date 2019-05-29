@@ -95,3 +95,53 @@ h6 {
     background: linear-gradient(#2e4e81, #0e1b2c);
     color: #ffffff !important;
 }
+
+.mdb_income{
+    .form-control{
+        border: 0px solid #ced4da;
+        font-size:14px !important;
+        padding:  0 0 0 0;
+        position: relative;
+        top:8px;
+    }
+    ::-webkit-input-placeholder {
+        color: red;
+    }
+}
+
+mdb-select {
+    margin-bottom: -30px;
+    .placeholder {
+        color: red !important;
+        font-size: 14px;
+        border: none;
+    }
+    
+    .below {
+        border: none;
+        position: relative;
+        font-size: 14px;
+        top: -10px;
+    }
+    
+    .open{
+        font-size: 14px !important;
+    }
+    
+    .single {
+        border: none !important;
+        font-size: 14px !important;
+        
+    }
+}
+
+
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+}
+
+table {
+    border-collapse: collapse;
+}

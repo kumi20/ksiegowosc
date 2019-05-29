@@ -50,7 +50,7 @@ export class CompanyComponent implements OnInit {
 
 
   onEnterNip(event){
-        this.CmsService.post('ksiega/company/getCompany.php', event.target.value).subscribe(
+        this.CmsService.post('company/getCompany.php', event.target.value).subscribe(
             response=>{
                 if (response.kod === '0'){
                     let post_code = response.post_code.substr(0, 2)+'-'+response.post_code.substr(2, 5);
@@ -84,7 +84,7 @@ export class CompanyComponent implements OnInit {
     
    save(){
        if(this.company.name != '' && this.company.name != null){
-            this.CmsService.postAuthorization('ksiega/company/save.php', this.company).subscribe(
+            this.CmsService.postAuthorization('company/save.php', this.company).subscribe(
                 response =>{
                     if (response.kod === 0 ) this.event.showInfo('success', response.opis);
                     else this.event.showInfo('error', response.opis)

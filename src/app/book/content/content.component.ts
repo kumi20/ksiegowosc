@@ -20,7 +20,14 @@ export class ContentComponent implements OnInit {
   actualYear;
   year: Array<any> = [];  
   incomeYear: number[] = [];
-  expenditureYear: number[] = [];    
+  expenditureYear: number[] = []; 
+  incomeWait: number = 0;
+  expenditureWait: number = 0;
+  incomeAfterDeadLine: number = 0;
+  expenditureAfterDeadLine: number = 0; 
+  
+  incomeWaitChart:Array<any> = [];   
+  expenditureWaitChart: Array<any> = [];
     
     
   constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) { }
@@ -37,9 +44,12 @@ export class ContentComponent implements OnInit {
             this.actualYear = String(new Date().getFullYear());
         }
       )
+      
       //console.log('konsola', routesObject)
       this.getYearStatistic();
       this.getMonthStatistic();
+      this.unpaidInvoicesGet();
+      this.incomeWaitChartGet();
   }
 
     
@@ -147,5 +157,87 @@ export class ContentComponent implements OnInit {
     changeYear(year){
         this.getYearStatistic();
         this.getMonthStatistic();
+        this.unpaidInvoicesGet();
+        this.incomeWaitChartGet();
+    }
+    
+    unpaidInvoicesGet(){
+        this.CmsService.getAuthorization(`content/unpaidInvoicesGet.php?year=${this.actualYear}`).subscribe(
+            response=>{
+                if(response.kod === 0){
+                    this.incomeWait = response.przychod;
+                    this.expenditureWait = response.wydatki;
+                    this.incomeAfterDeadLine = response.przychod_po_terminie;
+                    this.expenditureAfterDeadLine = response.wydatki_po_terminie;
+                }
+                else this.event.showInfo('error', response.description)
+            }
+        )
+    }
+    
+    incomeWaitChartGet(){
+        this.CmsService.getAuthorization(`content/incomeWaitChart.php?year=${this.actualYear}`).subscribe(
+            response =>{
+                
+                this.incomeWaitChart.length = 0;
+                this.expenditureWaitChart.length = 0;
+                
+                            
+                for(let i = 0; i < 12; i++){
+                    this.incomeWaitChart.push(Number(0));
+                    this.expenditureWaitChart.push(Number(0));
+                }
+                
+                response.forEach(el=>{                    
+                    switch (el.miesiac){
+                        case '01': this.incomeWaitChart[0] = Number(el.przychod);
+                                    this.expenditureWaitChart[0] = Number(el.rozchod);
+                                    break;
+                        case '02': this.incomeWaitChart[1] = Number(el.przychod);
+                                    this.expenditureWaitChart[1] = Number(el.rozchod);
+                                    break;
+                        case '03': this.incomeWaitChart[2] = Number(el.przychod);
+                                    this.expenditureWaitChart[2] = Number(el.rozchod);
+                                    break;
+                        case '04': this.incomeWaitChart[3] = Number(el.przychod);
+                                    this.expenditureWaitChart[3] = Number(el.rozchod);
+                                    break;
+                        case '05': this.incomeWaitChart[4] = Number(el.przychod);
+                                    this.expenditureWaitChart[4] = Number(el.rozchod);
+                                    break;
+                        case '06': this.incomeWaitChart[5] = Number(el.przychod);
+                                    this.expenditureWaitChart[5] = Number(el.rozchod);
+                                    break;
+                        case '07': this.incomeWaitChart[6] = Number(el.przychod);
+                                    this.expenditureWaitChart[6] = Number(el.rozchod);
+                                    break;
+                        case '08': this.incomeWaitChart[7] = Number(el.przychod);
+                                    this.expenditureWaitChart[7] = Number(el.rozchod);
+                                    break;
+                        case '09': this.incomeWaitChart[8] = Number(el.przychod);
+                                    this.expenditureWaitChart[8] = Number(el.rozchod);
+                                    break;
+                        case '10': this.incomeWaitChart[9] = Number(el.przychod);
+                                    this.expenditureWaitChart[9] = Number(el.rozchod);
+                                    break;
+                        case '11': this.incomeWaitChart[10] = Number(el.przychod);
+                                    this.expenditureWaitChart[10] = Number(el.rozchod);
+                                    break;
+                        case '12': this.incomeWaitChart[11] = Number(el.przychod);
+                                    this.expenditureWaitChart[11] = Number(el.rozchod);
+                                    break;    
+                            
+                    }
+                })
+                this.incomeWaitChart = [{data: this.incomeWaitChart, label: 'Oczekujące na zapłatę'}];
+                this.expenditureWaitChart = [{data: this.expenditureWaitChart, label: 'Oczekujące na zapłatę'}];
+            }
+        )
+    }
+    
+    chartClicked(event){
+        if(event.active.length !=0){
+            console.log(event.active[0]._index);            
+        }
     }
 }

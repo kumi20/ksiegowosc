@@ -122,7 +122,7 @@ export class OptionList {
       anyShown = this.options.length > 0;
     } else {
       this.options.forEach((option) => {
-        const l: string = Diacritics.strip(option.value).toUpperCase();
+        const l: string = Diacritics.strip(option.label).toUpperCase();
         const t: string = Diacritics.strip(term).toUpperCase();
         option.shown = l.indexOf(t) > -1;
       });

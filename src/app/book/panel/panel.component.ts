@@ -20,6 +20,10 @@ export class PanelComponent implements OnInit {
             response =>{
                 if (response.kod === 0){
                     this.companyNeme = response.name;
+                    localStorage.setItem('companyName', response.name);
+                    localStorage.setItem('companyAdres', response.adres);
+                    localStorage.setItem('companyCity', response.city);
+                    localStorage.setItem('companyNip', response.nip);
                 }
                 else if (response.kod === -1) this.event.showInfo('error', response.description)
             }
