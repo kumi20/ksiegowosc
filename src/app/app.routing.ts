@@ -19,6 +19,7 @@ const routesConfig: Routes = [
             {path: 'settings', component: SettingsComponent, outlet:'panel-outlet', canActivate: [AuthGuard]},
             {path: 'myProfiles', component: MyProfileComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
             {path: 'income', component: IncomeComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
+            {path: 'kpir', component: IncomeComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
         ]          
     }
   ]

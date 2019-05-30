@@ -17,7 +17,7 @@ export class IncomeComponent implements OnInit {
     
   @ViewChild('constructorList') constructorList;    
 
-  invoice: invoice = {number: 1+'/'+currentDate.getFullYear(), documentData:'', dataSales:'', customerId:0,servicesList:[], toPay:0, toPayNetto:0, boolToPay:false, vat50: false, dataToPay:'', boolPay: false};  
+  invoice: invoice = {number: 1+'/'+currentDate.getFullYear(), documentData:'', dataSales:'', customerId:0,servicesList:[], toPay:0, toPayNetto:0, vat50: false, dataToPay:'', boolPay: false};  
   company: company = {name:'', street: '',city: '', nip: ''};
   constractorSelected: company = {name:'', street:'', city:'', nip:''};    
   contractor = [];    
@@ -105,14 +105,26 @@ export class IncomeComponent implements OnInit {
         })
     }
 
-    save(){
-          console.log('save', this.invoice)
-        
-        this.CmsService.postAuthorization(`income/postFV.php`, this.invoice).subscribe(
-            response =>{
-                console.log('response', response)
-            }
-        )
+    save(){      
+        if (this.invoice.customerId === "undefined" ||
+            this.invoice.customerId === "" ||
+            this.invoice.customerId === null ||
+            this.invoice.dataSales === "" ||
+            this.invoice.dataToPay === "" ||
+            this.invoice.documentData === "" ||
+            this.invoice.toPay === 0 
+           ) this.event.showInfo('error', 'Uzupełnij wszystkie wymagane pola');
+        else{
+            this.CmsService.postAuthorization(`income/postFV.php`, this.invoice).subscribe(
+                response =>{
+                    if (response.kod != "0") this.event.showInfo('error', response.description);
+                    else{
+                        this.event.showInfo('success', 'Faktura zapisana');
+                        this._route.navigate(["panel"]);
+                    }
+                }
+            )
+        }
     }
     
     changeNumber(i){
@@ -209,5 +221,9 @@ export class IncomeComponent implements OnInit {
     
     changePayment(){
         console.log('test', this.invoice.boolPay);
+    }
+    
+    test(){
+        
     }
 }

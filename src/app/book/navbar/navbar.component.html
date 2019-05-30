@@ -1,26 +1,35 @@
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark unique-color fixed-top">
         <links>
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active waves-light" mdbWavesEffect>
-                    <a class="nav-link" routerLink="/panel">Home</a>                     
+                <li class="nav-item waves-light"  mdbWavesEffect>
+                    <a class="nav-link" routerLink="/panel" >Home</a>                     
+                </li>
+                <li class="nav-item waves-light"  mdbWavesEffect>
+                    <a class="nav-link" [routerLink]="[{ outlets: { 'panel-outlet': ['kpir'] } }]" routerLinkActive="active">Kpir</a>                     
+                </li>
+                <li class="nav-item waves-light"  mdbWavesEffect>
+                    <a class="nav-link" [routerLink]="[{ outlets: { 'panel-outlet': ['kpir'] } }]" routerLinkActive="active">Faktury</a>                     
+                </li>
+                <li class="nav-item waves-light"  mdbWavesEffect>
+                    <a class="nav-link" [routerLink]="[{ outlets: { 'panel-outlet': ['kpir'] } }]" routerLinkActive="active">Kontrahenci</a>                     
                 </li>
             </ul>
             
             <div class="form-inline">
                 <links>  
                     <ul class="navbar-nav ml-auto">
-                          <li class="nav-item active">
-                            <a class="nav-link waves-light" mdbWavesEffect><i class="fa fa-envelope"></i> Kontakt<span class="sr-only">(current)</span></a>
+                          <li class="nav-item">
+                            <a class="nav-link waves-light" mdbWavesEffect routerLinkActive="active"><i class="fa fa-envelope"></i> Kontakt<span class="sr-only">(current)</span></a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link waves-light" mdbWavesEffect [routerLink]="[{ outlets: { 'panel-outlet': ['settings'] } }]"><i class="fa fa-cog"></i> Ustawienia</a>
+                            <a class="nav-link waves-light" mdbWavesEffect [routerLink]="[{ outlets: { 'panel-outlet': ['settings'] } }]" routerLinkActive="active"><i class="fa fa-cog"></i> Ustawienia</a>
                           </li>
 
                           <li class="nav-item dropdown" dropdown>
                             <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
                               <i class="fa fa-user"></i> Profile<span class="caret"></span></a>
                             <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
-                              <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="[{ outlets: { 'panel-outlet': ['myProfiles'] } }]">Mój profil</a>
+                              <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="[{ outlets: { 'panel-outlet': ['myProfiles'] } }]" routerLinkActive="active">Mój profil</a>
                               <a class="dropdown-item waves-light" mdbWavesEffect (click)="logOUT()" >Wyloguj</a>
                             </div>
                           </li>

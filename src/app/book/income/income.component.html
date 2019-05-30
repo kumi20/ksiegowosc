@@ -81,6 +81,13 @@
                 <input type="checkbox" id="pay" class="filled-in" [(ngModel)]="invoice.boolPay" (change)="changePayment()">
                 <label for="pay">Zapłacona:</label>
             </div>
+            
+            <table *ngIf="invoice.boolPay">
+                <tr>
+                    <td>Data dokonania płatności:</td>
+                    <td><mdb-date-picker name="mydate" [options]="myDatePickerOptions" [(ngModel)]="invoice.dataPay" [placeholder]="'Wybierz date'" class="mdb_income"></mdb-date-picker></td>
+                </tr>
+            </table>        
         </div>
     </div>
     

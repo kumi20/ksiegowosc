@@ -2,11 +2,10 @@ export interface invoice{
     number: string;
     documentData: string;
     dataSales: string;
-    customerId: number;
+    customerId: any;
     servicesList: fv[];
     toPayNetto: any;
     toPay: any;
-    boolToPay: boolean;
     vat50: boolean;
     dataToPay:string;
     boolPay: boolean;
