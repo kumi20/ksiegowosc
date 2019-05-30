@@ -1,0 +1,163 @@
+<div class="a4 card">
+    <div class="row">
+        <div class="col-md-12">
+            <p class="income_name">Faktura</p>
+            <p class="income_number">Nr: {{invoice.number}}</p>
+            <table>
+                <tr>
+                    <td><p class="income_date">Data wystawienia dokumentu:</p></td>
+                    <td><mdb-date-picker name="mydate" [options]="myDatePickerOptions" [placeholder]="'Wybierz date'" [(ngModel)]="invoice.documentData" class="mdb_income"></mdb-date-picker></td>
+                </tr>
+                <tr>
+                    <td><p class="income_date">Data wykonania usługi lub dostarczenia towaru:</p></td>
+                    <td><mdb-date-picker name="mydate" [options]="myDatePickerOptions" [placeholder]="'Wybierz date'" [(ngModel)]="invoice.dataSales" class="mdb_income"></mdb-date-picker></td>
+                </tr>
+            </table>
+            
+            
+        </div>        
+    </div>
+    
+    <div class="income-inline"></div>
+    
+    <div class="row">
+        <div class="col-md-6">
+            
+            <table>
+                <tr>
+                    <td><p class="income_number">Sprzedawca:</p></td>
+                    <td><p class="income_company">{{company.name}}</p></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><p class="income_company">{{company.street}}</p></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><p class="income_company">{{company.city}}</p></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td> <p class="income_company">Nip: {{company.nip}}</p></td>
+                </tr>
+            </table>           
+        </div>
+        
+        <div class="col-md-6">
+            <table style="width:100%;">
+                <tr>
+                    <td style="width:70px;"><p class="income_number">Nabywca:</p></td>
+                    <td><mdb-select class="select" [options]="contractor" [filterEnabled]="true" placeholder="-- wybierz nabywce --" [(ngModel)]="invoice.customerId" (selected)="changeConstructor($event)" class="mdb_income" #constructorList 
+                        style="border: none!important"></mdb-select></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><p class="income_company">{{constractorSelected.street}}</p></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><p class="income_company">{{constractorSelected.city}}</p></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td> <p *ngIf="constractorSelected.name!=''" class="income_company">Nip: {{constractorSelected.nip}}</p></td>
+                </tr>
+            </table>
+            
+        </div>
+    </div>
+    
+    <div class="income-inline"></div>
+    
+    <div class="row" style="margin-bottom: 30px;">
+        <div class="col-md-12">
+            <table>
+                <tr>
+                    <td>Termin płatności:</td>
+                    <td><mdb-date-picker name="mydate" [options]="myDatePickerOptions" [placeholder]="'Wybierz date'" [(ngModel)]="invoice.dataToPay" class="mdb_income"></mdb-date-picker></td>
+                </tr>                        
+            </table>   
+            <div class="form-group checkbox-primary">
+                <input type="checkbox" id="pay" class="filled-in" [(ngModel)]="invoice.boolPay" (change)="changePayment()">
+                <label for="pay">Zapłacona:</label>
+            </div>
+        </div>
+    </div>
+    
+    <div class="income-inline"></div>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <table mdbTable small="true" class="table table-sm">
+              <thead>
+                <tr>
+                    <th scope="col" style="width:1%">Lp.</th>
+                    <th scope="col" style="width:20%">Nazwa towaru / usługi</th>
+                    <th scope="col" style="width:10%">J.m.</th>
+                    <th scope="col" style="width:5%">Ilość</th>
+                    <th scope="col" style="width:12%">Cenna netto</th>
+                    <th scope="col" style="width:12%">Wartość netto</th>
+                    <th scope="col" style="width:12%">Stawka VAT</th>
+                    <th scope="col" style="width:12%">Kwota VAT</th>
+                    <th scope="col" style="width:12%">Wartość brutto</th>
+                    <th scope="col" style="width:4%"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr mdbTableCol *ngFor="let el of invoice.servicesList; let i = index;">
+                  <td scope="row">{{i+1}}.</td>    
+                  <td scope="row"><input type="text" [(ngModel)]="el.name" class="fv_input"></td>
+                  <td><mdb-select class="select" [options]="jm" placeholder="-- jm --" [(ngModel)]="el.jm" class="mdb_income" style="border: none!important"></mdb-select></td>
+                  <td style="width:10px;"><input type="number" [(ngModel)]="el.count" min="0" class="fv_input" (change)="changeNumber(i)"></td>
+                  <td><input type="text" [(ngModel)]="el.netto" class="fv_input" (keyup.enter)="changeNumber(i)"></td>
+                  <td>{{el.countNetto| currency: 'PLN '}}</td>
+                  <td><mdb-select class="select" [options]="vat" placeholder="-- VAT --" [(ngModel)]="el.vat" class="mdb_income" style="border: none!important" (selected)="changeNumber(i)"></mdb-select></td>
+                  <td>{{el.countVat| currency: 'PLN '}}</td>
+                  <td>{{el.brutto| currency: 'PLN '}}</td>
+                  <td><i class="fa fa-trash" (click)="deleted(i)"></i></td>
+                </tr>
+              </tbody>
+            </table>
+            <i class="fa fa-plus-circle" (click)="addServices()"></i>
+            
+            <div class="income-inline"></div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <table mdbTable small="true" class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Netto (PLN)</th>
+                                <th>%</th>
+                                <th>VAT (PLN)</th>
+                                <th>Brutto (PLN)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let el of suma;">
+                                <td>{{el.count| currency: 'PLN '}}</td>
+                                <td>{{el.vat}}</td>
+                                <td>{{el.vatCount| currency: 'PLN '}}</td>
+                                <td>{{el.count + el.vatCount| currency: 'PLN '}}</td>
+                            </tr>
+                        </tbody>
+                    </table>   
+                    <p class="toPay">DO ZAPŁATY: {{invoice.toPay| currency: 'PLN '}}</p>
+                </div>
+
+            </div>
+            
+        </div>
+        
+        
+        
+        
+        
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <button class="btn blue-gradient" rounded="true" mdbWavesEffect (click)="save()">Zapisz dokument</button>
+    </div>    
+</div>
