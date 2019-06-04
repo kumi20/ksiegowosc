@@ -3,26 +3,19 @@ import { EventService } from '../../event.service';
 import { ApiService } from '../../api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { invoice, company, fv } from './income';
+import { invoice, company, fv } from '../income/income';
 
- const currentDate = new Date();
-    
-    
+
 @Component({
-  selector: 'app-income',
-  templateUrl: './income.component.html',
-  styleUrls: ['./income.component.scss']
+  selector: 'app-expenditure',
+  templateUrl: './expenditure.component.html',
+  styleUrls: ['./expenditure.component.scss']
 })
-export class IncomeComponent implements OnInit {
-    
-  @ViewChild('constructorList') constructorList;    
+export class ExpenditureComponent implements OnInit {
 
-  invoice: invoice = {number: 1+'/'+currentDate.getFullYear(), documentData:'', dataSales:'', customerId:0,servicesList:[], toPay:0, toPayNetto:0, vat50: false, dataToPay:'', boolPay: false, description:''};  
-  company: company = {name:'', street: '',city: '', nip: ''};
-  constractorSelected: company = {name:'', street:'', city:'', nip:''};    
-  contractor = [];    
-  contractorList; 
-  suma = []; //suma netto z podziałem na stawki vat   
+  @ViewChild('constructorList') constructorList;     
+  expenditure: invoice = {number: '', documentData:'', dataSales:'', customerId:0,servicesList:[], toPay:0, toPayNetto:0, vat50: false, dataToPay:'', boolPay: false, description:''};  
+  company: company = {name:'', street: '',city: '', nip: ''};    
     
   public myDatePickerOptions = {
     todayBtnTxt: "Dzisiaj",
@@ -59,32 +52,23 @@ export class IncomeComponent implements OnInit {
       {value: 'min.', label: 'min.'},
       {value: 'litr.', label: 'litr.'},
       {value: 'usługa', label: 'usługa'},
-  ];
+  ];       
     
-     
+  constractorSelected: company = {name:'', street:'', city:'', nip:''};    
+  contractor = [];    
+  contractorList; 
+    
+  suma = []; //suma netto z podziałem na stawki vat       
     
   constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) { }
 
-  ngOnInit() {  
-        this.company.name = localStorage.getItem('companyName');
-        this.company.street = localStorage.getItem('companyAdres');
-        this.company.city = localStorage.getItem('companyCity');
-        this.company.nip = localStorage.getItem('companyNip');
+  ngOnInit() {
+      this.company.name = localStorage.getItem('companyName');
+      this.company.street = localStorage.getItem('companyAdres');
+      this.company.city = localStorage.getItem('companyCity');
+      this.company.nip = localStorage.getItem('companyNip');
       
-      
-        let services = {name:'', jm: '', count: 0 ,netto:'0.00' ,countNetto:0.00, vat:'23', countVat:0.00,brutto:0.00}; 
-        this.invoice.servicesList.push(services);
-      
-       this.CmsService.getAuthorization(`income/getNumberInvoice.php`).subscribe(
-            response=>{
-                if (response != null){
-                    let number = Number(response.number) + 1;
-                    this.invoice.number = number + '/' + currentDate.getFullYear();     
-                }
-            }
-       );
-      
-      this.CmsService.getAuthorization(`income/getContractor.php`).subscribe(
+      this.CmsService.getAuthorization(`expenditure/getContractor.php`).subscribe(
             response =>{
                 this.contractorList = response;
                 response.forEach(el=>{
@@ -94,8 +78,12 @@ export class IncomeComponent implements OnInit {
             }    
       );
       
+      let services = {name:'', jm: '', count: 0 ,netto:'0.00' ,countNetto:0.00, vat:'23', countVat:0.00,brutto:0.00}; 
+      this.expenditure.servicesList.push(services);
+      
   }
-
+    
+    
     changeConstructor(event){
         this.contractorList.forEach(el=>{
             if (el.id === event.value ){
@@ -104,43 +92,27 @@ export class IncomeComponent implements OnInit {
             }    
         })
     }
+    
+    addServices(){
+        let services = {name:'', jm: '', count: 0 ,netto:'0.00' ,countNetto:0.00, vat:'23', countVat:0.00,brutto:0.00}; 
+        this.expenditure.servicesList.push(services);
+    }
 
-    save(){      
-        if (this.invoice.customerId === "undefined" ||
-            this.invoice.customerId === "" ||
-            this.invoice.customerId === null ||
-            this.invoice.dataSales === "" ||
-            this.invoice.dataToPay === "" ||
-            this.invoice.documentData === "" ||
-            this.invoice.toPay === 0 
-           ) this.event.showInfo('error', 'Uzupełnij wszystkie wymagane pola');
-        else{
-            this.CmsService.postAuthorization(`income/postFV.php`, this.invoice).subscribe(
-                response =>{
-                    if (response.kod != "0") this.event.showInfo('error', response.description);
-                    else{
-                        this.event.showInfo('success', 'Faktura zapisana');
-                        this._route.navigate(["panel"]);
-                    }
-                }
-            )
-        }
+    deleted(i){
+        this.expenditure.servicesList.splice(i, 1);
+        this.sumVatServices();
     }
     
     changeNumber(i){
         let vat = 0;
-        if(!isNaN(this.invoice.servicesList[i].vat)) vat = this.invoice.servicesList[i].vat;
-        this.invoice.servicesList[i].netto = this.invoice.servicesList[i].netto.replace(',','.');
-        this.invoice.servicesList[i].countNetto = this.invoice.servicesList[i].netto * this.invoice.servicesList[i].count;
-        this.invoice.servicesList[i].countVat = (this.invoice.servicesList[i].countNetto * vat)/100;
-        this.invoice.servicesList[i].brutto = this.invoice.servicesList[i].countNetto + this.invoice.servicesList[i].countVat;
+        if(!isNaN(this.expenditure.servicesList[i].vat)) vat = this.expenditure.servicesList[i].vat;
+        this.expenditure.servicesList[i].netto = this.expenditure.servicesList[i].netto.replace(',','.');
+        this.expenditure.servicesList[i].countNetto = this.expenditure.servicesList[i].netto * this.expenditure.servicesList[i].count;
+        this.expenditure.servicesList[i].countVat = (this.expenditure.servicesList[i].countNetto * vat)/100;
+        this.expenditure.servicesList[i].brutto = this.expenditure.servicesList[i].countNetto + this.expenditure.servicesList[i].countVat;
         this.sumVatServices();
     }
     
-    addServices(){
-        let services = {name:'', jm: '', count: 0 ,netto:'0.00' ,countNetto:0.00, vat:'23', countVat:0.00,brutto:0.00}; 
-        this.invoice.servicesList.push(services);
-    }
     
     sumVatServices(){
         let vat0 = 0;
@@ -157,7 +129,7 @@ export class IncomeComponent implements OnInit {
         let nettoZw = 0;
         let nettoNp = 0;
         
-        this.invoice.servicesList.forEach(el=>{
+        this.expenditure.servicesList.forEach(el=>{
             switch (el.vat){
                 case '0': vat0 += el.countVat;
                           netto0 += el.countNetto;    
@@ -206,16 +178,34 @@ export class IncomeComponent implements OnInit {
             this.suma.push({vat: 'np', count: nettoNp, vatCount: vatNp});
         }
         
-        this.invoice.toPay = 0;
-        this.invoice.toPayNetto = 0;
+        this.expenditure.toPay = 0;
+        this.expenditure.toPayNetto = 0;
         this.suma.forEach(el=>{
-            this.invoice.toPay += (el.count + el.vatCount);
-            this.invoice.toPayNetto += el.count;
+            this.expenditure.toPay += (el.count + el.vatCount);
+            this.expenditure.toPayNetto += el.count;
         })
     }
     
-    deleted(i){
-        this.invoice.servicesList.splice(i, 1);
-        this.sumVatServices();
+    save(){      
+        if (this.expenditure.customerId === "undefined" ||
+            this.expenditure.number === ""||
+            this.expenditure.customerId === "" ||
+            this.expenditure.customerId === null ||
+            this.expenditure.dataSales === "" ||
+            this.expenditure.dataToPay === "" ||
+            this.expenditure.documentData === "" ||
+            this.expenditure.toPay === 0 
+           ) this.event.showInfo('error', 'Uzupełnij wszystkie wymagane pola');
+        else{
+            this.CmsService.postAuthorization(`expenditure/postFV.php`, this.expenditure).subscribe(
+                response =>{
+                    if (response.kod != "0") this.event.showInfo('error', response.description);
+                    else{
+                        this.event.showInfo('success', 'Faktura zapisana');
+                        this._route.navigate(["panel"]);
+                    }
+                }
+            )
+        }
     }
 }

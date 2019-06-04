@@ -9,6 +9,7 @@ export interface invoice{
     vat50: boolean;
     dataToPay:string;
     boolPay: boolean;
+    description: string;
 }
 
 export interface company{

@@ -2,52 +2,31 @@
     <div class="row">
         <div class="col-md-12">
             <p class="income_name">Faktura</p>
-            <p class="income_number">Nr: {{invoice.number}}</p>
             <table>
                 <tr>
+                    <td>Nr:</td>
+                    <td><input type="text" class="fv_input" style="border-bottom: 1px solid #111" [(ngModel)]="expenditure.number"></td>
+                </tr>
+                <tr>
                     <td><p class="income_date">Data wystawienia dokumentu:</p></td>
-                    <td><mdb-date-picker name="mydate" [options]="myDatePickerOptions" [placeholder]="'Wybierz date'" [(ngModel)]="invoice.documentData" class="mdb_income"></mdb-date-picker></td>
+                    <td><mdb-date-picker name="mydate" [options]="myDatePickerOptions" [placeholder]="'Wybierz date'" [(ngModel)]="expenditure.documentData" class="mdb_income"></mdb-date-picker></td>
                 </tr>
                 <tr>
                     <td><p class="income_date">Data wykonania usługi lub dostarczenia towaru:</p></td>
-                    <td><mdb-date-picker name="mydate" [options]="myDatePickerOptions" [placeholder]="'Wybierz date'" [(ngModel)]="invoice.dataSales" class="mdb_income"></mdb-date-picker></td>
+                    <td><mdb-date-picker name="mydate" [options]="myDatePickerOptions" [placeholder]="'Wybierz date'"  [(ngModel)]="expenditure .dataSales"  class="mdb_income"></mdb-date-picker></td>
                 </tr>
             </table>
-            
-            
-        </div>        
+        </div>
     </div>
     
-    <div class="income-inline"></div>
+     <div class="income-inline"></div>
     
     <div class="row">
         <div class="col-md-6">
-            
-            <table>
+             <table style="width:100%;">
                 <tr>
-                    <td><p class="income_number">Sprzedawca:</p></td>
-                    <td><p class="income_company">{{company.name}}</p></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><p class="income_company">{{company.street}}</p></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><p class="income_company">{{company.city}}</p></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td> <p class="income_company">Nip: {{company.nip}}</p></td>
-                </tr>
-            </table>           
-        </div>
-        
-        <div class="col-md-6">
-            <table style="width:100%;">
-                <tr>
-                    <td style="width:70px;"><p class="income_number">Nabywca:</p></td>
-                    <td><mdb-select class="select" [options]="contractor" [filterEnabled]="true" placeholder="-- wybierz nabywce --" [(ngModel)]="invoice.customerId" (selected)="changeConstructor($event)" class="mdb_income" #constructorList 
+                    <td style="width:70px;"><p class="income_number">Sprzedawca:</p></td>
+                    <td><mdb-select class="select" [options]="contractor" [filterEnabled]="true" placeholder="-- wybierz dostawcę --" [(ngModel)]="expenditure.customerId" (selected)="changeConstructor($event)" class="mdb_income" #constructorList 
                         style="border: none!important"></mdb-select></td>
                 </tr>
                 <tr>
@@ -63,6 +42,29 @@
                     <td> <p *ngIf="constractorSelected.name!=''" class="income_company">Nip: {{constractorSelected.nip}}</p></td>
                 </tr>
             </table>
+          
+        </div>
+        
+        <div class="col-md-6">
+            <table>
+                <tr>
+                    <td><p class="income_number">Nabywca:</p></td>
+                    <td><p class="income_company">{{company.name}}</p></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><p class="income_company">{{company.street}}</p></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><p class="income_company">{{company.city}}</p></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td> <p class="income_company">Nip: {{company.nip}}</p></td>
+                </tr>
+            </table> 
+           
             
         </div>
     </div>
@@ -74,20 +76,27 @@
             <table>
                 <tr>
                     <td>Termin płatności:</td>
-                    <td><mdb-date-picker name="mydate" [options]="myDatePickerOptions" [placeholder]="'Wybierz date'" [(ngModel)]="invoice.dataToPay" class="mdb_income"></mdb-date-picker></td>
+                    <td><mdb-date-picker name="mydate" [options]="myDatePickerOptions" [placeholder]="'Wybierz date'" [(ngModel)]="expenditure.dataToPay" class="mdb_income"></mdb-date-picker></td>
                 </tr>                        
             </table>   
             <div class="form-group checkbox-primary">
-                <input type="checkbox" id="pay" class="filled-in" [(ngModel)]="invoice.boolPay">
+                <input type="checkbox" id="pay" class="filled-in" [(ngModel)]="expenditure.boolPay">
                 <label for="pay">Zapłacona:</label>
             </div>
             
-            <table *ngIf="invoice.boolPay">
+            <table *ngIf="expenditure.boolPay">
                 <tr>
                     <td>Data dokonania płatności:</td>
-                    <td><mdb-date-picker name="mydate" [options]="myDatePickerOptions" [(ngModel)]="invoice.dataPay" [placeholder]="'Wybierz date'" class="mdb_income"></mdb-date-picker></td>
+                    <td><mdb-date-picker name="mydate" [options]="myDatePickerOptions" [(ngModel)]="expenditure.dataPay" [placeholder]="'Wybierz date'" class="mdb_income"></mdb-date-picker></td>
                 </tr>
-            </table>        
+            </table>   
+            
+            <div class="form-group checkbox-primary">
+                <input type="checkbox" id="vat" class="filled-in" [(ngModel)]="expenditure.vat50">
+                <label for="vat">50% VAT:</label>
+            </div>
+            
+            
         </div>
     </div>
     
@@ -111,7 +120,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr mdbTableCol *ngFor="let el of invoice.servicesList; let i = index;">
+                <tr mdbTableCol *ngFor="let el of expenditure.servicesList; let i = index;">
                   <td scope="row">{{i+1}}.</td>    
                   <td scope="row"><input type="text" [(ngModel)]="el.name" class="fv_input"></td>
                   <td><mdb-select class="select" [options]="jm" placeholder="-- jm --" [(ngModel)]="el.jm" class="mdb_income" style="border: none!important"></mdb-select></td>
@@ -149,9 +158,20 @@
                             </tr>
                         </tbody>
                     </table>   
-                    <p class="toPay">DO ZAPŁATY: {{invoice.toPay| currency: 'PLN '}}</p>
+                    <p class="toPay">DO ZAPŁATY: {{expenditure.toPay| currency: 'PLN '}}</p>
                 </div>
 
+            </div>
+            
+            <div class="income-inline"></div>
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="md-form">
+                        <textarea [(ngModel)]="expenditure.description" class="form-control"></textarea>
+                        <label class="active">Opis:</label>
+                    </div>
+                </div>
             </div>
             
         </div>        

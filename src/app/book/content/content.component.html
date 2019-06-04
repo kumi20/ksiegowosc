@@ -70,7 +70,7 @@
             <mdb-card-header class="card-header">Zakupy: nieopłacone rachunki</mdb-card-header>
                 <mdb-card-body class="card-body">
                     <mdb-card-text>
-                        <button class="btn blue-gradient" rounded="true" mdbWavesEffect>Nowa faktura</button>
+                        <button class="btn blue-gradient" rounded="true" mdbWavesEffect [routerLink]="[{ outlets: { 'panel-outlet': ['expenditure'] } }]">Nowa faktura</button>
                         
                         <br><br>
                         <p><strong>Faktury do opłacenia:</strong> {{expenditureWait| currency: 'PLN '}}</p>

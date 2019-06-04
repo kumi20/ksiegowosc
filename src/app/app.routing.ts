@@ -8,6 +8,7 @@ import { SettingsComponent } from './book/settings/settings.component';
 import { MyProfileComponent} from './book/my-profile/my-profile.component';
 import { ContentComponent } from './book/content/content.component';
 import { IncomeComponent } from './book/income/income.component';
+import { ExpenditureComponent } from './book/expenditure/expenditure.component'
 
 import { AuthGuard } from './auth.guard';
 // ROUTING
@@ -19,6 +20,7 @@ const routesConfig: Routes = [
             {path: 'settings', component: SettingsComponent, outlet:'panel-outlet', canActivate: [AuthGuard]},
             {path: 'myProfiles', component: MyProfileComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
             {path: 'income', component: IncomeComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
+            {path: 'expenditure', component: ExpenditureComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
             {path: 'kpir', component: IncomeComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
         ]          
     }
