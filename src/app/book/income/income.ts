@@ -7,6 +7,7 @@ export interface invoice{
     toPayNetto: any;
     toPay: any;
     vat50: boolean;
+    cost75?:boolean;
     dataToPay:string;
     boolPay: boolean;
     description: string;

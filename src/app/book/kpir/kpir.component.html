@@ -1,0 +1,107 @@
+<mdb-card class="card">  
+  <mdb-card-header class="card-header">KPiR</mdb-card-header>
+  <mdb-card-body class="card-body">
+    <mdb-card-text>  
+
+        <div class="row">
+           <div class="col-md-3">
+               
+                <div class="md-form">
+                    <mdb-select class="select" [options]="year" [filterEnabled]="true" placeholder="-- wybierz rok --" [(ngModel)]="actualYear" #yearSelected></mdb-select>
+                    <label class="active">Rok:</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+  
+                <div class="md-form">
+                    <mdb-select class="select" [options]="month" [filterEnabled]="true" placeholder="-- wybierz miesiąc --" [(ngModel)]="actualMonth" #monthSelected></mdb-select>
+                    <label class="active">Miesiąc:</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+
+                <button class="btn blue-gradient" (click)="showKPiR()">Pokaż</button>
+            </div>
+       </div>
+        
+        <br><br>
+        
+        <div class="row">
+            <div class="col-md-12">                
+                <table class="table" responsive="true">
+                  <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th style="width:100px;">data zd. gosp.</th>
+                        <th>nr dow. księg.</th>
+                        <th>imię i nazwisko (firma)</th>
+                        <th>razem przychód</th>
+                        <th>zak. tow.handl.</th>
+                        <th style="width:100px;">koszty ub. zak.</th>
+                        <th>wynagr. w got.</th>
+                        <th>pozostałe wydatki</th>
+                        <th>opis zd. gosp.</th>
+                        <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr mdbTableCol *ngFor="let el of kpir; let i = index;">
+                      <th scope="row">{{i + 1}}</th>
+                      <td>{{el.data_zd}}</td>
+                      <td>{{el.nr_dow}}</td>
+                      <td>{{el.name}}</td>
+                      <td>{{el.razem_przychod}}</td>
+                      <td>{{el.zakup_towarow}}</td>
+                      <td>{{el.koszty_uboczne}}</td>
+                      <td>{{el.wynagrodzenie_gotowka}}</td>
+                      <td>{{el.pozostale_wydatki}}</td>
+                      <td>{{el.opis_zdarzenia}}</td>
+                      <td><i class="fa fa-trash-o" style="cursor: pointer" (click)="delete(el.id)"></i></td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+        </div>
+    </mdb-card-text>
+  </mdb-card-body>
+</mdb-card>
+
+<br><br>
+
+<mdb-card class="card">  
+    <mdb-card-header class="card-header">Statystyka</mdb-card-header>
+      <mdb-card-body class="card-body">
+          <mdb-card-text>  
+              <div class="row">
+                    <div class="col-md-6">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th style="width:35%"></th>
+                                    <th>w danym miesiącu</th>
+                                    <th>od początku roku</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>razem przychód</td>
+                                    <td>{{statistic.przychod_miesiac}} zł</td>
+                                    <td>{{statistic.przychod_rok}} zł</td>
+                                </tr>
+                                <tr>
+                                    <td>koszt uzyskania przychodu</td>
+                                    <td>{{statistic.wydatki_miesiac}} zł</td>
+                                    <td>{{statistic.wydatki_rok}} zł</td>
+                                </tr>
+                                <tr>
+                                    <td>dochód</td>
+                                    <td>{{statistic.dochod_miesiac}} zł</td>
+                                    <td>{{statistic.dochod_rok}} zł</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+          </mdb-card-text>
+      </mdb-card-body>
+</mdb-card>

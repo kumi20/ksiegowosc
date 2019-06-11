@@ -7,6 +7,21 @@ import { ApiService } from './api.service';
 @Injectable()
 export class EventService {
     
+  month: Array<any> = [
+      {value:'01', label: 'styczeń'},
+      {value:'02', label: 'luty'},
+      {value:'03', label: 'marzec'},
+      {value:'04', label: 'kwiecień'},
+      {value:'05', label: 'maj'},
+      {value:'06', label: 'czerwiec'},
+      {value:'07', label: 'lipiec'},
+      {value:'08', label: 'sierpień'},
+      {value:'09', label: 'wrzesień'},
+      {value:'10', label: 'październik'},
+      {value:'11', label: 'listopad'},
+      {value:'12', label: 'grudzień'}
+    ];    
+    
   constructor(private toastrService: ToastService) {
 
   }
@@ -27,5 +42,16 @@ export class EventService {
     klepsydraStop(){
       document.getElementById('klepsydra').style.display = 'none';
     }
+    
+    formatMonth(month){
+      month++;
+      if (month < 10) month = '0'+month;
+      return month;
+      }    
+
+      formatDay(day){
+          if (day < 10) day = '0'+day;
+          return day;
+      }
     
 }

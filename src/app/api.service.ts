@@ -79,6 +79,17 @@ export class ApiService {
     )
   }  
     
+  delete(uri){
+      return this._http.delete<any[]|any>(this.uri+uri, {headers: {
+          'Authorizationtoken':localStorage.getItem('ksiegaQumiToken')
+      }}).pipe(
+        catchError((err, caught)=>{
+            this.event.showInfo('error',err.message);
+            throw new Error(err.message)
+        })
+    )   
+  }    
+    
   logOn(user, psw){
       const json = JSON.stringify({
           'user': user,
