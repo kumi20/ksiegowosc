@@ -10,12 +10,16 @@ import { ContentComponent } from './book/content/content.component';
 import { IncomeComponent } from './book/income/income.component';
 import { ExpenditureComponent } from './book/expenditure/expenditure.component';
 import { KpirComponent } from './book/kpir/kpir.component';
+import { InternalEvidenceComponent } from './book/internal-evidence/internal-evidence.component';
+import { AddComponent } from './book/internal-evidence/add/add.component';
+
+
 
 import { AuthGuard } from './auth.guard';
 // ROUTING
 const routesConfig: Routes = [
     { path: '', component: DashboardComponent},
-    {   path: 'panel', component: PanelComponent, canActivate: [AuthGuard],
+    { path: 'panel', component: PanelComponent, canActivate: [AuthGuard],
         children: [
             {path: '', component: ContentComponent, outlet:'panel-outlet', canActivate: [AuthGuard]},
             {path: 'settings', component: SettingsComponent, outlet:'panel-outlet', canActivate: [AuthGuard]},
@@ -23,6 +27,8 @@ const routesConfig: Routes = [
             {path: 'income', component: IncomeComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
             {path: 'expenditure', component: ExpenditureComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
             {path: 'kpir', component: KpirComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
+            {path: 'internal-evidence', component: InternalEvidenceComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
+            {path: 'internal-evidence-add', component: AddComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
         ]          
     }
   ]

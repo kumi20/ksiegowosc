@@ -1,0 +1,55 @@
+<mdb-card class="card">  
+  <mdb-card-header class="card-header">Dowód</mdb-card-header>
+  <mdb-card-body class="card-body">
+    <mdb-card-text> 
+        
+        <div class="row">
+            <div class="col-md-12">
+                <label>Data dokumentu:</label>
+                <mdb-date-picker name="mydate" [options]="myDatePickerOptions" [placeholder]="'Wybierz date'" [(ngModel)]="evidence.data"></mdb-date-picker>
+            </div>
+        </div>
+        
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <label>Numer dokumentu:</label>
+                <input type="text" class="form-control" [(ngModel)]="evidence.number"/>
+            </div>
+        </div>
+        
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <label>Opis:</label>
+                <textarea class="form-control" [(ngModel)]="evidence.description"></textarea>
+            </div>
+        </div>
+        
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <label>Kwota:</label>
+                <input type="text" class="form-control" [(ngModel)]="evidence.sum"/>
+            </div>
+        </div>
+        
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <label>Dostawca:</label>
+                <mdb-select class="select" [options]="contractor" [filterEnabled]="true" placeholder="-- wybierz dostawcę --" [(ngModel)]="evidence.customerId" class="mdb_income" #constructorList 
+                        style="border: none!important"></mdb-select>
+            </div>
+        </div>
+        
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn blue-gradient" (click)="save()">Zapisz</button>
+            </div>
+        </div>
+        
+    </mdb-card-text>
+  </mdb-card-body>
+</mdb-card>

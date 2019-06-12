@@ -41,6 +41,8 @@ import { ContentComponent } from './book/content/content.component';
 import { IncomeComponent } from './book/income/income.component';
 import { ExpenditureComponent } from './book/expenditure/expenditure.component';
 import { KpirComponent } from './book/kpir/kpir.component';
+import { InternalEvidenceComponent } from './book/internal-evidence/internal-evidence.component';
+import { AddComponent } from './book/internal-evidence/add/add.component';
 
 
 
@@ -73,7 +75,9 @@ export function getAuthServiceConfigs() {
         ContentComponent,
         IncomeComponent,
         ExpenditureComponent,
-        KpirComponent
+        KpirComponent,
+        InternalEvidenceComponent,
+        AddComponent
 	],
 	imports: [
 		BrowserModule,

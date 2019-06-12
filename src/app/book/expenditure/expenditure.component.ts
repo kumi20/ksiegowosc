@@ -107,9 +107,9 @@ export class ExpenditureComponent implements OnInit {
         let vat = 0;
         if(!isNaN(this.expenditure.servicesList[i].vat)) vat = this.expenditure.servicesList[i].vat;
         this.expenditure.servicesList[i].netto = this.expenditure.servicesList[i].netto.replace(',','.');
-        this.expenditure.servicesList[i].countNetto = this.expenditure.servicesList[i].netto * this.expenditure.servicesList[i].count;
-        this.expenditure.servicesList[i].countVat = (this.expenditure.servicesList[i].countNetto * vat)/100;
-        this.expenditure.servicesList[i].brutto = this.expenditure.servicesList[i].countNetto + this.expenditure.servicesList[i].countVat;
+        this.expenditure.servicesList[i].countNetto = this.Round(this.expenditure.servicesList[i].netto * this.expenditure.servicesList[i].count, 2);
+        this.expenditure.servicesList[i].countVat = this.Round((this.expenditure.servicesList[i].countNetto * vat)/100,2);
+        this.expenditure.servicesList[i].brutto = this.Round(this.expenditure.servicesList[i].countNetto + this.expenditure.servicesList[i].countVat,2);
         this.sumVatServices();
     }
     
@@ -207,5 +207,11 @@ export class ExpenditureComponent implements OnInit {
                 }
             )
         }
+    }
+    
+    Round(n, k)
+    {
+        var factor = Math.pow(10, k);
+        return Math.round(n*factor)/factor;
     }
 }

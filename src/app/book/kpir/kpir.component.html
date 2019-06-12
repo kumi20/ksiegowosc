@@ -7,20 +7,16 @@
            <div class="col-md-3">
                
                 <div class="md-form">
-                    <mdb-select class="select" [options]="year" [filterEnabled]="true" placeholder="-- wybierz rok --" [(ngModel)]="actualYear" #yearSelected></mdb-select>
+                    <mdb-select class="select" [options]="year" [filterEnabled]="true" placeholder="-- wybierz rok --" [(ngModel)]="actualYear" #yearSelected (click)="showKPiR()"></mdb-select>
                     <label class="active">Rok:</label>
                 </div>
             </div>
             <div class="col-md-3">
   
                 <div class="md-form">
-                    <mdb-select class="select" [options]="month" [filterEnabled]="true" placeholder="-- wybierz miesiąc --" [(ngModel)]="actualMonth" #monthSelected></mdb-select>
+                    <mdb-select class="select" [options]="month" [filterEnabled]="true" placeholder="-- wybierz miesiąc --" [(ngModel)]="actualMonth" #monthSelected (click)="showKPiR()"></mdb-select>
                     <label class="active">Miesiąc:</label>
                 </div>
-            </div>
-            <div class="col-md-3">
-
-                <button class="btn blue-gradient" (click)="showKPiR()">Pokaż</button>
             </div>
        </div>
         
