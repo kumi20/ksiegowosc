@@ -1,0 +1,30 @@
+<mdb-card class="card">  
+  <mdb-card-header class="card-header">Faktury nieopłacone</mdb-card-header>
+  <mdb-card-body class="card-body">
+    <mdb-card-text>  
+
+            <table class="table" responsive="true">
+                  <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th >kontrahent</th>
+                        <th>nr dow. księg.</th>
+                        <th>wartość FV</th>
+                        <th>data dokonania płatności</th>
+                        <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr mdbTableCol *ngFor="let el of fv; let i = index;">
+                        <td>{{i+1}}</td>
+                        <td>{{el.name}}</td>
+                        <td>{{el.nr_dow}}</td>
+                        <td>{{el.razem_przychod}}</td>
+                        <td><mdb-date-picker name="mydate" [options]="myDatePickerOptions" [placeholder]="'Wybierz date'" style="top:-8px; position:relative" [(ngModel)]="el.date"></mdb-date-picker></td>
+                        <td><i class="fa fa-save" style="font-size:24px; cursor: pointer;" (click)="pay(el.id, el.date)"></i></td>
+                    </tr>
+                  </tbody>
+            </table>
+      </mdb-card-text>
+   </mdb-card-body>
+</mdb-card>

@@ -23,6 +23,7 @@ export class AddComponent implements OnInit {
           customerId:""
   }  
     contractor = [];
+    idDocumnet;
     
   public myDatePickerOptions = {
     todayBtnTxt: "Dzisiaj",
@@ -38,12 +39,27 @@ export class AddComponent implements OnInit {
 
   ngOnInit() {
       
+      this.route.params.subscribe(params => this.idDocumnet = parseInt(params['id']));
+      
       this.CmsService.getAuthorization(`expenditure/getContractor.php`).subscribe(
             response =>{
                 response.forEach(el=>{
                     this.contractor.push({value: el.id, label:el.name});
                 })
                 this.constructorList.updateOptionsList();
+                
+                if (!isNaN(this.idDocumnet)){
+                  this.CmsService.getAuthorization(`internal-evidence/getOne.php?id=${this.idDocumnet}`).subscribe(
+                        response=>{
+                            this.evidence.data = response[0].data;
+                            this.evidence.number = response[0].number;
+                            this.evidence.description = response[0].description;
+                            this.evidence.sum = response[0].sum;
+                            this.evidence.id = response[0].id;
+                            this.evidence.customerId = response[0].customerId;
+                        }
+                  );
+              }
             }    
       );
       
@@ -51,11 +67,24 @@ export class AddComponent implements OnInit {
     
     save(){
         this.evidence.sum = this.evidence.sum.replace(',','.');
-        this.CmsService.postAuthorization(`internal-evidence/save.php`, this.evidence).subscribe(
-            response =>{
-                this.event.showInfo('success', "Zapisano dowód")
-            }
-        )
+        if (!isNaN(this.idDocumnet)){
+            this.CmsService.postAuthorization(`internal-evidence/put.php`, this.evidence).subscribe(
+                response =>{
+                    this.event.showInfo('success', "Zapisano dowód");
+                    this._route.navigate(['/panel/', { outlets: { 'panel-outlet': ['internal-evidence']}}]);
+                }
+            )
+        }
+        else{
+            
+            this.CmsService.postAuthorization(`internal-evidence/save.php`, this.evidence).subscribe(
+                response =>{
+                    this.event.showInfo('success', "Zapisano dowód");
+                    this._route.navigate(['/panel/', { outlets: { 'panel-outlet': ['internal-evidence']}}]);
+                }
+            )
+        }
+        
     }
 
 }

@@ -236,8 +236,8 @@ export class ContentComponent implements OnInit {
     }
     
     chartClicked(event){
-        if(event.active.length !=0){
-            console.log(event.active[0]._index);            
+        if(event.active.length !=0){ 
+            this._route.navigate(['/panel/',{ outlets: { 'panel-outlet': ['not-paid', event.active[0]._index] } }]);
         }
     }
 }

@@ -43,6 +43,7 @@ import { ExpenditureComponent } from './book/expenditure/expenditure.component';
 import { KpirComponent } from './book/kpir/kpir.component';
 import { InternalEvidenceComponent } from './book/internal-evidence/internal-evidence.component';
 import { AddComponent } from './book/internal-evidence/add/add.component';
+import { IncomeNotPaidComponent } from './book/income-not-paid/income-not-paid.component';
 
 
 
@@ -77,7 +78,8 @@ export function getAuthServiceConfigs() {
         ExpenditureComponent,
         KpirComponent,
         InternalEvidenceComponent,
-        AddComponent
+        AddComponent,
+        IncomeNotPaidComponent
 	],
 	imports: [
 		BrowserModule,

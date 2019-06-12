@@ -12,7 +12,7 @@ import { ExpenditureComponent } from './book/expenditure/expenditure.component';
 import { KpirComponent } from './book/kpir/kpir.component';
 import { InternalEvidenceComponent } from './book/internal-evidence/internal-evidence.component';
 import { AddComponent } from './book/internal-evidence/add/add.component';
-
+import { IncomeNotPaidComponent } from './book/income-not-paid/income-not-paid.component';
 
 
 import { AuthGuard } from './auth.guard';
@@ -29,6 +29,8 @@ const routesConfig: Routes = [
             {path: 'kpir', component: KpirComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
             {path: 'internal-evidence', component: InternalEvidenceComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
             {path: 'internal-evidence-add', component: AddComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
+            {path: 'internal-evidence-add/:id', component: AddComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
+            {path: 'not-paid/:id', component: IncomeNotPaidComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
         ]          
     }
   ]
