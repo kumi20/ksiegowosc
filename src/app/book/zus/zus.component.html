@@ -1,0 +1,50 @@
+<mdb-card class="card">  
+  <mdb-card-header class="card-header">Składki ZUS</mdb-card-header>
+  <mdb-card-body class="card-body">
+    <mdb-card-text>  
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="md-form">
+                    <mdb-select class="select" [options]="year" [filterEnabled]="true" placeholder="-- wybierz rok --" [(ngModel)]="actualYear" #yearSelected (selected)="showZus()"></mdb-select>
+                    <label class="active">Rok:</label>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <button class="btn blue-gradient" style="position:relatice; float:right;" [routerLink]="['/panel/',{outlets: { 'panel-outlet': ['add-zus'] } }]">Dodaj składke</button>
+            </div>
+        </div>    
+        
+        <br><br>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                        <th>#</th>
+                        <th>Rok</th>
+                        <th>Miesiąc</th>
+                        <th>Termin płatności</th>
+                        <th>Składka społeczna</th>
+                        <th>Składka zdrowotna</th>
+                        <th>Składka na fundusz pracy</th>
+                        <th></th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let month of zus; let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{month.rok}}</td>
+                            <td>{{month.miesiac}}</td>
+                            <td>{{month.termin_platnosci}}</td>
+                            <td>{{month.skladka_spoleczne}} zł</td>
+                            <td>{{month.skladka_zdrowotne}} zł</td>
+                            <td>{{month.skladka_fundusz_pracy}} zł</td>
+                            <td><i class="fa fa-trash-o" style="cursor: pointer" (click)="delete(month.id)"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+      </mdb-card-text>
+   </mdb-card-body>
+</mdb-card>

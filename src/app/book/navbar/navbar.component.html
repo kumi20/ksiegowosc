@@ -4,28 +4,20 @@
                 <li class="nav-item waves-light"  mdbWavesEffect>
                     <a class="nav-link" routerLink="/panel" >Home</a>                     
                 </li>
-                <li class="nav-item waves-light"  mdbWavesEffect>
-                    <a class="nav-link" [routerLink]="[{ outlets: { 'panel-outlet': ['kpir'] } }]" routerLinkActive="active">Kpir</a>                     
+                <li class="nav-item dropdown" dropdown>
+                    <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect routerLinkActive="active">Ewidencje<span class="caret"></span></a>
+                    <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+                        <a class="nav-link" [routerLink]="[{ outlets: { 'panel-outlet': ['kpir'] } }]" routerLinkActive="active">Kpir</a>
+                        <a class="nav-link" [routerLink]="[{ outlets: { 'panel-outlet': ['kpir'] } }]" routerLinkActive="active">Faktury</a>
+                        <a class="nav-link" [routerLink]="[{ outlets: { 'panel-outlet': ['internal-evidence'] } }]" routerLinkActive="active">Dowody wewnętrzne</a>   
+                        <a class="nav-link" [routerLink]="[{ outlets: { 'panel-outlet': ['zus'] } }]" routerLinkActive="active">Składki ZUS</a>
+                        <a class="nav-link" [routerLink]="[{ outlets: { 'panel-outlet': ['kpir'] } }]" routerLinkActive="active">Podatek dochodowy</a>    
+                    </div>
                 </li>
-                <li class="nav-item waves-light"  mdbWavesEffect>
-                    <a class="nav-link" [routerLink]="[{ outlets: { 'panel-outlet': ['kpir'] } }]" routerLinkActive="active">Faktury</a>                     
-                </li>
+
                 <li class="nav-item waves-light"  mdbWavesEffect>
                     <a class="nav-link" [routerLink]="[{ outlets: { 'panel-outlet': ['kpir'] } }]" routerLinkActive="active">Kontrahenci</a>                     
                 </li>
-                <li class="nav-item waves-light"  mdbWavesEffect>
-                    <a class="nav-link" [routerLink]="[{ outlets: { 'panel-outlet': ['kpir'] } }]" routerLinkActive="active">Składki ZUS</a>                     
-                </li>
-                <li class="nav-item waves-light"  mdbWavesEffect>
-                    <a class="nav-link" [routerLink]="[{ outlets: { 'panel-outlet': ['kpir'] } }]" routerLinkActive="active">Podatek</a>                     
-                </li>
-                <li class="nav-item dropdown" dropdown>
-                            <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect [routerLink]="[{ outlets: { 'panel-outlet': ['internal-evidence'] } }]" routerLinkActive="active">
-                            Dowody wewnętrzne<span class="caret"></span></a>
-                            <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
-                              <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="[{ outlets: { 'panel-outlet': ['internal-evidence-add'] } }]" routerLinkActive="active">Dodaj</a>
-                            </div>
-                          </li>
             </ul>
             
             <div class="form-inline">

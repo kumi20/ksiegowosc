@@ -1,0 +1,107 @@
+<mdb-card class="card">  
+  <mdb-card-header class="card-header">Dodaj składkę ZUS</mdb-card-header>
+  <mdb-card-body class="card-body">
+    <mdb-card-text>  
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="md-form">
+                    <mdb-select class="select" [options]="year" [filterEnabled]="true" placeholder="-- wybierz rok --" [(ngModel)]="actualYear" #yearSelected (selected)="setDataPayment()"></mdb-select>
+                    <label class="active">Rok:</label>
+                </div>
+            </div>
+            
+            <div class="col-md-3">
+  
+                <div class="md-form">
+                    <mdb-select class="select" [options]="month" [filterEnabled]="true" placeholder="-- wybierz miesiąc --" [(ngModel)]="actualMonth" #monthSelected (click)="setDataPayment()"></mdb-select>
+                    <label class="active">Miesiąc:</label>
+                </div>
+            </div>
+        </div>
+        
+        <br><br>
+        <div class="row">
+            <div class="col-md-12">
+                <label>Termi płatności: {{zus.paymentDeadline}}</label>
+            </div>     
+        </div>
+        
+        <br><br>
+        <div class="row">
+            <div class="col-md-12">
+                <p class="p_header">Składka na ubezpieczenie społeczne:</p>
+                
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="md-form">
+                            <input type="text" class="form-control" [(ngModel)]="zus.socialContribution">
+                            <label class="active">wysokość składki [zł]</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="md-form">
+                            <input type="text" class="form-control" [(ngModel)]="zus.dateSocial" disabled>
+                            <label class="active">data wpłaty</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <br><br>
+        <div class="row">
+            <div class="col-md-12">
+                <p class="p_header">Składka na ubezpieczenie zdrowotne:</p>
+                
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="md-form">
+                            <input type="text" class="form-control" [(ngModel)]="zus.healthContribution">
+                            <label class="active">wysokość składki [zł]</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="md-form">
+                            <input type="text" class="form-control" [(ngModel)]="zus.dateHealth" disabled>
+                            <label class="active">data wpłaty</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <br><br>
+        <div class="row">
+            <div class="col-md-12">
+                <p class="p_header">Składka na fundusz pracy:</p>
+                
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="md-form">
+                            <input type="text" class="form-control" [(ngModel)]="zus.workContribution">
+                            <label class="active">wysokość składki [zł]</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="md-form">
+                            <input type="text" class="form-control" [(ngModel)]="zus.dateWork" disabled>
+                            <label class="active">data wpłaty</label>
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn blue-gradient" (click)="save()">Zapisz</button>
+            </div>
+        </div>
+        
+      </mdb-card-text>
+    </mdb-card-body>
+</mdb-card>

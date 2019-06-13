@@ -13,6 +13,8 @@ import { KpirComponent } from './book/kpir/kpir.component';
 import { InternalEvidenceComponent } from './book/internal-evidence/internal-evidence.component';
 import { AddComponent } from './book/internal-evidence/add/add.component';
 import { IncomeNotPaidComponent } from './book/income-not-paid/income-not-paid.component';
+import { ZusComponent } from './book/zus/zus.component';
+import { AddZusComponent } from './book/zus/add-zus/add-zus.component';
 
 
 import { AuthGuard } from './auth.guard';
@@ -31,6 +33,8 @@ const routesConfig: Routes = [
             {path: 'internal-evidence-add', component: AddComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
             {path: 'internal-evidence-add/:id', component: AddComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
             {path: 'not-paid/:id', component: IncomeNotPaidComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
+            {path: 'zus', component: ZusComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
+            {path: 'add-zus', component: AddZusComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
         ]          
     }
   ]

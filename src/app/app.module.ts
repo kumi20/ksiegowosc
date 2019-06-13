@@ -44,6 +44,8 @@ import { KpirComponent } from './book/kpir/kpir.component';
 import { InternalEvidenceComponent } from './book/internal-evidence/internal-evidence.component';
 import { AddComponent } from './book/internal-evidence/add/add.component';
 import { IncomeNotPaidComponent } from './book/income-not-paid/income-not-paid.component';
+import { ZusComponent } from './book/zus/zus.component';
+import { AddZusComponent } from './book/zus/add-zus/add-zus.component';
 
 
 
@@ -79,7 +81,9 @@ export function getAuthServiceConfigs() {
         KpirComponent,
         InternalEvidenceComponent,
         AddComponent,
-        IncomeNotPaidComponent
+        IncomeNotPaidComponent,
+        ZusComponent,
+        AddZusComponent
 	],
 	imports: [
 		BrowserModule,
