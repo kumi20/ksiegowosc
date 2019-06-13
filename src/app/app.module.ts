@@ -14,6 +14,7 @@ import { MDBSpinningPreloader } from './typescripts/pro/index';
 import { CommonModule } from '@angular/common';
 import { RouterModule,Router } from '@angular/router';
 import { GoogleAnalyticsModule, GA_TOKEN } from 'angular-ga';
+import { Ng2PaginationModule } from 'ng2-pagination';
 
 import { ApiService } from './api.service';
 import { EventService } from './event.service';
@@ -46,7 +47,10 @@ import { AddComponent } from './book/internal-evidence/add/add.component';
 import { IncomeNotPaidComponent } from './book/income-not-paid/income-not-paid.component';
 import { ZusComponent } from './book/zus/zus.component';
 import { AddZusComponent } from './book/zus/add-zus/add-zus.component';
-
+import { TaxComponent } from './book/tax/tax.component';
+import { CountTaxComponent } from './book/tax/count-tax/count-tax.component';
+import { CompanyComponentBook } from './book/company/company.component';
+import { AddCompanyComponent } from './book/company/add-company/add-company.component';
 
 
 // Configs 
@@ -83,7 +87,11 @@ export function getAuthServiceConfigs() {
         AddComponent,
         IncomeNotPaidComponent,
         ZusComponent,
-        AddZusComponent
+        AddZusComponent,
+        TaxComponent,
+        CountTaxComponent,
+        CompanyComponentBook,
+        AddCompanyComponent
 	],
 	imports: [
 		BrowserModule,
@@ -94,6 +102,7 @@ export function getAuthServiceConfigs() {
         ReactiveFormsModule,
         BrowserAnimationsModule,
         TemplateModule,
+        Ng2PaginationModule,
         ToastModule.forRoot(),
         GoogleAnalyticsModule.forRoot(),
         MDBBootstrapModule.forRoot(),

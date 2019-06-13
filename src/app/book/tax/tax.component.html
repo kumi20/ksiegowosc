@@ -1,0 +1,49 @@
+<mdb-card class="card">  
+  <mdb-card-header class="card-header">Podatek dochodowy</mdb-card-header>
+  <mdb-card-body class="card-body">
+    <mdb-card-text>  
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="md-form">
+                    <mdb-select class="select" [options]="year" [filterEnabled]="true" placeholder="-- wybierz rok --" [(ngModel)]="actualYear" #yearSelected (selected)="getTax()"></mdb-select>
+                    <label class="active">Rok:</label>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <button class="btn blue-gradient" style="position:relatice; float:right;" [routerLink]="['/panel/',{outlets: { 'panel-outlet': ['count-tax'] } }]">Oblicz podatek</button>
+            </div>
+        </div>  
+        
+        <br><br>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                        <th>#</th>
+                        <th>Rok</th>
+                        <th>Miesiąc</th>
+                        <th>Przychód</th>
+                        <th>Koszt uzyskania przychodu</th>
+                        <th>Dochód</th>
+                        <th>Kwota zaliczki</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let tax of tax; let i = index">
+                            <td>{{i + 1}}</td>
+                            <td>{{tax.rok}}</td>
+                            <td>{{tax.miesiac}}</td>
+                            <td>{{tax.suma_przychodow| currency:'PLN '}}</td>
+                            <td>{{tax.suma_kosztow| currency:'PLN '}}</td>
+                            <td>{{tax.suma_przychodow - tax.suma_kosztow| currency:'PLN '}}</td>
+                            <td>{{tax.kwota_zaliczki| currency:'PLN '}}</td>
+                            <td><i class="fa fa-trash-o" style="cursor: pointer" (click)="delete(tax.id)"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+      </mdb-card-text>
+    </mdb-card-body>
+</mdb-card>

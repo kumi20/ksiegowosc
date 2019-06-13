@@ -1,0 +1,84 @@
+<mdb-card class="card">  
+  <mdb-card-header class="card-header">Oblicz podatek</mdb-card-header>
+  <mdb-card-body class="card-body">
+    <mdb-card-text>  
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Wybierz rok i miesiąc</label>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="md-form">
+                                <mdb-select class="select" [options]="year" [filterEnabled]="true" placeholder="-- wybierz rok --" [(ngModel)]="actualYear" #yearSelected></mdb-select>
+                                <label class="active">Rok:</label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+
+                            <div class="md-form">
+                                <mdb-select class="select" [options]="month" [filterEnabled]="true" placeholder="-- wybierz miesiąc --" [(ngModel)]="actualMonth" #monthSelected ></mdb-select>
+                                <label class="active">Miesiąc:</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn blue-gradient" (click)="countTax()">Oblicz</button>
+                        </div>
+                    </div>
+                </div>              
+            </div>
+
+      </mdb-card-text>
+    </mdb-card-body>
+</mdb-card>
+
+<br><br>
+
+<mdb-card class="card" *ngIf="showTax">  
+  <mdb-card-header class="card-header">Podatek</mdb-card-header>
+    <mdb-card-body class="card-body">
+        <mdb-card-text> 
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Rok: </strong>{{tax.year}}</p>
+                    <p><strong>Suma zapłaconych składek na ub. społeczne: </strong>{{tax.social| currency:'PLN '}}</p>
+                    <p><strong>Podatek od początku roku: </strong>{{tax.tax| currency:'PLN '}}</p>
+                </div>
+                
+                <div class="col-md-6">
+                    <p><strong>Miesiąc: </strong>{{tax.month}}</p>
+                    <p><strong>Suma odliczonych składek na ub. zdrowotne: </strong>{{tax.health| currency:'PLN '}}</p>
+                    <p><strong>Zaliczka na podatek: </strong>{{tax.tax| currency:'PLN '}}</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table">
+                        <thead>
+                            <th>#</th>
+                            <th>Przychód</th>
+                            <th>Koszt uzyskania przychodu</th>
+                            <th>Dochód</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>{{tax.income| currency:'PLN '}}</td>
+                                <td>{{tax.cost| currency:'PLN '}}</td>
+                                <td>{{tax.income - tax.cost| currency:'PLN '}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <button class="btn blue-gradient" (click)="save()">Zapisz</button>
+                </div>
+            </div>
+        </mdb-card-text>
+    </mdb-card-body>
+</mdb-card>

@@ -15,6 +15,10 @@ import { AddComponent } from './book/internal-evidence/add/add.component';
 import { IncomeNotPaidComponent } from './book/income-not-paid/income-not-paid.component';
 import { ZusComponent } from './book/zus/zus.component';
 import { AddZusComponent } from './book/zus/add-zus/add-zus.component';
+import { TaxComponent } from './book/tax/tax.component';
+import { CountTaxComponent } from './book/tax/count-tax/count-tax.component';
+import { CompanyComponentBook } from './book/company/company.component';
+import { AddCompanyComponent } from './book/company/add-company/add-company.component';
 
 
 import { AuthGuard } from './auth.guard';
@@ -35,6 +39,10 @@ const routesConfig: Routes = [
             {path: 'not-paid/:id', component: IncomeNotPaidComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
             {path: 'zus', component: ZusComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
             {path: 'add-zus', component: AddZusComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
+            {path: 'tax', component: TaxComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
+            {path: 'count-tax', component: CountTaxComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
+            {path: 'company', component: CompanyComponentBook, outlet:'panel-outlet', canActivate: [AuthGuard] },
+            {path: 'add-company/:id', component: AddCompanyComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
         ]          
     }
   ]
