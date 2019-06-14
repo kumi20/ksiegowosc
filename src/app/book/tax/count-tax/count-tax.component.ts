@@ -33,7 +33,7 @@ export class CountTaxComponent implements OnInit {
     
   showTax: boolean = false;    
 
-  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) { }
+  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) {this.event.youCanVisit();}
 
   ngOnInit() {
       this.month = this.CmsService.month;

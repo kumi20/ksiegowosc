@@ -30,7 +30,7 @@ export class ContentComponent implements OnInit {
   expenditureWaitChart: Array<any> = [];
     
     
-  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) { }
+  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) {this.event.youCanVisit();}
 
   ngOnInit() {
       this.actualYear = String(new Date().getFullYear());

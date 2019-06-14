@@ -21,7 +21,7 @@ export class InternalEvidenceComponent implements OnInit {
   actualMonth;  
   internalEvidence = []
 
-  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) { }
+  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) {this.event.youCanVisit();}
 
   ngOnInit() {
       

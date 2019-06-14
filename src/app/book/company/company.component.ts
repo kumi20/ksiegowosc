@@ -13,7 +13,7 @@ export class CompanyComponentBook implements OnInit {
   company;
   page;    
     
-  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) { }
+  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) { this.event.youCanVisit();}
 
   ngOnInit() {
       this.showCompany();
@@ -23,7 +23,6 @@ export class CompanyComponentBook implements OnInit {
         this.CmsService.getAuthorization(`company/getList.php`).subscribe(
             response=>{
                 this.company = response;
-                console.log(response)
             }
         )
     }

@@ -60,7 +60,7 @@ export class ExpenditureComponent implements OnInit {
     
   suma = []; //suma netto z podziałem na stawki vat       
     
-  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) { }
+  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) {this.event.youCanVisit();}
 
   ngOnInit() {
       this.company.name = localStorage.getItem('companyName');

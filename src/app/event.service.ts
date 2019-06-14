@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ToastService } from './typescripts/pro/alerts'
 import { MDBSpinningPreloader } from './typescripts/pro';
 import { ApiService } from './api.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Injectable()
@@ -22,7 +23,7 @@ export class EventService {
       {value:'12', label: 'grudzień'}
     ];    
     
-  constructor(private toastrService: ToastService) {
+  constructor(private toastrService: ToastService, private _route: Router) {
 
   }
   
@@ -52,6 +53,16 @@ export class EventService {
       formatDay(day){
           if (day < 10) day = '0'+day;
           return day;
+      }
+    
+    
+      youCanVisit(){
+          setTimeout(()=>{
+              if(!localStorage.getItem("companyName")){
+              this._route.navigate(['/panel/', {outlets: { 'panel-outlet': ['add-user-company'] } }])
+            }
+          },100)
+          
       }
     
 }

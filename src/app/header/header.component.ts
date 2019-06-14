@@ -46,6 +46,7 @@ export class HeaderComponent implements OnInit {
                   localStorage.setItem('ksiegaQumiToken', response);
                   localStorage.setItem('user_nameKsiega', tokenExpDate.name);
                   document.getElementById('btn_close_login').click();
+                  this.getCompanyDate();
                   this._route.navigateByUrl('panel');
               }
           }
@@ -65,8 +66,32 @@ export class HeaderComponent implements OnInit {
             localStorage.setItem('ksiegaQumiToken', userData.id);
             localStorage.setItem('user_nameKsiega', userData.name);
             document.getElementById('btn_close_login').click();
+            this.getCompanyDate();  
             this._route.navigateByUrl('panel');            
           }
         );
+   }  
+    
+    
+   getCompanyDate(){
+       this.CmsService.getAuthorization('getCompanyDate.php').subscribe(
+            response =>{
+                console.log(response)
+                if (response.kod === 0){
+                    //this.companyNeme = response.name;
+                    localStorage.setItem('companyName', response.name);
+                    localStorage.setItem('companyAdres', response.adres);
+                    localStorage.setItem('companyCity', response.city);
+                    localStorage.setItem('companyNip', response.nip);
+                }
+                else if (response.kod === -1) this.event.showInfo('error', response.description);
+                else{
+                    localStorage.removeItem('companyName');
+                    localStorage.removeItem('companyAdres');
+                    localStorage.removeItem('companyCity');
+                    localStorage.removeItem('companyNip');
+                }
+            }
+        )
    }    
 }

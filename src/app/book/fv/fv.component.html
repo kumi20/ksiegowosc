@@ -1,0 +1,35 @@
+<mdb-card class="card">  
+  <mdb-card-header class="card-header">Faktury</mdb-card-header>
+  <mdb-card-body class="card-body">
+    <mdb-card-text>  
+
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                        <th>#</th>
+                        <th>Numer faktury</th>
+                        <th>Wystawca faktury</th>
+                        <th>Data wystawienia</th>
+                        <th>Kwota brutto</th>
+                        <th></th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let fv of fv| paginate: { itemsPerPage: 15, currentPage:  page }; let i = index">
+                            <td>{{i+1}}</td>
+                            <td>{{fv.number}}</td>
+                            <td>{{fv.name}} <p *ngIf="fv.nazwa!=null">{{fv.nazwa}}</p></td>
+                            <td>{{fv.documentDate}}</td>
+                            <td>{{fv.toPay| currency: 'PLN '}}</td>
+                            <td><i class="fa fa-trash-o" style="cursor: pointer" (click)="delete(fv.id)"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <pagination-controls (pageChange)="page = pageChanged($event)"  directionLinks="true"  previousLabel="Poprzednia" nextLabel="Następna" autoHide="true" class="pagination" style="widtH:50%; margin: auto;"> </pagination-controls>
+            </div>
+        </div>
+        
+      </mdb-card-text>
+    </mdb-card-body>
+</mdb-card>

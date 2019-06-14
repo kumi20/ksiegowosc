@@ -19,16 +19,19 @@ import { TaxComponent } from './book/tax/tax.component';
 import { CountTaxComponent } from './book/tax/count-tax/count-tax.component';
 import { CompanyComponentBook } from './book/company/company.component';
 import { AddCompanyComponent } from './book/company/add-company/add-company.component';
+import { FvComponent } from './book/fv/fv.component';
+import { AddUserCompanyComponent } from './book/add-user-company/add-user-company.component';
 
 
 import { AuthGuard } from './auth.guard';
+
 // ROUTING
 const routesConfig: Routes = [
     { path: '', component: DashboardComponent},
-    { path: 'panel', component: PanelComponent, canActivate: [AuthGuard],
+    { path: 'panel', component: PanelComponent, canActivate: [AuthGuard], 
         children: [
             {path: '', component: ContentComponent, outlet:'panel-outlet', canActivate: [AuthGuard]},
-            {path: 'settings', component: SettingsComponent, outlet:'panel-outlet', canActivate: [AuthGuard]},
+            {path: 'settings', component: SettingsComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
             {path: 'myProfiles', component: MyProfileComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
             {path: 'income', component: IncomeComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
             {path: 'expenditure', component: ExpenditureComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
@@ -43,6 +46,9 @@ const routesConfig: Routes = [
             {path: 'count-tax', component: CountTaxComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
             {path: 'company', component: CompanyComponentBook, outlet:'panel-outlet', canActivate: [AuthGuard] },
             {path: 'add-company/:id', component: AddCompanyComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
+            {path: 'add-company/:id/:company', component: AddCompanyComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
+            {path: 'fv', component: FvComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
+            {path: 'add-user-company', component: AddUserCompanyComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
         ]          
     }
   ]

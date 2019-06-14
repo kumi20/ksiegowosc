@@ -16,7 +16,7 @@ export class TaxComponent implements OnInit {
   year = []; 
   tax;    
     
-  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) { }
+  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) {this.event.youCanVisit();}
 
   ngOnInit() {
       

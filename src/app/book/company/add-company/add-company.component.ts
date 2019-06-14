@@ -29,10 +29,28 @@ export class AddCompanyComponent implements OnInit {
     
   admissibleScenario: boolean = false;
   disableInput: boolean = true; 
-  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) { }
+  idCompany;    
+    
+  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) {this.event.youCanVisit();}
 
   ngOnInit() {
       this.route.params.subscribe(params => this.supiler = parseInt(params['id']));
+      this.route.params.subscribe(params => this.idCompany = parseInt(params['company']));
+      
+      if(this.idCompany){
+          this.disableInput = false;
+          this.CmsService.getAuthorization(`company/get.php?id=${this.idCompany}`).subscribe(
+                response=>{
+                    this.company.city = response[0].city;
+                    this.company.home_number = response[0].home_number;
+                    this.company.local_number = response[0].local_number;
+                    this.company.name = response[0].name;
+                    this.company.nip = response[0].nip;
+                    this.company.post_code = response[0].post_code;
+                    this.company.street = response[0].street;
+                }
+          )
+      }
   }
     
   onEnterNip(event){
@@ -69,7 +87,15 @@ export class AddCompanyComponent implements OnInit {
    }
     
    save(){
-       if(this.company.name != '' && this.company.name != null){
+       if(this.idCompany){
+           this.CmsService.postAuthorization(`company/update.php?id=${this.idCompany}`, this.company).subscribe(
+                response=>{
+                    this._route.navigate(['/panel/', {outlets: { 'panel-outlet': ['company'] } }])
+                }
+           )
+       }
+       else{
+            if(this.company.name != '' && this.company.name != null){
             this.CmsService.postAuthorization('company/save.php', this.company).subscribe(
                 response =>{
                     if (response.kod === 0 ) this.event.showInfo('success', response.opis);
@@ -77,7 +103,8 @@ export class AddCompanyComponent implements OnInit {
                 }
            );
            
-       }       
+       }    
+       }      
    }    
 
 }

@@ -2,23 +2,16 @@ import { Component, OnInit, ElementRef, Input, ViewChild, Output, EventEmitter, 
 import { EventService } from '../../event.service';
 import { ApiService } from '../../api.service';
 import { ActivatedRoute, Router } from '@angular/router';
-
 @Component({
-  selector: 'app-panel',
-  templateUrl: './panel.component.html',
-  styleUrls: ['./panel.component.scss']
+  selector: 'app-add-user-company',
+  templateUrl: './add-user-company.component.html',
+  styleUrls: ['./add-user-company.component.scss']
 })
-export class PanelComponent implements OnInit {
+export class AddUserCompanyComponent implements OnInit {
 
-  companyNeme: string = '';
-    
   constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) { }
 
   ngOnInit() {
-      setTimeout(()=>{
-          this.companyNeme = localStorage.getItem('companyName');
-      },100)
-      
   }
 
 }

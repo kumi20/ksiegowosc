@@ -4,16 +4,32 @@ import { ApiService } from '../../api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-settings',
-  templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.scss']
+  selector: 'app-fv',
+  templateUrl: './fv.component.html',
+  styleUrls: ['./fv.component.scss']
 })
-export class SettingsComponent implements OnInit {
+export class FvComponent implements OnInit {
 
   constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) {this.event.youCanVisit();}
 
+  fv;
+  page;
+    
   ngOnInit() {
-      
+      this.getFv();
+  }
+    
+
+  getFv(){
+      this.CmsService.getAuthorization(`fv/getList.php`).subscribe(
+        response =>{
+            this.fv = response;
+        }
+      )
+  } 
+    
+  delete(id){
+      console.log(id)
   }
 
 }

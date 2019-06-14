@@ -51,6 +51,8 @@ import { TaxComponent } from './book/tax/tax.component';
 import { CountTaxComponent } from './book/tax/count-tax/count-tax.component';
 import { CompanyComponentBook } from './book/company/company.component';
 import { AddCompanyComponent } from './book/company/add-company/add-company.component';
+import { FvComponent } from './book/fv/fv.component';
+import { AddUserCompanyComponent } from './book/add-user-company/add-user-company.component';
 
 
 // Configs 
@@ -91,7 +93,9 @@ export function getAuthServiceConfigs() {
         TaxComponent,
         CountTaxComponent,
         CompanyComponentBook,
-        AddCompanyComponent
+        AddCompanyComponent,
+        FvComponent,
+        AddUserCompanyComponent,
 	],
 	imports: [
 		BrowserModule,

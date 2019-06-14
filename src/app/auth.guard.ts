@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Router, CanActivate } from '@angular/router';
+import { Router, CanActivate, CanLoad } from '@angular/router';
  
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class AuthGuard implements CanActivate{
  
     constructor(private _router: Router) { }
  
@@ -14,4 +14,7 @@ export class AuthGuard implements CanActivate {
         this._router.navigate(['/']);
         return false;
     }
+
 }
+
+

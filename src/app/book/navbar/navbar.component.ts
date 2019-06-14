@@ -18,6 +18,10 @@ export class NavbarComponent implements OnInit {
   logOUT(){
         localStorage.removeItem('ksiegaQumiToken');
         localStorage.removeItem('user_nameKsiega');
+        localStorage.removeItem('companyName');
+        localStorage.removeItem('companyAdres');
+        localStorage.removeItem('companyCity');
+        localStorage.removeItem('companyNip');
         this._route.navigateByUrl('');
   }    
 }

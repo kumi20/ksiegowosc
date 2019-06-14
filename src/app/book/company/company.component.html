@@ -25,7 +25,7 @@
                         <th></th>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let com of company| paginate: { itemsPerPage: 15, currentPage:  page }; let i = index ">
+                        <tr *ngFor="let com of company| paginate: { itemsPerPage: 15, currentPage:  page }; let i = index " [routerLink]="['/panel/',{outlets: { 'panel-outlet': ['add-company','1',com.id] } }]">
                             <td>{{i + 1 }}</td>
                             <td style="width:300px">{{com.name}}</td>
                             <td><p style="display: inline">{{com.street}} {{com.home_number}} </p><p *ngIf="com.local_number!=''" style="display: inline">/{{com.local_number}}</p></td>

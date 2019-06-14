@@ -33,7 +33,7 @@ export class KpirComponent implements OnInit {
       dochod_rok:''
   }    
     
-  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) { }
+  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) {this.event.youCanVisit();}
 
   ngOnInit() {
       this.CmsService.getYear().subscribe(
