@@ -1,0 +1,342 @@
+<mdb-card class="card">  
+  <mdb-card-header class="card-header">Oblicz VAT</mdb-card-header>
+  <mdb-card-body class="card-body">
+    <mdb-card-text> 
+        
+        <div class="row">
+            <div class="col-md-3">
+                <div class="md-form">
+                    <mdb-select class="select" [options]="year" [filterEnabled]="true" placeholder="-- wybierz rok --" [(ngModel)]="actualYear" #yearSelected (selected)="counfTax()"></mdb-select>
+                    <label class="active">Rok:</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+  
+                <div class="md-form">
+                    <mdb-select class="select" [options]="month" [filterEnabled]="true" placeholder="-- wybierz miesiąc --" [(ngModel)]="actualMonth" #monthSelected (selected)="counfTax()"></mdb-select>
+                    <label class="active">Miesiąc:</label>
+                </div>
+            </div>
+        </div>  
+        
+        <br><br>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                        <th>Wiersz</th>
+                        <th>Opis</th>
+                        <th>Podstawa opodatkowania</th>
+                        <th>Podatek należny</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>C</td>
+                            <td>ROZLICZENIE PODATKU NALEŻNEGO</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>10. Dostawa towarów oraz świadczenie usług na terytorium kraju, zwolnione od podatku</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>2.</td>
+                            <td>11. Dostawa towarów oraz świadczenie usług poza terytorium kraju</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>2a.</td>
+                            <td>12. w tym świadczenie usług, o których mowa w art.100 ust.1 pkt 4 ustawy</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>3.</td>
+                            <td>13. Dostawa towarów oraz świadczenie usług na terytorium kraju, opodatkowane stawką 0%</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>3a.</td>
+                            <td>14. w tym dostawa towarów, o której mowa w art.129 ustawy</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>4.</td>
+                            <td>15. 16. Dostawa towarów oraz świadczenie usług na terytorium kraju, opodatkowane stawką 5%</td>
+                            <td>{{vatDeclaration.income5}}</td>
+                            <td>{{vatDeclaration.vat5}}</td>
+                        </tr>
+                        <tr>
+                            <td>5.</td>
+                            <td>17. 18. Dostawa towarów oraz świadczenie usług na terytorium kraju, opodatkowane stawką 7% albo 8%</td>
+                            <td>{{vatDeclaration.income8}}</td>
+                            <td>{{vatDeclaration.vat8}}</td>
+                        </tr>
+                        <tr>
+                            <td>6.</td>
+                            <td>19. 20. Dostawa towarów oraz świadczenie usług na terytorium kraju, opodatkowane stawką 22% albo 23%</td>
+                            <td>{{vatDeclaration.income23}}</td>
+                            <td>{{vatDeclaration.vat23}}</td>
+                        </tr>
+                        <tr>
+                            <td>7.</td>
+                            <td>21. Wewnątrzwspólnotowa dostawa towarów</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>8.</td>
+                            <td>22. Eksport towarów</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>9.</td>
+                            <td>23. 24. Wewnątrzwspólnotowe nabycie towarów</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>10.</td>
+                            <td>25. 26. Import towarów podlegający rozliczeniu zgodnie z art.33a ustawy</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>11.</td>
+                            <td>27. 28. Import usług z wyłączeniem usług nabywanych od podatników podatku od wartości dodanej, do których stosuje się art. 28b ustawy</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>12.</td>
+                            <td>29. 30. Import usług nabywanych od podatników podatku od wartości dodanej, do których stosuje się art. 28b ustawy</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>13.</td>
+                            <td>31. Dostawa towarów oraz świadczenie usług, dla których podatnikiem jest nabywca zgodnie z art.17 ust. 1 pkt 7 lub 8 ustawy (wypełnia dostawca)</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>14.</td>
+                            <td>32. 33. Dostawa towarów, dla których podatnikiem jest nabywca zgodnie z art. 17 ust. 1 pkt 5 ustawy (wypełnia nabywca)</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>15.</td>
+                            <td>34. 35. Dostawa towarów oraz świadczenie usług, dla których podatnikiem jest nabywca zgodnie z art. 17 ust. 1 pkt 7 lub 8 ustawy (wypełnia nabywca)</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>16.</td>
+                            <td>36. Kwota podatku należnego od towarów i usług objętych spisem z natury, o którym mowa w art.14 ust.5</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>17.</td>
+                            <td>37. Zwrot odliczonej lub zwróconej kwoty wydatkowanej na zakup kas rejestrujących, o którym mowa w art. 111 ust. 6 ustawy</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>18.</td>
+                            <td>38. Kwota podatku należnego od wewnątrzwspólnotowego nabycia środków transportu, wykazanego w poz. 24, podlegająca wpłacie w terminie, o którym mowa w art. 103 ust. 3, w związku z ust. 4 ustawy</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>19.</td>
+                            <td>39. Kwota podatku od wewnątrzwspólnotowego nabycia paliw silnikowych, podlegająca wpłacie w terminach, o których mowa w art. 103 ust. 5a i 5b ustawy</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>Razem</td>
+                            <td>Razem: ( Poz. 40 = suma kwot z poz. 10, 11, 13, 15, 17, 19, 21, 22, 23, 25, 27, 29, 31, 32 i 34. Poz. 41 = suma kwot z poz. 16, 18, 20, 24, 26, 28, 30, 33, 35,36 i 37 pomniejszona o kwotę z poz. 38 i 39)</td>
+                            <td>{{vatDeclaration.incomeAll}}</td>
+                            <td>{{vatDeclaration.vatIncomeAll}}</td>
+                        </tr>
+                        <tr>
+                            <td>C.</td>
+                            <td>==================================================</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>D.</td>
+                            <td>ROZLICZENIE PODATKU NALICZONEGO</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>D1.</td>
+                            <td>PRZENIESIENIA</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>D1.</td>
+                            <td>42. Kwota nadwyżki z poprzedniej deklaracji. Kwota z poz. „Kwota do przeniesienia na następny okres rozliczeniowy” z poprzedniej deklaracji lub wynikająca z decyzji.</td>
+                            <td></td>
+                            <td>{{vatDeclaration.vatToNextMonth}}</td>
+                        </tr>
+                        <tr>
+                            <td>D2.</td>
+                            <td>D.2. NABYCIE TOWARÓW I USŁUG ORAZ PODATEK NALICZONY Z UWZGLĘDNIENIEM KOREKT</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>D2.</td>
+                            <td>43. 44. Nabycie towarów i usług zaliczanych u podatnika do środków</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>D2.</td>
+                            <td>45. 46. Nabycie towarów i usług pozostałych</td>
+                            <td>{{vatDeclaration.coastAll}}</td>
+                            <td>{{vatDeclaration.vatCoastAll}}</td>
+                        </tr>
+                        <tr>
+                            <td>D3.</td>
+                            <td>PODATEK NALICZONY - DO ODLICZENIA (w zł)</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>D3.</td>
+                            <td>47. Korekta podatku naliczonego od nabycia środków trwałych</td>
+                            <td></td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>D3.</td>
+                            <td>48. Korekta podatku naliczonego od pozostałych nabyć</td>
+                            <td></td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>D3.</td>
+                            <td>49. Korekta podatku naliczonego, o której mowa w art. 89b ust. 1 ustawy</td>
+                            <td></td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>D3.</td>
+                            <td>50. Korekta podatku naliczonego, o której mowa w art. 89b ust. 4 ustawy</td>
+                            <td></td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>D3.</td>
+                            <td>51. Razem kwota podatku naliczonego do odliczenia. Należy wpisać sumę kwot z poz. 42, 44, 46, 47, 48, 49 i 50.</td>
+                            <td></td>
+                            <td>{{vatDeclaration.vatCoastAll}}</td>
+                        </tr>
+                        <tr>
+                            <td>D.</td>
+                            <td>==================================================</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>E.</td>
+                            <td>OBLICZENIE WYSOKOŚCI ZOBOWIĄZANIA PODATKOWEGO LUB KWOTY ZWROTU (w zł)</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>E.</td>
+                            <td>52. Kwota wydatkowana na zakup kas rejestrujących, do odliczenia w danym okresie rozliczeniowym</td>
+                            <td></td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>E.</td>
+                            <td>53. Kwota podatku objęta zaniechaniem poboru</td>
+                            <td></td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>E.</td>
+                            <td>54. Kwota podatku podlegającego wpłacie do urzędu skarbowego ***)</td>
+                            <td></td>
+                            <td>{{vatDeclaration.vatDue}}</td>
+                        </tr>
+                        <tr>
+                            <td>E.</td>
+                            <td>55. Kwota wydatkowana na zakup kas rejestrujących, przysługująca do zwrotu w danym okresie rozliczeniowym</td>
+                            <td></td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>E.</td>
+                            <td>56. Nadwyżka podatku naliczonego nad należnym</td>
+                            <td></td>
+                            <td>{{vatDeclaration.vatToNextMonth}}</td>
+                        </tr>
+                        <tr>
+                            <td>E.</td>
+                            <td>57. Kwota do zwrotu na rachunek bankowy wskazany przez podatnika</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>E.</td>
+                            <td>58. na rachunek VAT</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>E.</td>
+                            <td>59. w tym kwota do zwrotu w terminie 25 dni</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>E.</td>
+                            <td>60. w tym kwota do zwrotu w terminie 60 dni</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>E.</td>
+                            <td>61. w tym kwota do zwrotu w terminie 180 dni</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>E.</td>
+                            <td>62. Kwota do przeniesienia na następny okres rozliczeniowy</td>
+                            <td></td>
+                            <td>{{vatDeclaration.vatToNextMonth}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn blue-gradient" rounded="true" mdbWavesEffect (click)="save()">Zapisz</button>
+            </div>    
+        </div>
+        
+    </mdb-card-text>
+  </mdb-card-body>
+</mdb-card>
+
+

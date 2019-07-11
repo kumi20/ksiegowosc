@@ -13,6 +13,10 @@ header,
   .view {
     height: 1000px;
   }
+   .container-fluid{
+        width: 100%;
+    }  
+      
 }
 @media (min-width: 800px) and (max-width: 850px) {
   html,
@@ -21,10 +25,16 @@ header,
   .view {
     height: 600px;
   }
+    
+     
 }
 
 .btn .fa {
   margin-left: 3px;
+}
+
+.col-md-12{
+    overflow-y: auto;
 }
 
 .top-nav-collapse {
@@ -141,9 +151,6 @@ mdb-select {
     width: 100%;
     margin-bottom: 1rem;
     color: #212529;
-}
-
-table {
     border-collapse: collapse;
 }
 

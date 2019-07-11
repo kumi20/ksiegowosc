@@ -22,4 +22,8 @@ describe('DynamicComponentComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+    
+  it('should have a message with `warn`', ()=>{
+     expect(component).toContain('warn');  
+  });  
 });

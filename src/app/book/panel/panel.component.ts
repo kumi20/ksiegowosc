@@ -17,8 +17,8 @@ export class PanelComponent implements OnInit {
   ngOnInit() {
       setTimeout(()=>{
           this.companyNeme = localStorage.getItem('companyName');
-      },100)
-      
+      },100)            
   }
+    
 
 }

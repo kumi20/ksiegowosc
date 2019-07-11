@@ -21,6 +21,9 @@ import { CompanyComponentBook } from './book/company/company.component';
 import { AddCompanyComponent } from './book/company/add-company/add-company.component';
 import { FvComponent } from './book/fv/fv.component';
 import { AddUserCompanyComponent } from './book/add-user-company/add-user-company.component';
+import { ContactComponent } from './book/contact/contact.component';
+import { VatComponent } from './book/vat/vat.component';
+import { CountVatComponent } from './book/vat/count-vat/count-vat.component';
 
 
 import { AuthGuard } from './auth.guard';
@@ -49,6 +52,9 @@ const routesConfig: Routes = [
             {path: 'add-company/:id/:company', component: AddCompanyComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
             {path: 'fv', component: FvComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
             {path: 'add-user-company', component: AddUserCompanyComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
+            {path: 'contact', component: ContactComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
+            {path: 'vat', component: VatComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
+            {path: 'count-vat', component: CountVatComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
         ]          
     }
   ]

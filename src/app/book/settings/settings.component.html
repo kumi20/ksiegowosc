@@ -1,3 +1,93 @@
-<p>
-  settings works!
-</p>
+<mdb-card class="card">  
+  <mdb-card-header class="card-header">Ustawienia ZUS</mdb-card-header>
+  <mdb-card-body class="card-body">
+    <mdb-card-text>  
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                        <th style="width:50%">Opis</th>
+                        <th style="width:30%">Zaznacz pole, jeśli Cię dotyczy</th>
+                        <th style="width:10%">Miesiąc</th>
+                        <th style="width:10%">Rok</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Mały ZUS (wybierz ostatni miesiąc okresu ulgowego - maksymalnie 24 miesiące)</td>
+                            <td style="text-align: center">
+                                <input type="checkbox" id="smallZus" class="filled-in" [(ngModel)]="settings.smallZus">
+                                <label for="smallZus"></label>
+                            </td>
+                            <td>
+                                <mdb-select class="select" mdbActive [options]="month" placeholder="-- wybierz --" class="form-control" style="height:40px!important" [disabled]="!settings.smallZus" [(ngModel)]="settings.monthSmallZus"></mdb-select>
+                            </td>
+                            <td>
+                                <mdb-select class="select" mdbActive [options]="year" placeholder="-- wybierz --" class="form-control" style="height:40px!important" #yearList [disabled]="!settings.smallZus" [(ngModel)]="settings.yearSmallZus"></mdb-select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Zatrudnienie w oparciu o umowę o pracę w kwocie przekraczającej najniższą krajową.</td>
+                            <td style="text-align: center">
+                                <input type="checkbox" id="uop" class="filled-in" [(ngModel)]="settings.uop">
+                                <label for="uop"></label>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Opłata za dobrowolne ubezpieczenie chorobowe.</td>
+                            <td style="text-align: center">
+                                <input type="checkbox" id="disease" class="filled-in" [(ngModel)]="settings.disease">
+                                <label for="disease"></label>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>   
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </mdb-card-text>
+  </mdb-card-body>
+</mdb-card>
+
+<br><br>
+
+<mdb-card class="card">  
+  <mdb-card-header class="card-header">Ustawienia VAT</mdb-card-header>
+  <mdb-card-body class="card-body">
+    <mdb-card-text>  
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                        <th style="width:50%">Podatnik VAT</th>
+                        <th style="width:50%">Okres deklaracji VAT</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <mdb-select class="select" mdbActive [options]="vat" placeholder="-- wybierz --" class="form-control" style="height:40px!important" [(ngModel)]="settings.vatDeclaration"></mdb-select>
+                            </td>
+                            <td>
+                                <mdb-select class="select" mdbActive [options]="periodVat" placeholder="-- wybierz --" class="form-control" style="height:40px!important" [(ngModel)]="settings.periodVat" [disabled]="settings.vatDeclaration===0"></mdb-select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </mdb-card-text>
+  </mdb-card-body>
+</mdb-card>
+
+<br>
+<div class="row">
+    <div class="col-md-12">
+        <button class="btn blue-gradient" rounded="true" mdbWavesEffect (click)="save()">Zapisz</button>
+    </div>    
+</div>

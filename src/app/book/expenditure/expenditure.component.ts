@@ -34,7 +34,7 @@ export class ExpenditureComponent implements OnInit {
       {value: '5', label: '5%'},
       {value: '8', label: '8%'},
       {value: 'zw', label: 'zw'},
-      {value: 'np', label: 'nie podlega opodatkowaniu'},
+      {value: 'np', label: 'np'},
   ];
     
   jm = [
@@ -104,6 +104,7 @@ export class ExpenditureComponent implements OnInit {
     }
     
     changeNumber(i){
+        console.log(this.expenditure.servicesList[i])
         let vat = 0;
         if(!isNaN(this.expenditure.servicesList[i].vat)) vat = this.expenditure.servicesList[i].vat;
         this.expenditure.servicesList[i].netto = this.expenditure.servicesList[i].netto.replace(',','.');
@@ -113,6 +114,12 @@ export class ExpenditureComponent implements OnInit {
         this.sumVatServices();
     }
     
+    inputVat(i){
+        this.expenditure.servicesList[i].countVat = Number(this.expenditure.servicesList[i].countVat);
+        this.expenditure.servicesList[i].brutto = this.Round(this.expenditure.servicesList[i].countNetto + this.expenditure.servicesList[i].countVat,2);
+        this.sumVatServices();
+        
+    }
     
     sumVatServices(){
         let vat0 = 0;

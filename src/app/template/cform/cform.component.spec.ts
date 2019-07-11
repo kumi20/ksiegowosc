@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CformComponent } from './cform.component';
+import { CformTemplateComponent } from './cform.component';
 
 describe('CformComponent', () => {
-  let component: CformComponent;
-  let fixture: ComponentFixture<CformComponent>;
+  let component: CformTemplateComponent;
+  let fixture: ComponentFixture<CformTemplateComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CformComponent ]
+      declarations: [ CformTemplateComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CformComponent);
+    fixture = TestBed.createComponent(CformTemplateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -130,14 +130,77 @@ export class ContentComponent implements OnInit {
                    else{
                        this.incomeYear.length = 0;
                         this.expenditureYear.length = 0;
+                        
+                       for(let i = 0; i < 12; i++){
+                            this.incomeYear.push(Number(0));
+                        } 
+                       
+                       for(let i = 0; i < 12; i++){
+                                    this.expenditureYear.push(Number(0));
+                        } 
+                       
                         response.forEach(el=>{
-                            this.incomeYear.push(Number(el.razem_przychod));
+                            switch (el.miesiac){
+                                        case '01': this.incomeYear[0] = Number(el.razem_przychod);
+                                                    break;
+                                        case '02': this.incomeYear[1] = Number(el.razem_przychod);
+                                                    break;
+                                        case '03': this.incomeYear[2] = Number(el.razem_przychod);
+                                                    break;
+                                        case '04': this.incomeYear[3] = Number(el.razem_przychod);
+                                                    break;
+                                        case '05': this.incomeYear[4] = Number(el.razem_przychod);
+                                                    break;
+                                        case '06': this.incomeYear[5] = Number(el.razem_przychod);
+                                                    break;
+                                        case '07': this.incomeYear[6] = Number(el.razem_przychod);
+                                                    break;
+                                        case '08': this.incomeYear[7] = Number(el.razem_przychod);
+                                                    break;
+                                        case '09': this.incomeYear[8] = Number(el.razem_przychod);
+                                                    break;
+                                        case '10': this.incomeYear[9] = Number(el.razem_przychod);
+                                                    break;
+                                        case '11': this.incomeYear[10] = Number(el.razem_przychod);
+                                                    break;
+                                        case '12': this.incomeYear[11] = Number(el.razem_przychod);
+                                                    break;    
+
+                                    }
                         });
                        
                        this.CmsService.getAuthorization(`content/getRozchod.php?year=${this.actualYear}`).subscribe(
                             response =>{
+                                                               
+                                
                                 response.forEach(el=>{
-                                    this.expenditureYear.push(Number(el.razem_przychod));
+                                    switch (el.miesiac){
+                                        case '01': this.expenditureYear[0] = Number(el.razem_przychod);
+                                                    break;
+                                        case '02': this.expenditureYear[1] = Number(el.razem_przychod);
+                                                    break;
+                                        case '03': this.expenditureYear[2] = Number(el.razem_przychod);
+                                                    break;
+                                        case '04': this.expenditureYear[3] = Number(el.razem_przychod);
+                                                    break;
+                                        case '05': this.expenditureYear[4] = Number(el.razem_przychod);
+                                                    break;
+                                        case '06': this.expenditureYear[5] = Number(el.razem_przychod);
+                                                    break;
+                                        case '07': this.expenditureYear[6] = Number(el.razem_przychod);
+                                                    break;
+                                        case '08': this.expenditureYear[7] = Number(el.razem_przychod);
+                                                    break;
+                                        case '09': this.expenditureYear[8] = Number(el.razem_przychod);
+                                                    break;
+                                        case '10': this.expenditureYear[9] = Number(el.razem_przychod);
+                                                    break;
+                                        case '11': this.expenditureYear[10] = Number(el.razem_przychod);
+                                                    break;
+                                        case '12': this.expenditureYear[11] = Number(el.razem_przychod);
+                                                    break;    
+
+                                    }
                                 })
 
                                 this.chartDatasets = [

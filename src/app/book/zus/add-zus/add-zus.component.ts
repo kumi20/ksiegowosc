@@ -86,11 +86,11 @@ export class AddZusComponent implements OnInit {
     }
     
     setContribution(){
-        this.CmsService.getAuthorization(`zus/getWysokoscSkladek.php?year=${this.actualYear}`).subscribe(
+        this.CmsService.getAuthorization(`zus/getWysokoscSkladek.php?year=${this.actualYear}&month=${this.actualMonth}`).subscribe(
             response=>{
-                this.zus.socialContribution = (Number(response[0].zus_sp) - Number(response[0].chorobowe)).toFixed(2);
-                this.zus.healthContribution = response[0].zus_zdr;
-                this.zus.workContribution = response[0].zus_fp;
+                  this.zus.socialContribution = response.zus_sp;
+                  this.zus.healthContribution = response.zus_zdr;
+                  this.zus.workContribution = response.zus_fp;    
             }
         );
     }

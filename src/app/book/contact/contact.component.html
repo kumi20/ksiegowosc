@@ -1,0 +1,40 @@
+<mdb-card class="card">  
+  <mdb-card-header class="card-header">Kontakt</mdb-card-header>
+  <mdb-card-body class="card-body">
+    <mdb-card-text>  
+        <div class="row">
+            <div class="col-md-12">
+                <div class="md-form">
+                     <input mdbActive type="text" class="form-control" [(ngModel)]="email.subject">
+                     <label>Temat</label> 
+                </div>
+            </div>
+        </div>  
+        <div class="row">
+            <div class="col-md-12">
+                <div class="md-form">
+                     <input mdbActive type="text" class="form-control" [(ngModel)]="email.email">
+                     <label>Email</label> 
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <app-tinymce [(ngModel)]="email.message"></app-tinymce>
+<!--                <editor apiKey="ofzg04hq1vpfslzzmnx2z40giqetae3lojfvcgvm9vio2xp3" [init]="{plugins: 'link'}"></editor>-->
+            </div>
+        </div>  
+        
+        <div class="alert alert-danger" [hidden]="!showError">
+            <i class="fa fa-exclamation-triangle"></i>
+            <span> Uzupełnij wszystkie pola</span>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn blue-gradient" rounded="true" mdbWavesEffect (click)="save()">Wyślij</button>
+            </div>    
+        </div>
+    </mdb-card-text>
+  </mdb-card-body>
+</mdb-card>

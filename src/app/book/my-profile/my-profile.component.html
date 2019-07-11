@@ -1,3 +1,119 @@
-<p>
-  my-profile works!
-</p>
+<app-add-user-company label="Moja firma"></app-add-user-company>
+
+<br><br>
+
+<mdb-card class="card">  
+  <mdb-card-header class="card-header">Mój profil</mdb-card-header>
+  <mdb-card-body class="card-body">
+    <mdb-card-text>  
+        <div *ngIf="!disabled">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="md-form">
+                        <input mdbActive type="text" class="form-control" [(ngModel)]="user.user_login">
+                        <label>Login</label>                    
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="md-form">
+                        <input mdbActive type="email" class="form-control" [(ngModel)]="user.user_email">
+                        <label>Email</label>                    
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="md-form">
+                        <input mdbActive type="email" class="form-control" [(ngModel)]="user.user_name">
+                        <label>Imię i nazwisko</label>                    
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="md-form">
+                        <mdb-select class="select" mdbActive [options]="status" placeholder="-- wybierz status --" [(ngModel)]="user.user_status_id" class="form-control"></mdb-select>
+                        <label>Status</label>                    
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <button class="btn blue-gradient" rounded="true" mdbWavesEffect (click)="save()">Zapisz</button>
+                </div>    
+            </div>
+
+            <br>
+
+            <div class="alert alert-danger" [hidden]="!showError">
+                <i class="fa fa-exclamation-triangle"></i>
+                <span> {{textError}}</span>
+            </div>
+        </div>
+        
+        <div *ngIf="disabled">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <i class="fa fa-facebook" style="font-size: 36px;"> Konto facebookowe</i>
+                </div>
+            </div>            
+        </div>
+        
+      </mdb-card-text>
+    </mdb-card-body>
+</mdb-card>
+
+<br><br>
+
+<mdb-card class="card">  
+  <mdb-card-header class="card-header">Zmień hasło</mdb-card-header>
+  <mdb-card-body class="card-body">
+    <mdb-card-text> 
+        <div *ngIf="!disabled">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="md-form">
+                            <input mdbActive type="password" [(ngModel)]="password.old_psw" name="old_psw">
+                            <label>Stare hasło</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="md-form">
+                            <input mdbActive type="password" [(ngModel)]="password.new_psw" name="new_psw">
+                            <label>Nowe hasło</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="md-form">
+                            <input mdbActive type="password" [(ngModel)]="password.repeat_psw" name="repeat_psw">
+                            <label>Powtórz nowe hasło</label>
+                        </div>  
+                    </div>            
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <button class="btn blue-gradient" rounded="true" mdbWavesEffect (click)="savePsw()">Zapisz</button>
+                    </div>    
+                </div>
+
+                <br>
+
+                <div class="alert alert-danger" [hidden]="!showErrorPsw">
+                    <i class="fa fa-exclamation-triangle"></i>
+                    <span> {{textErrorPsw}}</span>
+                </div>
+        </div>
+        <div *ngIf="disabled">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <i class="fa fa-facebook" style="font-size: 36px;"> Konto facebookowe</i>
+                </div>
+            </div>            
+        </div>
+        
+    </mdb-card-text>
+  </mdb-card-body>
+</mdb-card>

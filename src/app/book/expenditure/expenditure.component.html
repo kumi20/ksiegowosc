@@ -128,12 +128,12 @@
                   <td scope="row">{{i+1}}.</td>    
                   <td scope="row"><input type="text" [(ngModel)]="el.name" class="fv_input"></td>
                   <td><mdb-select class="select" [options]="jm" placeholder="-- jm --" [(ngModel)]="el.jm" class="mdb_income" style="border: none!important"></mdb-select></td>
-                  <td style="width:10px;"><input type="number" [(ngModel)]="el.count" min="0" class="fv_input" (change)="changeNumber(i)"></td>
-                  <td><input type="text" [(ngModel)]="el.netto" class="fv_input" (keyup.enter)="changeNumber(i)"></td>
-                  <td><input type="text" [(ngModel)]="el.countNetto" class="fv_input"></td>
+                  <td style="width:10px;"><input type="number" [(ngModel)]="el.count" min="0" class="fv_input" (change)="changeNumber(i)" (keydown.Tab)="changeNumber(i)"></td>
+                  <td><input type="text" [(ngModel)]="el.netto" class="fv_input" (keyup.enter)="changeNumber(i)" (keydown.Tab)="changeNumber(i)"></td>
+                  <td><input type="text" [(ngModel)]="el.countNetto" class="fv_input" (keydown.Tab)="changeNumber(i)"></td>
                   <td><mdb-select class="select" [options]="vat" placeholder="-- VAT --" [(ngModel)]="el.vat" class="mdb_income" style="border: none!important" (selected)="changeNumber(i)"></mdb-select></td>
-                  <td><input type="text" [(ngModel)]="el.countVat" class="fv_input"></td>
-                  <td><input type="text" [(ngModel)]="el.brutto" class="fv_input" style="width:100%"></td>
+                  <td><input type="text" [(ngModel)]="el.countVat" class="fv_input" (input)="inputVat(i)"></td>
+                  <td>{{el.brutto}}</td>
                   <td><i class="fa fa-trash" (click)="deleted(i)"></i></td>
                 </tr>
               </tbody>

@@ -1,7 +1,9 @@
-import { Component, OnInit, ElementRef, Input, ViewChild, Output, EventEmitter, ViewChildren, AfterViewInit, OnDestroy} from '@angular/core';
+import { Component, OnInit, ElementRef, Input, ViewChild, Output, EventEmitter, ViewChildren, AfterViewInit, OnDestroy, } from '@angular/core';
 import { EventService } from '../../event.service';
 import { ApiService } from '../../api.service';
 import { ActivatedRoute, Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-fv',
@@ -21,6 +23,9 @@ export class FvComponent implements OnInit {
     
 
   getFv(){
+      
+      
+      
       this.CmsService.getAuthorization(`fv/getList.php`).subscribe(
         response =>{
             this.fv = response;
@@ -29,7 +34,15 @@ export class FvComponent implements OnInit {
   } 
     
   delete(id){
-      console.log(id)
+      this.CmsService.delete(`fv/delete.php?id=${id}`).subscribe(
+            response=>{
+                this.getFv();
+            }
+      )
   }
 
+    pageChanged(page){
+        //this._route.navigate(['/content-24',page]);
+        return page;
+      }
 }

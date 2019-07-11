@@ -1,14 +1,88 @@
 <mdb-card class="card">  
-  <mdb-card-header class="card-header">Dodaj firmę</mdb-card-header>
+  <mdb-card-header class="card-header">{{label}}</mdb-card-header>
   <mdb-card-body class="card-body">
     <mdb-card-text>  
         <div class="row">
             <div class="col-md-12">
-                <p>
-                  add-user-company works!
-                </p>
+                <div class="md-form">
+                    <input mdbActive type="text" class="form-control" [(ngModel)]="myCompany.name">
+                    <label class="active">Nazwa firmy*</label>                    
+                </div>
             </div>
-        </div>        
+        </div> 
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="md-form">
+                    <input mdbActive type="text" class="form-control" [(ngModel)]="myCompany.street">
+                    <label>Ulica*</label>                    
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="md-form">
+                    <input mdbActive type="text" class="form-control" [(ngModel)]="myCompany.home_number">
+                    <label>Numer domu*</label>                    
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="md-form">
+                    <input mdbActive type="text" class="form-control" [(ngModel)]="myCompany.local_number">
+                    <label>Numer mieszkania</label>                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="md-form">
+                    <input mdbActive type="text" class="form-control" [(ngModel)]="myCompany.post_code">
+                    <label>Kod pocztowy*</label> 
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="md-form">
+                    <input mdbActive type="text" class="form-control" [(ngModel)]="myCompany.city">
+                    <label>Miejscowość*</label> 
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="md-form">
+                    <input mdbActive type="number" class="form-control" [(ngModel)]="myCompany.nip">
+                    <label>NIP*</label> 
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="md-form">
+                    <input mdbActive type="number" class="form-control" [(ngModel)]="myCompany.regon">
+                    <label>REGON*</label> 
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="md-form">
+                    <input mdbActive type="email" class="form-control" [(ngModel)]="myCompany.email">
+                    <label class="active">Email*</label>                    
+                </div>
+            </div>
+        </div> 
+        
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn blue-gradient" rounded="true" mdbWavesEffect (click)="save()">Zapisz</button>
+            </div>    
+        </div>
+        
+        <br>
+        
+        <div class="alert alert-danger" [hidden]="!showError">
+            <i class="fa fa-exclamation-triangle"></i>
+            <span> {{textError}} </span>
+        </div>
       </mdb-card-text>
     </mdb-card-body>
 </mdb-card>

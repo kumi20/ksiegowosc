@@ -59,12 +59,12 @@ export class CountTaxComponent implements OnInit {
                 this.showTax = true;
                 this.tax.year = response.rok;
                 this.tax.month = response.miesiac;
-                this.tax.social = (response.spoleczne).toFixed(2);
-                this.tax.health = (response.zdrowotne).toFixed(2);
-                this.tax.income = (response.przychod).toFixed(2);
-                this.tax.cost = (response.koszt).toFixed(2);
-                this.tax.tax = (response.podatek).toFixed(2);
-                this.tax.advance =( response.zaliczka).toFixed(2);
+                this.tax.social = response.spoleczne;
+                this.tax.health = response.zdrowotne;
+                this.tax.income = response.przychod;
+                this.tax.cost = response.koszt;
+                this.tax.tax = response.podatek;
+                this.tax.advance = response.zaliczka;
             }
         )
     }

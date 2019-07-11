@@ -66,23 +66,29 @@ export class HeaderComponent implements OnInit {
             localStorage.setItem('ksiegaQumiToken', userData.id);
             localStorage.setItem('user_nameKsiega', userData.name);
             document.getElementById('btn_close_login').click();
-            this.getCompanyDate();  
-            this._route.navigateByUrl('panel');            
+            this.getCompanyDate().then(
+                response=>{
+                    if(response) this._route.navigateByUrl('panel');  
+                    else this._route.navigate(['/panel/', {outlets: { 'panel-outlet': ['add-user-company'] } }]);
+                }
+            );  
+                      
           }
         );
    }  
     
     
    getCompanyDate(){
-       this.CmsService.getAuthorization('getCompanyDate.php').subscribe(
+       return new Promise(resolve=>{
+            this.CmsService.getAuthorization('getCompanyDate.php').subscribe(
             response =>{
-                console.log(response)
                 if (response.kod === 0){
                     //this.companyNeme = response.name;
                     localStorage.setItem('companyName', response.name);
                     localStorage.setItem('companyAdres', response.adres);
                     localStorage.setItem('companyCity', response.city);
                     localStorage.setItem('companyNip', response.nip);
+                    resolve(true);
                 }
                 else if (response.kod === -1) this.event.showInfo('error', response.description);
                 else{
@@ -90,8 +96,9 @@ export class HeaderComponent implements OnInit {
                     localStorage.removeItem('companyAdres');
                     localStorage.removeItem('companyCity');
                     localStorage.removeItem('companyNip');
+                    resolve(false);
                 }
-            }
-        )
+            })  
+       })
    }    
 }

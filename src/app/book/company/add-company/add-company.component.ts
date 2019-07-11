@@ -98,7 +98,10 @@ export class AddCompanyComponent implements OnInit {
             if(this.company.name != '' && this.company.name != null){
             this.CmsService.postAuthorization('company/save.php', this.company).subscribe(
                 response =>{
-                    if (response.kod === 0 ) this.event.showInfo('success', response.opis);
+                    if (response.kod === 0 ){
+                        this._route.navigate(['/panel/', {outlets: { 'panel-outlet': ['company'] } }]);
+                        this.event.showInfo('success', response.opis);
+                    } 
                     else this.event.showInfo('error', response.opis)
                 }
            );

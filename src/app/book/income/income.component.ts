@@ -41,7 +41,7 @@ export class IncomeComponent implements OnInit {
       {value: '5', label: '5%'},
       {value: '8', label: '8%'},
       {value: 'zw', label: 'zw'},
-      {value: 'np', label: 'nie podlega opodatkowaniu'},
+      {value: 'np', label: 'np'},
   ];
     
   jm = [

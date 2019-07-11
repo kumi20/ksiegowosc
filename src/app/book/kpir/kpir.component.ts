@@ -36,15 +36,17 @@ export class KpirComponent implements OnInit {
   constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) {this.event.youCanVisit();}
 
   ngOnInit() {
-      this.CmsService.getYear().subscribe(
-        response=>{
-            response.forEach(el=>{
+      this.CmsService.getYear().toPromise()
+      .then(
+          res=>{
+              res.forEach(el=>{
                 this.year.push({value: el.year, label:el.year})
             });
             this.yearList.updateOptionsList();
             this.actualYear = String(new Date().getFullYear());
-        }
+          }
       )
+
       
       this.month = this.CmsService.month;
       this.actualDate = new Date();

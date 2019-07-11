@@ -1,0 +1,46 @@
+<mdb-card class="card">  
+  <mdb-card-header class="card-header">Podatek VAT</mdb-card-header>
+  <mdb-card-body class="card-body">
+    <mdb-card-text> 
+        
+        <div class="row">
+            <div class="col-md-3">
+                <div class="md-form">
+                    <mdb-select class="select" [options]="year" [filterEnabled]="true" placeholder="-- wybierz rok --" [(ngModel)]="actualYear" #yearSelected (selected)="getVat()"></mdb-select>
+                    <label class="active">Rok:</label>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <button class="btn blue-gradient" style="position:relatice; float:right;" [routerLink]="['/panel/',{outlets: { 'panel-outlet': ['count-vat'] } }]">Oblicz podatek</button>
+            </div>
+        </div>  
+        
+        <br><br>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                        <th>#</th>
+                        <th>Od</th>
+                        <th>Opis</th>
+                        <th>Do</th>
+                        <th>Kwota</th>
+                        <th></th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let tax of vatDeclaration; let i = index">
+                            <td>{{i + 1}}</td>
+                            <td>{{tax.from}}</td>
+                            <td>{{tax.name}}</td>
+                            <td>{{tax.to}}</td>
+                            <td>{{tax.count| currency:'PLN '}}</td>
+                            <td><i class="fa fa-trash-o" style="cursor: pointer" (click)="delete(tax.id)"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </mdb-card-text>
+  </mdb-card-body>
+</mdb-card>
+

@@ -22,6 +22,9 @@ import { routerModule} from './app.routing';
 
 import { AuthGuard } from './auth.guard';
 
+import { TinymceModule } from 'angular2-tinymce';
+import { EditorModule } from '@tinymce/tinymce-angular';
+
 import {
     SocialLoginModule,
     AuthServiceConfig,
@@ -53,6 +56,9 @@ import { CompanyComponentBook } from './book/company/company.component';
 import { AddCompanyComponent } from './book/company/add-company/add-company.component';
 import { FvComponent } from './book/fv/fv.component';
 import { AddUserCompanyComponent } from './book/add-user-company/add-user-company.component';
+import { ContactComponent } from './book/contact/contact.component';
+import { VatComponent } from './book/vat/vat.component';
+import { CountVatComponent } from './book/vat/count-vat/count-vat.component';
 
 
 // Configs 
@@ -96,6 +102,9 @@ export function getAuthServiceConfigs() {
         AddCompanyComponent,
         FvComponent,
         AddUserCompanyComponent,
+        ContactComponent,
+        VatComponent,
+        CountVatComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -111,7 +120,19 @@ export function getAuthServiceConfigs() {
         GoogleAnalyticsModule.forRoot(),
         MDBBootstrapModule.forRoot(),
         MDBBootstrapModulePro.forRoot(),
-        SocialLoginModule
+        SocialLoginModule,
+        TinymceModule.withConfig({ 
+            height: 350,
+			language: "pl",
+			gecko_spellcheck: true,
+			entity_encoding: 'utf8',
+			plugins: [
+				"advlist autolink link lists charmap print hr anchor pagebreak",
+				"searchreplace wordcount visualblocks visualchars insertdatetime media nonbreaking",
+				"table contextmenu directionality emoticons paste textcolor image code tinymceEmoji"],
+			toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent forecolor backcolor | link image'
+        }),
+        EditorModule
 	],
 	providers: [ApiService, EventService, AuthGuard,
                {
