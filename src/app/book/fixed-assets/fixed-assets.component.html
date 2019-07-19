@@ -1,0 +1,39 @@
+<mdb-card class="card">  
+  <mdb-card-header class="card-header">Środki trwałe</mdb-card-header>
+  <mdb-card-body class="card-body">
+    <mdb-card-text> 
+       <div class="row">
+            <div class="col-md-12">
+                <button class="btn blue-gradient" [routerLink]="['/panel/',{outlets: { 'panel-outlet': ['add-fixxed-assets'] } }]">Dodaj środek trwały</button>
+            </div>
+        </div>   
+        
+        <br><br>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                        <th></th>
+                        <th>Numer dokumentu</th>
+                        <th>Nazwa</th>
+                        <th>Data nabycia</th>
+                        <th>Data likwidacji</th>
+                        <th>Wartość początkowa</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let field of fixedAssets| paginate: { itemsPerPage: 15, currentPage:  page }; let i = index" [routerLink]="['/panel/',{outlets: { 'panel-outlet': ['add-fixxed-assets',field.id] } }]">
+                            <td>{{i + 1}}</td>    
+                            <td>{{field.numer_dokumentu}}</td>
+                            <td>{{field.nazwa}}</td>
+                            <td>{{field.data_nabycia}}</td>
+                            <td>{{field.data_likwidacji}}</td>
+                            <td>{{field.warotsc_poczatkowa}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <pagination-controls (pageChange)="page = pageChanged($event)"  directionLinks="true"  previousLabel="Poprzednia" nextLabel="Następna" autoHide="true" class="pagination" style="widtH:50%; margin: auto;"> </pagination-controls>
+            </div>
+        </div>
+    </mdb-card-text>
+  </mdb-card-body>
+</mdb-card>

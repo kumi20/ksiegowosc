@@ -11,7 +11,7 @@ import { MDBBootstrapModule } from './typescripts/free';
 import { MDBBootstrapModulePro } from './typescripts/pro/index';
 import { AppComponent } from './app.component';
 import { MDBSpinningPreloader } from './typescripts/pro/index';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgClass  } from '@angular/common';
 import { RouterModule,Router } from '@angular/router';
 import { GoogleAnalyticsModule, GA_TOKEN } from 'angular-ga';
 import { Ng2PaginationModule } from 'ng2-pagination';
@@ -59,6 +59,12 @@ import { AddUserCompanyComponent } from './book/add-user-company/add-user-compan
 import { ContactComponent } from './book/contact/contact.component';
 import { VatComponent } from './book/vat/vat.component';
 import { CountVatComponent } from './book/vat/count-vat/count-vat.component';
+import { SiginupComponent } from './siginup/siginup.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { FooterComponent } from './footer/footer.component';
+import { HomeComponent } from './home/home.component';
+import { FixedAssetsComponent } from './book/fixed-assets/fixed-assets.component';
+import { AddAssetsComponent } from './book/fixed-assets/add-assets/add-assets.component';
 
 
 // Configs 
@@ -105,6 +111,12 @@ export function getAuthServiceConfigs() {
         ContactComponent,
         VatComponent,
         CountVatComponent,
+        SiginupComponent,
+        PageNotFoundComponent,
+        FooterComponent,
+        HomeComponent,
+        FixedAssetsComponent,
+        AddAssetsComponent,
 	],
 	imports: [
 		BrowserModule,

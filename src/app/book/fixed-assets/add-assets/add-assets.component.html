@@ -1,0 +1,90 @@
+<mdb-card class="card">  
+  <mdb-card-header class="card-header">Środki trwałe</mdb-card-header>
+  <mdb-card-body class="card-body">
+    <mdb-card-text> 
+        <form [formGroup]="fixedAssets" (ngSubmit)="onSubmit(fixedAssets)">
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="active">Nazwa:</label> 
+                    <input type="text" name="nameOfAssets" id="nameOfAssets" formControlName="nameOfAssets" 
+                        [ngClass]="(submited && formErrors.nameOfAssets)?'form-control in-valid' : 'form-control'">
+                    <small class="text-danger" *ngIf="submited && formErrors.nameOfAssets">
+                        {{ formErrors.nameOfAssets}}
+                    </small>
+                </div>
+            </div> 
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="active">Numer dokumentu:</label> 
+                    <input type="text" name="numberOfDocument" id="numberOfDocument" formControlName="numberOfDocument" 
+                        [ngClass]="(submited && formErrors.numberOfDocument)?'form-control in-valid' : 'form-control'">
+                    <small class="text-danger" *ngIf="submited && formErrors.numberOfDocument">
+                        {{ formErrors.numberOfDocument}}
+                    </small>
+                </div>    
+            </div>
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="active">Data nabycia:</label> 
+                    <mdb-date-picker name="dataSet" id="dataSet" [options]="myDatePickerOptions" [placeholder]="'Wybierz date'" formControlName="dataSet" class="mdb_income" [ngClass]="(submited && formErrors.dataSet)?'form-control in-valid' : 'form-control'"></mdb-date-picker>
+                    <small class="text-danger" *ngIf="submited && formErrors.dataSet">
+                        {{ formErrors.dataSet}}
+                    </small>
+                </div>    
+            </div>
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="active">Wartość początkowa:</label> 
+                    <input type="text" name="initialValue" id="initialValue" formControlName="initialValue" 
+                        [ngClass]="(submited && formErrors.initialValue)?'form-control in-valid' : 'form-control'">
+                    <small class="text-danger" *ngIf="submited && formErrors.initialValue">
+                        {{ formErrors.initialValue}}
+                    </small>
+                </div>    
+            </div>
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="active">Miejsce użytkowania:</label> 
+                    <input type="text" name="placeOfUse" id="placeOfUse" formControlName="placeOfUse" 
+                        class="form-control">
+                </div>    
+            </div>
+            
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group checkbox-primary">
+                        <input type="checkbox" id="orLiquidated" name="orLiquidated" class="filled-in" formControlName="orLiquidated">
+                        <label for="orLiquidated">Zlikwidowane:</label>
+                    </div>
+                </div>    
+            </div>
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="active">Data likwidacji:</label> 
+                    <mdb-date-picker name="dataOfLiquidated" id="dataOfLiquidated" [options]="myDatePickerOptions" [placeholder]="'Wybierz date'" formControlName="dataOfLiquidated" class="mdb_income" class="form-control"></mdb-date-picker>
+                </div>    
+            </div>
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Przyczyna likwidacji</label>
+                    <textarea name="causeOfLiquidated" id="causeOfLiquidated" cols="30" rows="10" class="form-control" formControlName="causeOfLiquidated"></textarea>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <button class="btn blue-gradient" type="submit">Zapisz</button>
+                </div>
+            </div>       
+        </form>
+        
+    </mdb-card-text>
+  </mdb-card-body>
+</mdb-card>

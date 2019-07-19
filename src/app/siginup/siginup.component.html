@@ -1,0 +1,70 @@
+
+<div class="signup-form">
+    <form [formGroup]="newAccount" (ngSubmit)="onSubmit(newAccount)">
+        <h2>Zarejestruj się</h2>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <input type="text" name="userName" formControlName="userName" id="userName" placeholder="Imię"
+                [ngClass]="(submited && formErrors.userName)?'form-control in-valid' : 'form-control'">
+                <small class="text-danger" *ngIf="submited && formErrors.userName">
+                    <p>{{ formErrors.userName}}</p>
+                </small>
+            </div>
+            <div class="col-md-6">
+                <input type="text" name="userSurname" formControlName="userSurname" id="userSurname" placeholder="Nazwisko"
+                [ngClass]="(submited && formErrors.userSurname)?'form-control in-valid' : 'form-control'">
+                <small class="text-danger" *ngIf="submited && formErrors.userSurname">
+                    <p>{{ formErrors.userSurname}}</p>
+                </small>
+            </div>
+        </div>
+        
+
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text" name="userLogin" formControlName="userLogin" placeholder="login"  id="userLogin"
+                [ngClass]="(submited && formErrors.userLogin)?'form-control in-valid' : 'form-control'">
+                <small class="text-danger" *ngIf="submited && formErrors.userLogin">
+                    <p>{{ formErrors.userLogin}}</p>
+                </small>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <input type="email" name="userEmail" formControlName="userEmail" placeholder="email" id="userEmail" 
+                [ngClass]="(submited && formErrors.userEmail)?'form-control in-valid' : 'form-control'">
+                <small class="text-danger" *ngIf="submited && formErrors.userEmail">
+                    <p>{{ formErrors.userEmail}}</p>
+                </small>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <input type="password" name="userPassword" formControlName="userPassword" class="form-control" id="userPassword" placeholder="hasło"
+                [ngClass]="(submited && formErrors.userPassword)?'form-control in-valid' : 'form-control'">
+                <small class="text-danger" *ngIf="submited && formErrors.userPassword">
+                    <p>{{ formErrors.userPassword}}</p>
+                </small>
+            </div>
+            <div class="col-md-6">
+                <input type="password" name="userReturnPassword" formControlName="userReturnPassword" class="form-control" id="userReturnPassword" placeholder="powtórz hasło"
+                [ngClass]="(submited && formErrors.userReturnPassword)?'form-control in-valid' : 'form-control'">
+                <small class="text-danger" *ngIf="submited && formErrors.userReturnPassword">
+                    <p>{{ formErrors.userReturnPassword}}</p>
+                </small>
+            </div>
+        </div>
+
+        <button type="submit" class="btn blue-gradient">Zarejestruj sie</button>
+    </form>
+    
+    <div class="alert alert-success" role="alert" *ngIf="successMessageRegistration!==''">
+        {{successMessageRegistration}}
+    </div>
+    <div class="alert alert-danger" role="alert" *ngIf="errorMessageRegistration!==''">
+        {{errorMessageRegistration}}
+    </div>
+</div>

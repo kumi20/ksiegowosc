@@ -6,24 +6,31 @@ header,
   min-height: 100vh;
 }
 
+.logo{
+    width:100px;
+}
+
 @media (max-width: 740px) {
   html,
   body,
   header,
   .view {
-    height: 1000px;
+    height: 100vh;
   }
    .container-fluid{
         width: 100%;
     }  
-      
+    
+    .headerTitle{
+        font-size: 24px!important;    
+    }      
 }
 @media (min-width: 800px) and (max-width: 850px) {
   html,
   body,
   header,
   .view {
-    height: 600px;
+    height: 100vh;
   }
     
      
@@ -34,17 +41,17 @@ header,
 }
 
 .col-md-12{
-    overflow-y: auto;
+    overflow-x: auto;
 }
 
 .top-nav-collapse {
-  background-color: #424f95 !important;
+  background-color: #273238 !important;
 }
 
 
 @media (max-width: 991px) {
   .navbar:not(.top-nav-collapse) {
-    background: #424f95 !important;
+    background: #273238 !important;
   }
 }
 
@@ -121,7 +128,6 @@ h6 {
 
 mdb-select {
     margin-bottom: -30px;
-    max-width: 95%;
     .placeholder {
         color: red !important;
         font-size: 14px;
@@ -216,4 +222,21 @@ li a.active{
     font-weight: bold;
     font-size: 32px;
     margin-top:20px;
+}
+
+.unique-color{
+    background-color: #273238 !important;
+}
+
+p{
+    font-size: 1.2rem;
+}
+
+h2{
+    font-weight: bold;
+    font-size: 2.5rem;
+}
+
+.in-valid{
+    border: 1px solid #ff0000;
 }

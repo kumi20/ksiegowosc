@@ -24,13 +24,26 @@ import { AddUserCompanyComponent } from './book/add-user-company/add-user-compan
 import { ContactComponent } from './book/contact/contact.component';
 import { VatComponent } from './book/vat/vat.component';
 import { CountVatComponent } from './book/vat/count-vat/count-vat.component';
+import { SiginupComponent } from './siginup/siginup.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { FixedAssetsComponent } from './book/fixed-assets/fixed-assets.component';
+import { AddAssetsComponent } from './book/fixed-assets/add-assets/add-assets.component';
+
+
+import { HomeComponent } from './home/home.component';
 
 
 import { AuthGuard } from './auth.guard';
 
 // ROUTING
 const routesConfig: Routes = [
-    { path: '', component: DashboardComponent},
+    { path: '', redirectTo: '/home', pathMatch: 'full'},
+    { path: 'home', component:DashboardComponent,
+        children:[
+            { path: '', component: HomeComponent, outlet:'dashboard-outlet'},
+            { path:'siginup', component:SiginupComponent, outlet:'dashboard-outlet'}
+        ]
+    },
     { path: 'panel', component: PanelComponent, canActivate: [AuthGuard], 
         children: [
             {path: '', component: ContentComponent, outlet:'panel-outlet', canActivate: [AuthGuard]},
@@ -55,11 +68,15 @@ const routesConfig: Routes = [
             {path: 'contact', component: ContactComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
             {path: 'vat', component: VatComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
             {path: 'count-vat', component: CountVatComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
+            {path: 'fixxed-assets', component: FixedAssetsComponent, outlet:'panel-outlet', canActivate: [AuthGuard]},
+            {path: 'add-fixxed-assets', component: AddAssetsComponent, outlet:'panel-outlet', canActivate: [AuthGuard]},
+            {path: 'add-fixxed-assets/:id', component: AddAssetsComponent, outlet:'panel-outlet', canActivate: [AuthGuard]}
         ]          
-    }
+    },
+    { path: '**', component: PageNotFoundComponent }
   ]
 
 export const routerModule = RouterModule.forRoot(routesConfig, {
-    enableTracing: false,
+    enableTracing: true,
     useHash: true,
 })

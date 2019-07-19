@@ -1,4 +1,7 @@
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark unique-color fixed-top">
+       <logo>
+            <img src="./assets/img/logo_ksiegowosc.png" alt="logo kumi księgowość" class="logo">
+       </logo>
         <links>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item waves-light"  mdbWavesEffect>
@@ -12,7 +15,8 @@
                         <a class="nav-link" [routerLink]="[{ outlets: { 'panel-outlet': ['internal-evidence'] } }]" routerLinkActive="active">Dowody wewnętrzne</a>   
                         <a class="nav-link" [routerLink]="[{ outlets: { 'panel-outlet': ['zus'] } }]" routerLinkActive="active">Składki ZUS</a>
                         <a class="nav-link" [routerLink]="[{ outlets: { 'panel-outlet': ['tax'] } }]" routerLinkActive="active">Podatek dochodowy</a>   
-                        <a class="nav-link" [routerLink]="[{ outlets: { 'panel-outlet': ['vat'] } }]" routerLinkActive="active">Podatek VAT</a>   
+                        <a class="nav-link" [routerLink]="[{ outlets: { 'panel-outlet': ['vat'] } }]" routerLinkActive="active">Podatek VAT</a> 
+                        <a class="nav-link" [routerLink]="[{ outlets: { 'panel-outlet': ['fixxed-assets'] } }]" routerLinkActive="active">Środki trwałe</a>   
                     </div>
                 </li>
 

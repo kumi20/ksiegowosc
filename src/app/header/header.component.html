@@ -1,8 +1,8 @@
 <header id="top">
     <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
-        <mdb-navbar-brand>
-            <a class="logo navbar-brand waves-light" mdbWavesEffect href="#"><strong>MDB</strong></a>
-        </mdb-navbar-brand>
+       <logo>
+            <img src="./assets/img/logo_ksiegowosc.png" alt="logo kumi księgowość" class="logo">
+       </logo>
         <links>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active waves-light" mdbWavesEffect>
@@ -20,12 +20,14 @@
     
     <div class="view" style="background-image: url('./assets/img/header.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
         <div class="mask d-flex justify-content-center align-items-center">
+            <div class="row">
+              <div class="col-md-12 text-center">
+                  <h1 class="headerTitle wow fadeInUp" data-wow-delay="0.3s">Księgowość dla małej firmy<br>nie była nigdy prostsza</h1>
+              </div>
+            </div>
         </div>
     </div>
 </header>
-
-
-
 
 <div mdbModal #login="mdb-modal" class="modal fade top"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -74,12 +76,13 @@
       </div>
       <!--Footer-->
       <div class="modal-footer mx-5 pt-3 mb-1">
-        <p class="font-small grey-text d-flex justify-content-end">Not a member?
-          <a href="#" class="blue-text ml-1"> Sign Up</a>
+        <p class="font-small grey-text d-flex justify-content-end">Nie masz konta?
+            
+          <a href="#" class="blue-text ml-1" [routerLink]="[{ outlets: { 'dashboard-outlet': ['siginup'] } }]" (click)="login.hide()">Zarejestruj się</a>
         </p>
       </div>
     </div>
-      
+          
     <!--/.Content-->
   </div>
 </div>
