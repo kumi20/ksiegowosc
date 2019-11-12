@@ -7,7 +7,7 @@ import { EventService } from './event.service';
 @Injectable()
 export class ApiService {
 
-  domanie = 'http://kumi20.webd.pl'; 
+  domanie = 'https://kumi20.webd.pl'; 
   uri =  this.domanie + '/api/ksiega/';
     
     
@@ -78,6 +78,18 @@ export class ApiService {
         })
     )
   }  
+
+  putAuthorization(uri, json){      
+    return this._http.put<any[]|any>(this.uri+uri, json, {headers: {
+        'Authorizationtoken':localStorage.getItem('ksiegaQumiToken')
+    }})
+    .pipe(
+      catchError((err, caught)=>{
+          this.event.showInfo('error',err.message);
+          throw new Error(err.message)
+      })
+  )
+}  
     
   delete(uri){
       return this._http.delete<any[]|any>(this.uri+uri, {headers: {

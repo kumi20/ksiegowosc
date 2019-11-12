@@ -40,7 +40,7 @@ export class SettingsComponent implements OnInit {
         periodVat: '0'
   }
     
-  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) {this.event.youCanVisit();}
+  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) {}
 
   ngOnInit() {
       this.CmsService.getYear().toPromise()

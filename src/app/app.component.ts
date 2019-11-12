@@ -17,4 +17,10 @@ export class AppComponent implements OnInit{
        //this.gaService.configure(this.googleAnalitycs);
    }
        
+    full(){
+        var html = document.documentElement;
+        if (html.requestFullscreen) {
+            html.requestFullscreen();
+        }
+    }
 }

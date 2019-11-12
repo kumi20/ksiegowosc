@@ -49,7 +49,7 @@ export class AddAssetsComponent implements OnInit {
   submited: boolean = false;
   idFixedAssets = null;    
     
-  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router, private formBuilder: FormBuilder) {this.event.youCanVisit();}
+  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router, private formBuilder: FormBuilder) {}
 
   ngOnInit() {
       this.route.params.subscribe(params => this.idFixedAssets = parseInt(params['id']));

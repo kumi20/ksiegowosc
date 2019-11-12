@@ -39,7 +39,7 @@ export class CountVatComponent implements OnInit {
         vatToNextMonth: 0,
     }
     
-  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) {this.event.youCanVisit();}
+  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) {}
 
   ngOnInit() {
       this.month = this.CmsService.month;

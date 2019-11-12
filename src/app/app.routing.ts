@@ -28,12 +28,14 @@ import { SiginupComponent } from './siginup/siginup.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { FixedAssetsComponent } from './book/fixed-assets/fixed-assets.component';
 import { AddAssetsComponent } from './book/fixed-assets/add-assets/add-assets.component';
-
+import { CustomerComponent } from './book/customer/customer.component';
+import { CustomerPanelComponent} from './book/customer/customer-panel/customer-panel.component';
+import { AddCutomerComponent } from './book/customer/add-cutomer/add-cutomer.component';
 
 import { HomeComponent } from './home/home.component';
 
 
-import { AuthGuard } from './auth.guard';
+import { AuthGuard, AlwaysAuthChildrenGuard } from './auth.guard';
 
 // ROUTING
 const routesConfig: Routes = [
@@ -46,31 +48,34 @@ const routesConfig: Routes = [
     },
     { path: 'panel', component: PanelComponent, canActivate: [AuthGuard], 
         children: [
-            {path: '', component: ContentComponent, outlet:'panel-outlet', canActivate: [AuthGuard]},
-            {path: 'settings', component: SettingsComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
-            {path: 'myProfiles', component: MyProfileComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
-            {path: 'income', component: IncomeComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
-            {path: 'expenditure', component: ExpenditureComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
-            {path: 'kpir', component: KpirComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
-            {path: 'internal-evidence', component: InternalEvidenceComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
-            {path: 'internal-evidence-add', component: AddComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
-            {path: 'internal-evidence-add/:id', component: AddComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
-            {path: 'not-paid/:id', component: IncomeNotPaidComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
-            {path: 'zus', component: ZusComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
-            {path: 'add-zus', component: AddZusComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
-            {path: 'tax', component: TaxComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
-            {path: 'count-tax', component: CountTaxComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
-            {path: 'company', component: CompanyComponentBook, outlet:'panel-outlet', canActivate: [AuthGuard] },
+            {path: '', component: ContentComponent, outlet:'panel-outlet', canActivate: [AuthGuard, AlwaysAuthChildrenGuard]},
+            {path: 'settings', component: SettingsComponent, outlet:'panel-outlet', canActivate: [AuthGuard, AlwaysAuthChildrenGuard] },
+            {path: 'myProfiles', component: MyProfileComponent, outlet:'panel-outlet', canActivate: [AuthGuard, AlwaysAuthChildrenGuard] },
+            {path: 'income', component: IncomeComponent, outlet:'panel-outlet', canActivate: [AuthGuard, AlwaysAuthChildrenGuard] },
+            {path: 'expenditure', component: ExpenditureComponent, outlet:'panel-outlet', canActivate: [AuthGuard, AlwaysAuthChildrenGuard] },
+            {path: 'kpir', component: KpirComponent, outlet:'panel-outlet', canActivate: [AuthGuard, AlwaysAuthChildrenGuard] },
+            {path: 'internal-evidence', component: InternalEvidenceComponent, outlet:'panel-outlet', canActivate: [AuthGuard, AlwaysAuthChildrenGuard] },
+            {path: 'internal-evidence-add', component: AddComponent, outlet:'panel-outlet', canActivate: [AuthGuard, AlwaysAuthChildrenGuard] },
+            {path: 'internal-evidence-add/:id', component: AddComponent, outlet:'panel-outlet', canActivate: [AuthGuard, AlwaysAuthChildrenGuard] },
+            {path: 'not-paid/:id', component: IncomeNotPaidComponent, outlet:'panel-outlet', canActivate: [AuthGuard, AlwaysAuthChildrenGuard] },
+            {path: 'zus', component: ZusComponent, outlet:'panel-outlet', canActivate: [AuthGuard, AlwaysAuthChildrenGuard] },
+            {path: 'add-zus', component: AddZusComponent, outlet:'panel-outlet', canActivate: [AuthGuard, AlwaysAuthChildrenGuard] },
+            {path: 'tax', component: TaxComponent, outlet:'panel-outlet', canActivate: [AuthGuard, AlwaysAuthChildrenGuard] },
+            {path: 'count-tax', component: CountTaxComponent, outlet:'panel-outlet', canActivate: [AuthGuard, AlwaysAuthChildrenGuard] },
+            {path: 'company', component: CompanyComponentBook, outlet:'panel-outlet', canActivate: [AuthGuard, AlwaysAuthChildrenGuard] },
             {path: 'add-company/:id', component: AddCompanyComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
-            {path: 'add-company/:id/:company', component: AddCompanyComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
-            {path: 'fv', component: FvComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
+            {path: 'add-company/:id/:company', component: AddCompanyComponent, outlet:'panel-outlet', canActivate: [AuthGuard, AlwaysAuthChildrenGuard] },
+            {path: 'fv', component: FvComponent, outlet:'panel-outlet', canActivate: [AuthGuard, AlwaysAuthChildrenGuard] },
             {path: 'add-user-company', component: AddUserCompanyComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
-            {path: 'contact', component: ContactComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
-            {path: 'vat', component: VatComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
-            {path: 'count-vat', component: CountVatComponent, outlet:'panel-outlet', canActivate: [AuthGuard] },
-            {path: 'fixxed-assets', component: FixedAssetsComponent, outlet:'panel-outlet', canActivate: [AuthGuard]},
-            {path: 'add-fixxed-assets', component: AddAssetsComponent, outlet:'panel-outlet', canActivate: [AuthGuard]},
-            {path: 'add-fixxed-assets/:id', component: AddAssetsComponent, outlet:'panel-outlet', canActivate: [AuthGuard]}
+            {path: 'contact', component: ContactComponent, outlet:'panel-outlet', canActivate: [AuthGuard, AlwaysAuthChildrenGuard] },
+            {path: 'vat', component: VatComponent, outlet:'panel-outlet', canActivate: [AuthGuard, AlwaysAuthChildrenGuard] },
+            {path: 'count-vat', component: CountVatComponent, outlet:'panel-outlet', canActivate: [AuthGuard, AlwaysAuthChildrenGuard] },
+            {path: 'fixxed-assets', component: FixedAssetsComponent, outlet:'panel-outlet', canActivate: [AuthGuard, AlwaysAuthChildrenGuard]},
+            {path: 'add-fixxed-assets', component: AddAssetsComponent, outlet:'panel-outlet', canActivate: [AuthGuard, AlwaysAuthChildrenGuard]},
+            {path: 'add-fixxed-assets/:id', component: AddAssetsComponent, outlet:'panel-outlet', canActivate: [AuthGuard, AlwaysAuthChildrenGuard]},
+            {path: 'customer', component: CustomerComponent, outlet:'panel-outlet', canActivate: [AuthGuard, AlwaysAuthChildrenGuard]},
+            {path: 'customer/:id', component: CustomerPanelComponent, outlet:'panel-outlet', canActivate: [AuthGuard, AlwaysAuthChildrenGuard]},
+            {path: 'add-customer', component: AddCutomerComponent, outlet:'panel-outlet', canActivate: [AuthGuard, AlwaysAuthChildrenGuard]}
         ]          
     },
     { path: '**', component: PageNotFoundComponent }

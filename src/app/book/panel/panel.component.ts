@@ -14,10 +14,7 @@ export class PanelComponent implements OnInit {
     
   constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) { }
 
-  ngOnInit() {
-      setTimeout(()=>{
-          this.companyNeme = localStorage.getItem('companyName');
-      },100)            
+  ngOnInit() {        
   }
     
 

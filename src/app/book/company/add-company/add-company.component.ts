@@ -31,7 +31,7 @@ export class AddCompanyComponent implements OnInit {
   disableInput: boolean = true; 
   idCompany;    
     
-  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) {this.event.youCanVisit();}
+  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) {}
 
   ngOnInit() {
       this.route.params.subscribe(params => this.supiler = parseInt(params['id']));
@@ -56,7 +56,9 @@ export class AddCompanyComponent implements OnInit {
   onEnterNip(event){
         this.CmsService.post('company/getCompany.php', event.target.value).subscribe(
             response=>{
-                if (response.kod === '0'){
+                console.log(response)
+                try{
+                    if (response.kod === '0'){
                     let post_code = response.post_code.substr(0, 2)+'-'+response.post_code.substr(2, 5);
                     this.company = {
                             city: response.city,
@@ -68,20 +70,25 @@ export class AddCompanyComponent implements OnInit {
                             street: response.street,
                             supplier: this.supiler
                       };
+                    }
+                    else{
+                        this.company = {
+                                city: '',
+                                home_number: '',
+                                local_number: '',
+                                name: '',
+                                nip: this.company.nip,
+                                post_code: '',
+                                street: '',
+                                supplier: this.supiler
+                        };
+                        this.event.showInfo('error', response.opis)
+                    }
                 }
-                else{
-                    this.company = {
-                            city: '',
-                            home_number: '',
-                            local_number: '',
-                            name: '',
-                            nip: this.company.nip,
-                            post_code: '',
-                            street: '',
-                            supplier: this.supiler
-                      };
-                      this.event.showInfo('error', response.opis)
+                catch{
+
                 }
+                
             }
         )
    }

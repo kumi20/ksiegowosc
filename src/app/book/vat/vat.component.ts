@@ -19,7 +19,7 @@ export class VatComponent implements OnInit {
     
     vatDeclaration = [];
     
-  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) {this.event.youCanVisit();}
+  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) {}
 
   ngOnInit() {
       

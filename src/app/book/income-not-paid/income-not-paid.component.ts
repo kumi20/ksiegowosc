@@ -24,7 +24,7 @@ export class IncomeNotPaidComponent implements OnInit {
     };    
     
 
-  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) {this.event.youCanVisit();}
+  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) {}
 
   ngOnInit() {
       
@@ -38,6 +38,7 @@ export class IncomeNotPaidComponent implements OnInit {
   showList(){
       this.CmsService.getAuthorization(`noPay/getListIncome.php?month=${this.idMonth}`).subscribe(
           response=>{
+            console.log(response)
               this.fv = response;
           }
       )
@@ -51,6 +52,16 @@ export class IncomeNotPaidComponent implements OnInit {
         }
       )
       
-  }    
+  }  
+  
+  sendMail(id, mail){
+    this.CmsService.getAuthorization(`customer/send-przypomnienie.php?fv=${id}&mail=${mail}`).subscribe(response=>{
+        if(response.code === 200) {
+          this.event.showInfo('success','Wysłano przypomnienie');
+          mail = '';
+        }
+    })
+
+  }
 
 }

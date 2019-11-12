@@ -64,5 +64,19 @@ export class EventService {
           },100)
           
       }
+
+      onControlValueChanged(from, formErrors, validationMsg){
+        const form = from;
+    
+        for(let field in formErrors){
+            formErrors[field] = '';
+            let control = form.get(field);
+            
+            const validationMessages = validationMsg[field];
+            for(const key in control.errors){
+              formErrors[field] += validationMessages[key] + ' ';
+            }
+        }
+    }
     
 }

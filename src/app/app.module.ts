@@ -16,11 +16,13 @@ import { RouterModule,Router } from '@angular/router';
 import { GoogleAnalyticsModule, GA_TOKEN } from 'angular-ga';
 import { Ng2PaginationModule } from 'ng2-pagination';
 
+import { FileUploadModule } from 'ng2-file-upload';
+
 import { ApiService } from './api.service';
 import { EventService } from './event.service';
 import { routerModule} from './app.routing';
 
-import { AuthGuard } from './auth.guard';
+import { AuthGuard, AlwaysAuthChildrenGuard } from './auth.guard';
 
 import { TinymceModule } from 'angular2-tinymce';
 import { EditorModule } from '@tinymce/tinymce-angular';
@@ -66,6 +68,11 @@ import { HomeComponent } from './home/home.component';
 import { FixedAssetsComponent } from './book/fixed-assets/fixed-assets.component';
 import { AddAssetsComponent } from './book/fixed-assets/add-assets/add-assets.component';
 
+
+import { SchemaFormModule, WidgetRegistry, DefaultWidgetRegistry } from "angular2-schema-form";
+import { CustomerComponent } from './book/customer/customer.component';
+import { AddCutomerComponent } from './book/customer/add-cutomer/add-cutomer.component';
+import { CustomerPanelComponent } from './book/customer/customer-panel/customer-panel.component';
 
 // Configs 
 export function getAuthServiceConfigs() {
@@ -117,10 +124,14 @@ export function getAuthServiceConfigs() {
         HomeComponent,
         FixedAssetsComponent,
         AddAssetsComponent,
+        CustomerComponent,
+        AddCutomerComponent,
+        CustomerPanelComponent,
 	],
 	imports: [
 		BrowserModule,
         HttpClientModule,
+        FileUploadModule,
         FormsModule,
         HttpModule,
         routerModule,
@@ -133,6 +144,7 @@ export function getAuthServiceConfigs() {
         MDBBootstrapModule.forRoot(),
         MDBBootstrapModulePro.forRoot(),
         SocialLoginModule,
+        SchemaFormModule.forRoot(),
         TinymceModule.withConfig({ 
             height: 350,
 			language: "pl",
@@ -146,7 +158,7 @@ export function getAuthServiceConfigs() {
         }),
         EditorModule
 	],
-	providers: [ApiService, EventService, AuthGuard,
+	providers: [ApiService, EventService, AuthGuard, AlwaysAuthChildrenGuard,
                {
                   provide: AuthServiceConfig,
                   useFactory: getAuthServiceConfigs

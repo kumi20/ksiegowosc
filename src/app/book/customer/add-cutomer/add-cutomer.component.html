@@ -1,0 +1,90 @@
+<mdb-card class="card">  
+    <mdb-card-header class="card-header">
+      <div class="row">
+          <div class="col-md-10">Dodaj klienta</div>
+      </div>      
+    </mdb-card-header>
+    <mdb-card-body class="card-body">
+        <mdb-card-text>
+            <form [formGroup]="customerForm" (ngSubmit)="onSubmitCustomer(customerForm)">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="customerName">Nazwa</label>
+                            <input class="form-control" [ngClass]="(submitted && formError.customerName)?'form-control in-valid' : 'form-control'" name="customerName" mdbActive id="customerName" formControlName="customerName">   
+                            <small class="text-danger" *ngIf="submitted && formError.customerName">
+                                <p>{{ formError.customerName}}</p>
+                            </small>                  
+                        </div>
+                    </div>
+                </div>
+  
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="customerPostCode">Kod pocztowy</label>
+                            <input class="form-control" [ngClass]="(submitted && formError.customerPostCode)?'form-control in-valid' : 'form-control'" 
+                            name="customerPostCode" mdbActive id="customerPostCode" formControlName="customerPostCode">   
+                            <small class="text-danger" *ngIf="submitted && formError.customerPostCode">
+                                <p>{{ formError.customerPostCode}}</p>
+                            </small>                  
+                        </div>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label for="customerCity">Miejscowośc</label>
+                            <input class="form-control" [ngClass]="(submitted && formError.customerCity)?'form-control in-valid' : 'form-control'" 
+                            name="customerCity" mdbActive id="customerCity" formControlName="customerCity">   
+                            <small class="text-danger" *ngIf="submitted && formError.customerCity">
+                                <p>{{ formError.customerCity}}</p>
+                            </small>                  
+                        </div>
+                    </div>
+                </div>
+  
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="customerStreet">Ulica</label>
+                            <input class="form-control" [ngClass]="(submitted && formError.customerStreet)?'form-control in-valid' : 'form-control'" 
+                            name="customerStreet" mdbActive id="customerStreet" formControlName="customerStreet">   
+                            <small class="text-danger" *ngIf="submitted && formError.customerStreet">
+                                <p>{{ formError.customerStreet}}</p>
+                            </small>                  
+                        </div>
+                    </div>
+                </div>
+  
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="customerNip">Nip</label>
+                            <input type="number" class="form-control" [ngClass]="(submitted && formError.customerNip)?'form-control in-valid' : 'form-control'" 
+                            name="customerNip" mdbActive id="customerNip" formControlName="customerNip">   
+                            <small class="text-danger" *ngIf="submitted && formError.customerNip">
+                                <p>{{ formError.customerNip}}</p>
+                            </small>                  
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="customerLogin">Login</label>
+                            <input type="email" class="form-control" [ngClass]="(submitted && formError.customerLogin)?'form-control in-valid' : 'form-control'" 
+                            name="customerLogin" mdbActive id="customerLogin" formControlName="customerLogin">   
+                            <small class="text-danger" *ngIf="submitted && formError.customerLogin">
+                                <p>{{ formError.customerLogin}}</p>
+                            </small>                  
+                        </div>
+                    </div>
+                </div>
+  
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn blue-gradient">Zapisz</button>
+                    </div>
+                </div>
+          </form>
+        </mdb-card-text>
+    </mdb-card-body>
+  </mdb-card>
+  

@@ -36,7 +36,9 @@
                     </tbody>
                 </table>
                 
-                <pagination-controls (pageChange)="page = pageChanged($event)"  directionLinks="true"  previousLabel="Poprzednia" nextLabel="Następna" autoHide="true" class="pagination" style="widtH:50%; margin: auto;"> </pagination-controls>
+                <div class="d-flex justify-content-center">
+                    <pagination-controls (pageChange)="page = pageChanged($event)"  directionLinks="true"  previousLabel="Poprzednia" nextLabel="Następna" autoHide="true" class="pagination"></pagination-controls>
+                </div>
             </div>
         </div>
     </mdb-card-text>

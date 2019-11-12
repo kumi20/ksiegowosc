@@ -1,0 +1,40 @@
+<mdb-card class="card">  
+  <mdb-card-header class="card-header">Klienci</mdb-card-header>
+  <mdb-card-body class="card-body">
+    <mdb-card-text>  
+        <div class="row">
+            <div class="col-md-6">
+                <button class="btn blue-gradient" [routerLink]="['/panel/',{outlets: { 'panel-outlet': ['add-customer'] } }]">Dodaj klienta</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+               <div class="table-responsive">
+                   <table class="table">
+                       <thead class="thead-dark">
+                       <tr class="text-white">
+                           <th>#</th>
+                           <th>Nazwa</th>
+                           <th></th>
+                       </tr>
+                       </thead>
+                       <tbody>
+                           <tr *ngFor="let customer of customerList| paginate: { itemsPerPage: 15, currentPage:  page }; let i = index;" >
+                               <td style="width:5%" [routerLink]="['/panel/',{outlets: { 'panel-outlet': ['customer',customer.customer_id] } }]">{{i + 1}}</td>
+                               <td style="width:70%" [routerLink]="['/panel/',{outlets: { 'panel-outlet': ['customer',customer.customer_id] } }]">{{customer.customer_name}}</td>
+                               <td class="text-center" style="width:10%"></td>
+                           </tr>
+                       </tbody>
+                   </table>
+               </div>
+               <div class="d-flex justify-content-center">
+                   <pagination-controls (pageChange)="page = $event"  directionLinks="true"  previousLabel="Poprzednia"
+                                 nextLabel="Następna" autoHide="true" class="pagination"> </pagination-controls>
+               </div>
+           </div>
+     </div>
+    </mdb-card-text>
+  </mdb-card-body>
+</mdb-card>
+      

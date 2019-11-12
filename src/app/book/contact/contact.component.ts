@@ -15,7 +15,7 @@ export class ContactComponent implements OnInit {
   email: mail = {subject:'', message:'', email: ''};
   showError: boolean = false;
 
-  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) { this.event.youCanVisit();}
+  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) {}
 
   ngOnInit() {
   }

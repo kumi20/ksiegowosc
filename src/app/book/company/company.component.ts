@@ -13,7 +13,7 @@ export class CompanyComponentBook implements OnInit {
   company;
   page;    
     
-  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) { this.event.youCanVisit();}
+  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) { }
 
   ngOnInit() {
       this.showCompany();
