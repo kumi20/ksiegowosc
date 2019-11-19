@@ -73,6 +73,7 @@ import { SchemaFormModule, WidgetRegistry, DefaultWidgetRegistry } from "angular
 import { CustomerComponent } from './book/customer/customer.component';
 import { AddCutomerComponent } from './book/customer/add-cutomer/add-cutomer.component';
 import { CustomerPanelComponent } from './book/customer/customer-panel/customer-panel.component';
+import { IndywidualZusComponent } from './book/indywidual-zus/indywidual-zus.component';
 
 // Configs 
 export function getAuthServiceConfigs() {
@@ -127,6 +128,7 @@ export function getAuthServiceConfigs() {
         CustomerComponent,
         AddCutomerComponent,
         CustomerPanelComponent,
+        IndywidualZusComponent,
 	],
 	imports: [
 		BrowserModule,

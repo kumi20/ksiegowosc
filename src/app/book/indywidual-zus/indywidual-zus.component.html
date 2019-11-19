@@ -1,0 +1,46 @@
+<mdb-card class="card">  
+  <mdb-card-header class="card-header">Indywidualny ZUS</mdb-card-header>
+    <mdb-card-body class="card-body">
+      <mdb-card-text> 
+          <form [formGroup]="indywidualZus" (ngSubmit)="onSubmited(indywidualZus)">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="md-form">
+                        <mdb-select class="select" [options]="year" [filterEnabled]="true" placeholder="-- wybierz rok --" formControlName="rok" #yearSelected></mdb-select>
+                        <label class="active">Rok:</label>
+                    </div>                  
+                </div>
+            </div> 
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="md-form">
+                        <input type="text" formControlName="chorobowe" class="form-control">
+                        <label class="active">Chorobowe:</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="md-form">
+                        <input type="text" formControlName="zus_sp" class="form-control">
+                        <label class="active">ZUS społeczne:</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="md-form">
+                        <input type="text" formControlName="zus_fp" class="form-control">
+                        <label class="active">ZUS fundusz pracy:</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <button class="btn blue-gradient" rounded="true" mdbWavesEffect>Zapisz</button>
+                </div>    
+            </div>
+          </form>
+      </mdb-card-text>
+    </mdb-card-body>
+</mdb-card>

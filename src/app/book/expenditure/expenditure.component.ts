@@ -104,7 +104,6 @@ export class ExpenditureComponent implements OnInit {
     }
     
     changeNumber(i){
-        console.log(this.expenditure.servicesList[i])
         let vat = 0;
         if(!isNaN(this.expenditure.servicesList[i].vat)) vat = this.expenditure.servicesList[i].vat;
         this.expenditure.servicesList[i].netto = this.expenditure.servicesList[i].netto.replace(',','.');

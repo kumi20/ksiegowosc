@@ -37,8 +37,11 @@ export class SettingsComponent implements OnInit {
         monthDisease: '',
         yearDisease: '',
         vatDeclaration: 1,
-        periodVat: '0'
+        periodVat: '0',
+        indywidualZus: false
   }
+
+  indywidualZus = [];
     
   constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) {}
 
@@ -59,6 +62,7 @@ export class SettingsComponent implements OnInit {
       )
       
       this.month = this.CmsService.month;      
+      this.getIndywidaulZus();
   }
     
     
@@ -84,6 +88,9 @@ export class SettingsComponent implements OnInit {
                   if(respnse[0].vatDeclaration === "1") this.settings.vatDeclaration = 1;
                   else this.settings.vatDeclaration = 0;
                   this.settings.periodVat = respnse[0].periodVat; 
+
+                  if(respnse[0].indywidualZus === "1") this.settings.indywidualZus = true;
+                  else this.settings.indywidualZus = false;
               } 
               resolve(this.settings);
           })
@@ -96,5 +103,23 @@ export class SettingsComponent implements OnInit {
                 this.event.showInfo('success', 'Zapisano dane');
             }
         )
+    }
+
+    getIndywidaulZus(){
+        this.CmsService.getAuthorization(`indywidual_zus/get.php`).subscribe(response=>{
+            if(response.length > 0){
+                this.indywidualZus = response;
+            }
+        })
+    }
+
+    delete(id){
+        this.CmsService.delete(`indywidual_zus/delete.php?id=${id}`).subscribe(response=>{
+            if(response.kod == 0){
+                this.indywidualZus = [];
+                this.event.showInfo('success', 'Usunięto składki');
+                this.getIndywidaulZus();
+            }
+        })
     }
 }

@@ -10,4 +10,5 @@ export interface settings{
     yearDisease: string;
     vatDeclaration: number;
     periodVat: string;
+    indywidualZus: boolean;
 }
