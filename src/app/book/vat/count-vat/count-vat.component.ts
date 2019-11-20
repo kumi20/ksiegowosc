@@ -11,7 +11,7 @@ import { vatDeclaration } from './declaration';
   styleUrls: ['./count-vat.component.scss']
 })
 export class CountVatComponent implements OnInit {
-    @ViewChild('yearSelected') yearList; 
+    @ViewChild('yearSelected', {static: false}) yearList; 
     actualYear;
     year = [];
     month;  

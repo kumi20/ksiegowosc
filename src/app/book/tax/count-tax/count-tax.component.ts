@@ -12,7 +12,7 @@ import { tax } from './tax';
 })
 export class CountTaxComponent implements OnInit {
     
-  @ViewChild('yearSelected') yearList; 
+  @ViewChild('yearSelected', {static: false}) yearList; 
     
   actualYear; 
   year = [];  

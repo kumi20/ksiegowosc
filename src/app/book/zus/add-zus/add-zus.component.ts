@@ -12,7 +12,7 @@ import { zus } from './zus';
 })
 export class AddZusComponent implements OnInit {
 
-  @ViewChild('yearSelected') yearList; 
+  @ViewChild('yearSelected', {static: false}) yearList; 
     
   actualYear; 
   year = [];  

@@ -15,7 +15,7 @@ import { invoice, company, fv } from './income';
 })
 export class IncomeComponent implements OnInit {
     
-  @ViewChild('constructorList') constructorList;    
+  @ViewChild('constructorList', {static: false}) constructorList;    
 
   invoice: invoice = {number: 1+'/'+currentDate.getFullYear(), documentData:'', dataSales:'', customerId:0,servicesList:[], toPay:0, toPayNetto:0, vat50: false, dataToPay:'', boolPay: false, description:''};  
   company: company = {name:'', street: '',city: '', nip: ''};

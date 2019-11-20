@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./vat.component.scss']
 })
 export class VatComponent implements OnInit {
-    @ViewChild('yearSelected') yearList; 
+    @ViewChild('yearSelected', {static: false}) yearList; 
     
     actualYear;
     year = [];

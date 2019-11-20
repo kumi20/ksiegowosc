@@ -1,6 +1,7 @@
 import { Component, Input, Output, ElementRef, EventEmitter, OnInit, HostListener, PLATFORM_ID, Inject, Renderer2 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 declare var screenfull: any;
+import { ApiService } from '../../../api.service';
 
 import 'hammerjs';
 
@@ -8,9 +9,7 @@ import 'hammerjs';
 @Component({
   selector: 'mdb-image-modal',
   templateUrl: 'image-popup.html',
-  // host: {
-  //   '(document:keyup)': 'keyboardControl($event)'
-  // },
+  inputs: ['disabledDeleteImage']
 })
 
 export class ImageModalComponent implements OnInit {
@@ -40,7 +39,7 @@ export class ImageModalComponent implements OnInit {
 
   @Output('cancelEvent') cancelEvent = new EventEmitter<any>();
 
-  constructor( @Inject(PLATFORM_ID) platformId: string, public element: ElementRef, public renderer: Renderer2) {
+  constructor( @Inject(PLATFORM_ID) platformId: string, public element: ElementRef, public renderer: Renderer2, private CmsService: ApiService) {
     this.isBrowser = isPlatformBrowser(platformId);
     this._element = this.element.nativeElement;
     try {

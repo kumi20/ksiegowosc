@@ -12,7 +12,7 @@ import { internalEvidence } from '../internalEvidence';
 })
 export class AddComponent implements OnInit {
     
-    @ViewChild('constructorList') constructorList;     
+    @ViewChild('constructorList', {static: false}) constructorList;     
 
   evidence: internalEvidence = {
           data: "",

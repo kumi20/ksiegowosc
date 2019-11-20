@@ -9,7 +9,7 @@ export class SBItemBodyComponent {
 
   public height = '0';
 
-  @ViewChild('body') bodyEl: ElementRef;
+  @ViewChild('body', {static: false}) bodyEl: ElementRef;
 
   constructor(private renderer: Renderer2) {}
 

@@ -1,8 +1,10 @@
 <div class="ng-gallery mdb-lightbox {{ type }}" *ngIf="showRepeat"> 
-  <figure class="col-md-4" *ngFor ="let i of modalImages; let index = index">
+  <figure class="col-md-4" *ngFor ="let i of modalImages; let index = index" style="margin-bottom: 50px;">
     <img src="{{ !i.thumb ? i.img : i.thumb }}" class="ng-thumb" (click)="openGallery(index)" alt="Image {{ index + 1 }}" />
+    <input type="text" [(ngModel)]="i.description"  [ngModelOptions]="{standalone: true}" class="form-control" *ngIf="!disabledDeleteImage"> 
+    <i class="fa fa-trash-o" (click)="delete(i.idPhoto)" *ngIf="!disabledDeleteImage" style="cursor: pointer"></i>                         
   </figure>
-</div>
+</div> 
 <div  tabindex="0" class="ng-overlay" [class.hide_lightbox]="opened == false">
   <div class="top-bar" style='z-index: 100000'>
     <span class="info-text">{{ currentImageIndex + 1 }}/{{ modalImages.length }}</span>    

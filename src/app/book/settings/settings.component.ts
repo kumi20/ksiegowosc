@@ -12,7 +12,7 @@ import { settings } from './settings';
 })
 export class SettingsComponent implements OnInit {
 
-  @ViewChild('yearList') yearList;
+  @ViewChild('yearList', {static: false}) yearList;
     
   vat = [
       {value: 1, label: 'Tak'},

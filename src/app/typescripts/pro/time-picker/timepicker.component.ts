@@ -15,16 +15,16 @@ export const TIME_PIRCKER_VALUE_ACCESSOT: any = {
 })
 
 export class ClockPickerComponent implements OnInit, AfterViewInit, ControlValueAccessor {
-    @ViewChild('hoursPlate') public hoursPlate: ElementRef;
-    @ViewChild('minutesPlate') public minutesPlate: ElementRef;
+    @ViewChild('hoursPlate', {static: false}) public hoursPlate: ElementRef;
+    @ViewChild('minutesPlate', {static: false}) public minutesPlate: ElementRef;
 
-    @ViewChild('plate') public plate: ElementRef;
-    @ViewChild('svg') public svg: ElementRef;
-    @ViewChild('g') public g: ElementRef;
-    @ViewChild('hand') public hand: ElementRef;
-    @ViewChild('fg') public fg: ElementRef;
-    @ViewChild('bg') public bg: ElementRef;
-    @ViewChild('bearing') public bearing: ElementRef;
+    @ViewChild('plate', {static: false}) public plate: ElementRef;
+    @ViewChild('svg', {static: false}) public svg: ElementRef;
+    @ViewChild('g', {static: false}) public g: ElementRef;
+    @ViewChild('hand', {static: false}) public hand: ElementRef;
+    @ViewChild('fg', {static: false}) public fg: ElementRef;
+    @ViewChild('bg', {static: false}) public bg: ElementRef;
+    @ViewChild('bearing', {static: false}) public bearing: ElementRef;
 
     @Input('twelvehour') public twelvehour = false;
     @Input('darktheme') public darktheme = false;

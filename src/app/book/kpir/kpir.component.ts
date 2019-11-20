@@ -5,8 +5,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { statistic } from './kpir';
 
-import * as jspdf from 'jspdf';    
+import * as jspdf from 'jspdf';  
+  
 import html2canvas from 'html2canvas';  
+
+declare let pdfmake: any ;
 
 @Component({
   selector: 'app-kpir',
@@ -15,7 +18,7 @@ import html2canvas from 'html2canvas';
 })
 export class KpirComponent implements OnInit {
 
-  @ViewChild('yearSelected') yearList;
+  @ViewChild('yearSelected', {static: false}) yearList;
     
   kpir;
   year = [];
@@ -87,19 +90,24 @@ export class KpirComponent implements OnInit {
         )
     }
     
-    public captureScreen()  
-      {  
-          var data = document.getElementById('convert');
-            html2canvas(data).then(canvas => {
-              var imgWidth = 208; 
-              var pageHeight = 295;  
-              var imgHeight = canvas.height * imgWidth / canvas.width;
-              var heightLeft = imgHeight;
-              const contentDataURL = canvas.toDataURL('image/png')
-              let pdf = new jspdf('p', 'mm', 'a4');
-              var position = 0;
-              pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
-              pdf.save('MYPdf.pdf')
-          });
-      }  
+    public captureScreen()
+    {
+        var data = document.getElementById('contentToConvert');  
+        html2canvas(data).then(canvas => {  
+        // Few necessary setting options  
+        var imgWidth = 208;   
+        var pageHeight = 295;    
+        var imgHeight = canvas.height * imgWidth / canvas.width;  
+        var heightLeft = imgHeight;  
+    
+        const contentDataURL = canvas.toDataURL('image/png')  
+        let pdf = new jspdf('l', 'mm', 'a4'); // A4 size page of PDF  
+        var position = 0;  
+        pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)  
+        pdf.save('MYPdf.pdf'); // Generated PDF   
+        });  
     }
+
+}
+
+

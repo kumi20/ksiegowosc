@@ -45,9 +45,9 @@ export class SelectComponent implements ControlValueAccessor, OnChanges, OnInit,
   @Output() noOptionsFound: EventEmitter<string> =
     new EventEmitter<string>();
 
-  @ViewChild('selection') selectionSpan: any;
-  @ViewChild('dropdown') dropdown: SelectDropdownComponent;
-  @ViewChild('filterInput') filterInput: any;
+  @ViewChild('selection', {static: false}) selectionSpan: any;
+  @ViewChild('dropdown', {static: false}) dropdown: SelectDropdownComponent;
+  @ViewChild('filterInput', {static: false}) filterInput: any;
 
   // Angular lifecycle hooks.
   KEYS: any = {

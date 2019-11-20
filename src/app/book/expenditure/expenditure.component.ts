@@ -13,7 +13,7 @@ import { invoice, company, fv } from '../income/income';
 })
 export class ExpenditureComponent implements OnInit {
 
-  @ViewChild('constructorList') constructorList;     
+  @ViewChild('constructorList', {static: false}) constructorList;     
   expenditure: invoice = {number: '', documentData:'', dataSales:'', customerId:0,servicesList:[], toPay:0, toPayNetto:0, vat50: false, dataToPay:'', boolPay: false, description:'', cost75: false};  
   company: company = {name:'', street: '',city: '', nip: ''};    
     

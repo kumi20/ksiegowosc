@@ -47,10 +47,15 @@
 							}
 						],
 						"scripts": [
-                            {
-                                "input": "node_modules/tinymce/tinymce.min.js",
-                            },
-							{
+              {
+                  "input": "node_modules/tinymce/tinymce.min.js",
+              },
+              {
+                    "input": "node_modules/pdfmake/build/pdfmake.js",
+              },
+              {
+                  "input": "node_modules/pdfmake/build/vfs_fonts.js",
+              },							{
 								"input": "node_modules/chart.js/dist/Chart.js"
 							},
 							{

@@ -65,7 +65,7 @@ export class MDBDatePickerComponent implements OnChanges, ControlValueAccessor, 
   @Output() calendarToggle: EventEmitter<number> = new EventEmitter<number>();
   @Output() inputFocusBlur: EventEmitter<IMyInputFocusBlur> = new EventEmitter<IMyInputFocusBlur>();
 
-  @ViewChild('divFocus') public divFocus: any;
+  @ViewChild('divFocus', {static: false}) public divFocus: any;
   public showSelector = false;
   public visibleMonth: IMyMonth = { monthTxt: '', monthNbr: 0, year: 1 };
   public selectedMonth: IMyMonth = { monthTxt: '', monthNbr: 0, year: 0 };

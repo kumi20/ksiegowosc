@@ -97,7 +97,7 @@ export class MDBUploaderService {
             speedHuman: null
           }
         },
-        lastModifiedDate: file.lastModifiedDate
+        lastModifiedDate: (<any>file).lastModifiedDate
       };
 
       this.serviceEvents.emit({ type: 'addedToQueue', file: uploadFile });

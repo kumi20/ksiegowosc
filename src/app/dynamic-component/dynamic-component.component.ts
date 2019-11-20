@@ -29,7 +29,7 @@ import { CalendarTemplateComponent } from '../template/calendar/calendar.compone
 })
 export class DynamicComponentComponent implements OnInit {
 
-  @ViewChild('dynamicComponentContainer', {read: ViewContainerRef}) dynamicComponentContainer;
+  @ViewChild('dynamicComponentContainer', {static: true, read: ViewContainerRef}) dynamicComponentContainer;
   @Input() componentData; 
   idTresci;
   pageElement;

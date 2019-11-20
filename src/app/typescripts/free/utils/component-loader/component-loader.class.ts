@@ -191,12 +191,12 @@ export class ComponentLoader<T> {
        }
 
        public toggle(): void | any {
-         if (this.isShown) {
-           this.hide();
-           return;
-         }
+        //  if (this.isShown) {
+        //    this.hide();
+        //    return;
+        //  }
 
-         this.show();
+        //  this.show();
        }
 
        public dispose(): void {

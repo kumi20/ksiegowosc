@@ -60,8 +60,8 @@ export class CompleterComponent implements OnInit, ControlValueAccessor, AfterVi
   @Output() public keyup: EventEmitter<any> = new EventEmitter();
   @Output() public keydown: EventEmitter<any> = new EventEmitter();
 
-  @ViewChild(MdbCompleterDirective) public completer: MdbCompleterDirective;
-  @ViewChild('mdbInput') public mdbInput: ElementRef;
+  @ViewChild(MdbCompleterDirective, {static: false}) public completer: MdbCompleterDirective;
+  @ViewChild('mdbInput', {static: false}) public mdbInput: ElementRef;
 
   public searchStr = '';
   public control = new FormControl('');

@@ -10,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ZusComponent implements OnInit {
     
-  @ViewChild('yearSelected') yearList; 
+  @ViewChild('yearSelected', {static: false}) yearList; 
     
   zus;
   actualYear; 

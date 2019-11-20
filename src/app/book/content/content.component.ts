@@ -13,7 +13,7 @@ import { yearStatistic } from './content';
 })
 export class ContentComponent implements OnInit {
 
-  @ViewChild('yearList') yearList;    
+  @ViewChild('yearList', {static: false}) yearList;    
   dataChart: number[] = []    
   chartDatasets:Array<any> = []; 
   yearStatistic: yearStatistic = {incomeYear:'',expenditureYear:'',revenueYear:''} ;

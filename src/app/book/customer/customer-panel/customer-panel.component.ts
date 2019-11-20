@@ -13,7 +13,7 @@ const URL = '';
   styleUrls: ['./customer-panel.component.scss']
 })
 export class CustomerPanelComponent implements OnInit {
-  @ViewChild('selectedYear') selectedYear;    
+  @ViewChild('selectedYear', {static: false}) selectedYear;    
 
   idCustomer;
   customerFVList = []; 

@@ -12,7 +12,7 @@ import { internalEvidence } from './internalEvidence';
 })
 export class InternalEvidenceComponent implements OnInit {
    
-  @ViewChild('yearSelected') yearList;   
+  @ViewChild('yearSelected', {static: false}) yearList;   
     
   year = [];
   month;    

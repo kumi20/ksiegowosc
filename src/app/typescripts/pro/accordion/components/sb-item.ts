@@ -13,7 +13,7 @@ export class SBItemComponent implements AfterViewInit {
 
   @Input() public collapsed = true;
 
-  @ContentChild(SBItemBodyComponent) body: SBItemBodyComponent;
+  @ContentChild(SBItemBodyComponent, {static: false}) body: SBItemBodyComponent;
 
   constructor() {
     this.squeezebox = sbConfig.serviceInstance;

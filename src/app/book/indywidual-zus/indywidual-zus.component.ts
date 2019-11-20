@@ -11,7 +11,7 @@ import {FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angu
   styleUrls: ['./indywidual-zus.component.scss']
 })
 export class IndywidualZusComponent implements OnInit {
-  @ViewChild('yearSelected') yearList;
+  @ViewChild('yearSelected', {static: false}) yearList;
   indywidualZus;
   year = [];
   actualYear;

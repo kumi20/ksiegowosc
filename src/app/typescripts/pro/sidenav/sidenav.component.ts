@@ -14,8 +14,8 @@ export class SidenavComponent implements AfterViewInit {
   @Input() public class: string;
   @Input() public fixed = true;
 
-  @ViewChild('sidenav') public sideNav: ElementRef;
-  @ViewChild('overlay') public overlay: any;
+  @ViewChild('sidenav', {static: false}) public sideNav: ElementRef;
+  @ViewChild('overlay', {static: false}) public overlay: any;
 
   constructor( @Inject(PLATFORM_ID) platformId: string, public el: ElementRef,
     public renderer: Renderer2) {
