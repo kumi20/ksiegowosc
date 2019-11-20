@@ -1,8 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter} from '@angular/core';
 import { ToastService } from './typescripts/pro/alerts'
-import { MDBSpinningPreloader } from './typescripts/pro';
-import { ApiService } from './api.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 
 @Injectable()
@@ -21,12 +19,17 @@ export class EventService {
       {value:'10', label: 'październik'},
       {value:'11', label: 'listopad'},
       {value:'12', label: 'grudzień'}
-    ];    
+    ];  
+    
+  @Output()	onSearchCompany: EventEmitter<any> = new EventEmitter<any>();
     
   constructor(private toastrService: ToastService, private _route: Router) {
 
   }
   
+  public searchingCompany(nip){
+		this.onSearchCompany.emit(nip);
+	}
     
   showInfo(typ, tresc){
     switch(typ){

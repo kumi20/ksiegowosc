@@ -12,15 +12,21 @@ export class CompanyComponentBook implements OnInit {
 
   company;
   page;    
+  onSearchCompanyServices
+  date = {nip:'', name:''};
     
-  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) { }
+  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) { 
+      this.onSearchCompanyServices = this.event.onSearchCompany.subscribe((nip)=>this.showCompany(nip));
+  }
 
   ngOnInit() {
-      this.showCompany();
+
   }
     
-    showCompany(){
-        this.CmsService.getAuthorization(`company/getList.php`).subscribe(
+    showCompany(nip){
+        this.date.nip = nip.nip;
+        this.date.name = nip.name;
+        this.CmsService.getAuthorization(`company/getList.php?nip=${this.date.nip}&name=${this.date.name}`).subscribe(
             response=>{
                 this.company = response;
             }
@@ -28,10 +34,11 @@ export class CompanyComponentBook implements OnInit {
     }
     
     delete(id){
+        this.date = {nip:'', name: ''}; 
        this.CmsService.delete(`company/delete.php?id=${id}`).subscribe(
             response=>{
                 this.event.showInfo('info', 'Kontrahent został usunięty');
-                this.showCompany();
+                this.showCompany(this.date);
             }
        )
     }
