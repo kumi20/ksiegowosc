@@ -75,6 +75,7 @@ import { AddCutomerComponent } from './book/customer/add-cutomer/add-cutomer.com
 import { CustomerPanelComponent } from './book/customer/customer-panel/customer-panel.component';
 import { IndywidualZusComponent } from './book/indywidual-zus/indywidual-zus.component';
 import { SearchComponent } from './book/company/search/search.component';
+import { SearchFvComponent } from './book/fv/search-fv/search-fv.component';
 
 // Configs 
 export function getAuthServiceConfigs() {
@@ -131,6 +132,7 @@ export function getAuthServiceConfigs() {
         CustomerPanelComponent,
         IndywidualZusComponent,
         SearchComponent,
+        SearchFvComponent,
 	],
 	imports: [
 		BrowserModule,

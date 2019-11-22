@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './company.component.html',
   styleUrls: ['./company.component.scss']
 })
-export class CompanyComponentBook implements OnInit {
+export class CompanyComponentBook implements OnInit, OnDestroy{
 
   company;
   page;    
@@ -21,6 +21,10 @@ export class CompanyComponentBook implements OnInit {
 
   ngOnInit() {
 
+  }
+
+  ngOnDestroy(){
+      this.onSearchCompanyServices.unsubscribe();
   }
     
     showCompany(nip){

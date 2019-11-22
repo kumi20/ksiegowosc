@@ -38,7 +38,6 @@ export class IncomeNotPaidComponent implements OnInit {
   showList(){
       this.CmsService.getAuthorization(`noPay/getListIncome.php?month=${this.idMonth}`).subscribe(
           response=>{
-            console.log(response)
               this.fv = response;
           }
       )

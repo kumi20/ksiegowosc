@@ -10,33 +10,39 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './fv.component.html',
   styleUrls: ['./fv.component.scss']
 })
-export class FvComponent implements OnInit {
+export class FvComponent implements OnInit, OnDestroy{
 
-  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) {}
+  onSearchFv
+  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) {
+    this.onSearchFv = this.event.onSearchCompany.subscribe((number)=>this.getFv(number.number));
+  }
 
+  number = '';
   fv;
   page;
     
   ngOnInit() {
-      this.getFv();
+      this.getFv(this.number);
   }
     
 
-  getFv(){
-      
-      
-      
-      this.CmsService.getAuthorization(`fv/getList.php`).subscribe(
+  getFv(number){ 
+      this.CmsService.getAuthorization(`fv/getList.php?number=${number}`).subscribe(
         response =>{
             this.fv = response;
         }
       )
   } 
+
+  ngOnDestroy(){
+    this.onSearchFv.unsubscribe();
+  }
     
   delete(id){
+      this.number = '';
       this.CmsService.delete(`fv/delete.php?id=${id}`).subscribe(
             response=>{
-                this.getFv();
+                this.getFv(this.number);
             }
       )
   }
