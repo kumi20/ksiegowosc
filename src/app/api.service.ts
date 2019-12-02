@@ -56,6 +56,13 @@ export class ApiService {
         })
     )
   }
+
+  public async downloadResource(uri): Promise<Blob> {
+    const file =  await this._http.get<Blob>(
+      this.uri+uri,
+      {responseType: 'blob' as 'json'}).toPromise();
+    return file;
+  }
     
   post(uri, json){      
       return this._http.post<any[]|any>(this.uri+uri, json)

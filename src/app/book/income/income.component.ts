@@ -17,7 +17,8 @@ export class IncomeComponent implements OnInit {
     
   @ViewChild('constructorList', {static: false}) constructorList;    
 
-  invoice: invoice = {number: 1+'/'+currentDate.getFullYear(), documentData:'', dataSales:'', customerId:0,servicesList:[], toPay:0, toPayNetto:0, vat50: false, dataToPay:'', boolPay: false, description:''};  
+  invoice: invoice = {number: 1+'/'+currentDate.getFullYear(), documentData:'', dataSales:'', customerId:0,servicesList:[], 
+            toPay:0, toPayNetto:0, vat50: false, dataToPay:'', boolPay: false, description:''};  
   company: company = {name:'', street: '',city: '', nip: ''};
   constractorSelected: company = {name:'', street:'', city:'', nip:''};    
   contractor = [];    

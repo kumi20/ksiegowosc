@@ -63,6 +63,7 @@
     "ng2-file-upload": "^1.2.1",
     "ng2-nouislider": "^1.7.11",
     "ng2-pagination": "^2.0.2",
+    "ng2-pdf-viewer": "^6.0.2",
     "ng2-right-click-menu": "0.0.16",
     "nouislider": "^11.1.0",
     "pdfmake": "^0.1.62",

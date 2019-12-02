@@ -96,34 +96,34 @@
     <div class="row">
         <div class="col-md-12">
             <table mdbTable small="true" class="table table-sm">
-              <thead>
-                <tr>
-                    <th scope="col" style="width:1%">Lp.</th>
-                    <th scope="col" style="width:20%">Nazwa towaru / usługi</th>
-                    <th scope="col" style="width:10%">J.m.</th>
-                    <th scope="col" style="width:5%">Ilość</th>
-                    <th scope="col" style="width:12%">Cenna netto</th>
-                    <th scope="col" style="width:12%">Wartość netto</th>
-                    <th scope="col" style="width:12%">Stawka VAT</th>
-                    <th scope="col" style="width:12%">Kwota VAT</th>
-                    <th scope="col" style="width:12%">Wartość brutto</th>
-                    <th scope="col" style="width:4%"></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr mdbTableCol *ngFor="let el of invoice.servicesList; let i = index;">
-                  <td scope="row">{{i+1}}.</td>    
-                  <td scope="row"><input type="text" [(ngModel)]="el.name" class="fv_input"></td>
-                  <td><mdb-select class="select" [options]="jm" placeholder="-- jm --" [(ngModel)]="el.jm" class="mdb_income" style="border: none!important"></mdb-select></td>
-                  <td style="width:10px;"><input type="number" [(ngModel)]="el.count" min="0" class="fv_input" (change)="changeNumber(i)"></td>
-                  <td><input type="text" [(ngModel)]="el.netto" class="fv_input" (keyup.enter)="changeNumber(i)"></td>
-                  <td>{{el.countNetto| currency: 'PLN '}}</td>
-                  <td><mdb-select class="select" [options]="vat" placeholder="-- VAT --" [(ngModel)]="el.vat" class="mdb_income" style="border: none!important" (selected)="changeNumber(i)"></mdb-select></td>
-                  <td>{{el.countVat| currency: 'PLN '}}</td>
-                  <td>{{el.brutto| currency: 'PLN '}}</td>
-                  <td><i class="fa fa-trash" (click)="deleted(i)"></i></td>
-                </tr>
-              </tbody>
+                <thead>
+                    <tr>
+                        <th scope="col" style="width:1%">Lp.</th>
+                        <th scope="col" style="width:20%">Nazwa towaru / usługi</th>
+                        <th scope="col" style="width:10%">J.m.</th>
+                        <th scope="col" style="width:5%">Ilość</th>
+                        <th scope="col" style="width:12%">Cenna netto</th>
+                        <th scope="col" style="width:12%">Wartość netto</th>
+                        <th scope="col" style="width:12%">Stawka VAT</th>
+                        <th scope="col" style="width:12%">Kwota VAT</th>
+                        <th scope="col" style="width:12%">Wartość brutto</th>
+                        <th scope="col" style="width:4%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr mdbTableCol *ngFor="let el of invoice.servicesList; let i = index;">
+                    <td scope="row">{{i+1}}.</td>    
+                    <td scope="row"><input type="text" [(ngModel)]="el.name" class="fv_input"></td>
+                    <td><mdb-select class="select" [options]="jm" placeholder="-- jm --" [(ngModel)]="el.jm" class="mdb_income" style="border: none!important"></mdb-select></td>
+                    <td style="width:10px;"><input type="number" [(ngModel)]="el.count" min="0" class="fv_input" (change)="changeNumber(i)"></td>
+                    <td><input type="text" [(ngModel)]="el.netto" class="fv_input" (keyup.enter)="changeNumber(i)" autocapitalize="none"></td>
+                    <td>{{el.countNetto| currency: 'PLN '}}</td>
+                    <td><mdb-select class="select" [options]="vat" placeholder="-- VAT --" [(ngModel)]="el.vat" class="mdb_income" style="border: none!important" (selected)="changeNumber(i)"></mdb-select></td>
+                    <td>{{el.countVat| currency: 'PLN '}}</td>
+                    <td>{{el.brutto| currency: 'PLN '}}</td>
+                    <td><i class="fa fa-trash" (click)="deleted(i)"></i></td>
+                    </tr>
+                </tbody>
             </table>
             <i class="fa fa-plus-circle" (click)="addServices()"></i>
             

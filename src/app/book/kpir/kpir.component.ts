@@ -3,13 +3,9 @@ import { EventService } from '../../event.service';
 import { ApiService } from '../../api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { Http, ResponseContentType } from '@angular/http';
+
 import { statistic } from './kpir';
-
-import * as jspdf from 'jspdf';  
-  
-import html2canvas from 'html2canvas';  
-
-declare let pdfmake: any ;
 
 @Component({
   selector: 'app-kpir',
@@ -19,6 +15,7 @@ declare let pdfmake: any ;
 export class KpirComponent implements OnInit {
 
   @ViewChild('yearSelected', {static: false}) yearList;
+  @ViewChild('monthSelected', {static: false}) monthSelected;
     
   kpir;
   year = [];
@@ -36,7 +33,7 @@ export class KpirComponent implements OnInit {
       dochod_rok:''
   }    
     
-  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) {}
+  constructor(private http: Http, private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) {}
 
   ngOnInit() {
       this.CmsService.getYear().toPromise()
@@ -52,10 +49,10 @@ export class KpirComponent implements OnInit {
 
       
       this.month = this.CmsService.month;
+
       this.actualDate = new Date();
       this.actualYear = this.actualDate.getFullYear().toString();
-      this.actualMonth = this.event.formatMonth(this.actualDate.getMonth());
-    
+      this.actualMonth = String(this.event.formatMonth(this.actualDate.getMonth()));   
       this.showKPiR();
   }
 
@@ -90,23 +87,9 @@ export class KpirComponent implements OnInit {
         )
     }
     
-    public captureScreen()
-    {
-        var data = document.getElementById('contentToConvert');  
-        html2canvas(data).then(canvas => {  
-        // Few necessary setting options  
-        var imgWidth = 208;   
-        var pageHeight = 295;    
-        var imgHeight = canvas.height * imgWidth / canvas.width;  
-        var heightLeft = imgHeight;  
-    
-        const contentDataURL = canvas.toDataURL('image/png')  
-        let pdf = new jspdf('l', 'mm', 'a4'); // A4 size page of PDF  
-        var position = 0;  
-        pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)  
-        pdf.save('MYPdf.pdf'); // Generated PDF   
-        });  
-    }
+    generatePDF() {
+        window.open(this.CmsService.uri+`mpdf/create_kpir.php?month=${this.actualMonth}&year=${this.actualYear}&user=${localStorage.getItem('ksiegaQumiToken')}`);
+    } 
 
 }
 

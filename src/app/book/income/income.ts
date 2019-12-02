@@ -11,6 +11,7 @@ export interface invoice{
     dataToPay:string;
     boolPay: boolean;
     description: string;
+    dataPay? : string;
 }
 
 export interface company{
