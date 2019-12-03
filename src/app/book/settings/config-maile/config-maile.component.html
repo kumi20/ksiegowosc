@@ -1,0 +1,52 @@
+<mdb-card class="card" >  
+    <mdb-card-header class="card-header">
+        Ustawienie poczty E-mail
+    </mdb-card-header>
+    <mdb-card-body class="card-body">
+      <mdb-card-text>  
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Host:</label>
+                    <input type="text" class="form-control" [(ngModel)]="configEmail.host"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label>E-mail:</label>
+                    <input type="text" class="form-control" [(ngModel)]="configEmail.email"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Użytkownik:</label>
+                    <input type="text" class="form-control" [(ngModel)]="configEmail.user"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Hasło:</label>
+                    <input type="password" class="form-control" [(ngModel)]="configEmail.psw"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Posrt SMPT:</label>
+                    <input type="text" class="form-control" [(ngModel)]="configEmail.smtpPort"/>
+                </div>
+            </div>
+
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <button class="btn blue-gradient" (click)="save()">Zapisz</button>
+                </div>
+            </div>
+
+      </mdb-card-text>
+    </mdb-card-body>
+</mdb-card>
