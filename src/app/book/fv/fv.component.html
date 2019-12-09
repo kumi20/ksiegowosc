@@ -3,11 +3,11 @@
   <mdb-card-body class="card-body">
     <mdb-card-text> 
 
-        <app-search-fv></app-search-fv>
+        <!-- <app-search-fv></app-search-fv> -->
         
         <div class="row">
             <div class="col-md-12">
-                <table class="table">
+                <!-- <table class="table">
                     <thead>
                         <th>#</th>
                         <th>Numer faktury</th>
@@ -30,7 +30,65 @@
                 
                 <div class="d-flex justify-content-center">
                     <pagination-controls (pageChange)="page = pageChanged($event)"  directionLinks="true"  previousLabel="Poprzednia" nextLabel="Następna" autoHide="true" class="pagination"></pagination-controls>
-                </div>
+                </div> -->
+
+
+                <dx-data-grid
+                    #grid
+                    id="gridContainer"
+                    [dataSource]="fv"
+                    keyExpr="id"
+                    [allowColumnReordering]="true"
+                    [allowColumnResizing]="true"
+                    [columnAutoWidth]="true"
+                    [selectedRowKeys]="[]"
+                    (onRowRemoving)="delete($event.key)"
+                    (onOptionChanged)="onClickPager($event)"
+                    >
+                    <dxo-selection mode="single"></dxo-selection>
+                    <dxo-paging [pageSize]="pageSize"></dxo-paging>
+                    <dxo-pager 
+                        [showPageSizeSelector]="true"
+                        [allowedPageSizes]="[5, 10, 20]"
+                        [showInfo]="true"
+                        >
+                    </dxo-pager>
+                    <dxo-editing
+                        mode="row"
+                        [allowUpdating]="false"
+                        [allowDeleting]="true"
+                        [allowAdding]="false"
+                        [useIcons]="true"
+                       >
+                    </dxo-editing>
+                    <dxo-filter-row 
+                        [visible]="true" 
+                        [applyFilter]="true"></dxo-filter-row>
+                    <dxo-search-panel 
+                        [visible]="true" 
+                        [width]="240" 
+                        placeholder="Szukaj..."></dxo-search-panel>
+                    <dxi-column 
+                        dataField="number" 
+                        caption="Numer">
+                        <dxo-header-filter [allowSearch]="true"></dxo-header-filter>
+                    </dxi-column>  
+                    <dxi-column 
+                        dataField= "nazwa" 
+                        caption="Wystawca faktury">
+                        <dxo-header-filter [allowSearch]="true"></dxo-header-filter>
+                    </dxi-column>  
+                    <dxi-column 
+                        dataField="documentDate" 
+                        caption="Data wystawienia">
+                        <dxo-header-filter [allowSearch]="true"></dxo-header-filter>
+                    </dxi-column>   
+                    <dxi-column 
+                        dataField="toPay" 
+                        caption="Kwota brutto">
+                        <dxo-header-filter [allowSearch]="true"></dxo-header-filter>
+                    </dxi-column>     
+                </dx-data-grid>
             </div>
         </div>
         

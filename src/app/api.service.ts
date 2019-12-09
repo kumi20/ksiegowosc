@@ -14,7 +14,7 @@ export class ApiService {
   uriGallery = this.domanie + '/cms/assets/gallery';
 
   sourceImageNews = this.domanie + '/source/';
-    
+
     
    month: Array<any> = [
       {value:'01', label: 'styczeń'},
@@ -137,4 +137,18 @@ export class ApiService {
 
 }
 
+export class Locale {
+  Name: string;
+  Value: string;
+}
 
+let locales: Locale[] = [{
+  "Name": "Polish",
+  "Value": "pl"
+}, {
+  "Name": "Deutsch",
+  "Value": "de"
+}, {
+  "Name": "Русский",
+  "Value": "ru"
+}];

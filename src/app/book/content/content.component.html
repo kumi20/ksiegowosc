@@ -4,7 +4,31 @@
     <mdb-card-text>    
         <div class="row">
             <div class="col-md-6">
-                <div class="gradient-card-header blue-gradient"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
+                <dx-chart
+                    id="chart"
+                    [dataSource]="dataChartttt">
+                    <dxi-series valueField="przychod" name="przychod"></dxi-series>
+                    <dxi-series valueField="rozchod" name="rozchód"></dxi-series>
+                    <dxo-common-series-settings
+                        argumentField="month"
+                        type="bar"
+                        hoverMode="allArgumentPoints"
+                        selectionMode="allArgumentPoints">
+                    </dxo-common-series-settings>
+                    <dxo-legend
+                        verticalAlignment="bottom"
+                        horizontalAlignment="center">
+                    </dxo-legend>
+                    <dxo-tooltip
+                        [enabled]="true"
+                        location="edge"
+                        [customizeTooltip]="customizeTooltip">
+                    </dxo-tooltip>
+                </dx-chart>    
+
+
+
+                <!-- <div class="gradient-card-header blue-gradient"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
 
                         <div style="display: block" *ngIf='chartDatasets.length > 0'>
                             <canvas mdbChart 
@@ -18,11 +42,22 @@
                                 >
                             </canvas>
                         </div>
-                </div>
+                </div> -->
             </div>
             
-            <div class="col-md-6">
-                <p><strong>Rok:</strong><mdb-select class="select" [options]="year" [filterEnabled]="true" placeholder="-- wybierz rok --" [(ngModel)]="actualYear" (selected)="changeYear($event)" #yearList></mdb-select></p>
+            <div class="col-md-6">                    
+                    <p><strong>Rok:</strong>               
+                            <dx-select-box *ngIf="year.length > 0"
+                                [dataSource]="year"
+                                [searchEnabled]="true"
+                                displayExpr="label"
+                                valueExpr="value"
+                                [value]="actualYear"
+                                (onSelectionChanged)="changeYear($event);"
+                                style="display: inline-block;margin-left:10px; width:83%;"
+                            ></dx-select-box>
+                    </p>
+                
                 <p><strong>Przychód:</strong> {{yearStatistic.incomeYear| currency:'PLN '}}</p>
                 <p><strong>Koszt uzyskania przychodu:</strong> {{yearStatistic.expenditureYear| currency:'PLN '}}</p>
                 <p class="revenueYear"><strong>Dochód:</strong> {{yearStatistic.revenueYear| currency:'PLN '}}</p>
@@ -38,14 +73,43 @@
             <mdb-card-header class="card-header">Sprzedaż: nieopłacone faktury</mdb-card-header>
                 <mdb-card-body class="card-body">
                     <mdb-card-text>  
-                        <a class="btn blue-gradient" rounded="true" mdbWavesEffect [routerLink]="[{ outlets: { 'panel-outlet': ['income'] } }]">Nowa faktura</a>
+                        <dx-button
+                            stylingMode="contained"
+                            text="Nowa faktura"
+                            type="default"
+                            [width]="150"
+                            [routerLink]="[{ outlets: { 'panel-outlet': ['income'] } }]"
+                        >
+                        </dx-button>
+                        <!-- <a class="btn blue-gradient" rounded="true" mdbWavesEffect [routerLink]="[{ outlets: { 'panel-outlet': ['income'] } }]">Nowa faktura</a> -->
                         
                         <br><br>
                         <p><strong>Faktury oczekujące na zapłatę:</strong> {{incomeWait| currency: 'PLN '}}</p>
                         <p><strong>Po terminie płatności:</strong> {{incomeAfterDeadLine| currency: 'PLN '}}</p>
-                        
-                        <div class="gradient-card-header blue-gradient"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
 
+                        <dx-chart
+                            id="chartIncome"
+                            [dataSource]="incomeWaitCharttt"                            
+                            (onPointClick)="onPointClick($event)">                            
+                            <dxi-series valueField="przychod" name="Oczekujące na zapłatę"></dxi-series>
+                            <dxo-common-series-settings
+                                argumentField="month"
+                                type="bar"
+                                hoverMode="allArgumentPoints"
+                                selectionMode="allArgumentPoints">
+                            </dxo-common-series-settings>
+                            <dxo-legend
+                                verticalAlignment="bottom"
+                                horizontalAlignment="center">
+                            </dxo-legend>
+                            <dxo-tooltip
+                                [enabled]="true"
+                                location="edge"
+                                [customizeTooltip]="customizeTooltip">
+                            </dxo-tooltip>
+                        </dx-chart>   
+                        
+                        <!-- <div class="gradient-card-header blue-gradient"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
                             <div style="display: block" *ngIf='incomeWaitChart.length > 0'>
                                 <canvas mdbChart 
                                     [chartType]="chartType"
@@ -59,7 +123,7 @@
                                     >
                                 </canvas>
                             </div>
-                        </div>
+                        </div> -->
                     </mdb-card-text>
             </mdb-card-body>
         </mdb-card>
@@ -70,13 +134,43 @@
             <mdb-card-header class="card-header">Zakupy: nieopłacone rachunki</mdb-card-header>
                 <mdb-card-body class="card-body">
                     <mdb-card-text>
-                        <button class="btn blue-gradient" rounded="true" mdbWavesEffect [routerLink]="[{ outlets: { 'panel-outlet': ['expenditure'] } }]">Nowa faktura</button>
+                        <dx-button
+                            stylingMode="contained"
+                            text="Nowa faktura"
+                            type="default"
+                            [width]="150"
+                            [routerLink]="[{ outlets: { 'panel-outlet': ['expenditure'] } }]"
+                        >
+                        </dx-button>
+                        <!-- <button class="btn blue-gradient" rounded="true" mdbWavesEffect [routerLink]="[{ outlets: { 'panel-outlet': ['expenditure'] } }]">Nowa faktura</button> -->
                         
                         <br><br>
                         <p><strong>Faktury do opłacenia:</strong> {{expenditureWait| currency: 'PLN '}}</p>
                         <p><strong>Po terminie płatności:</strong> {{expenditureAfterDeadLine| currency: 'PLN '}}</p>
+
+                        <dx-chart
+                            id="chartExpenditure"
+                            [dataSource]="expenditureWaitCharttt"                            
+                            (onPointClick)="onPointClick($event)">                            
+                            <dxi-series valueField="rozchod" name="Oczekujące na zapłatę"></dxi-series>
+                            <dxo-common-series-settings
+                                argumentField="month"
+                                type="bar"
+                                hoverMode="allArgumentPoints"
+                                selectionMode="allArgumentPoints">
+                            </dxo-common-series-settings>
+                            <dxo-legend
+                                verticalAlignment="bottom"
+                                horizontalAlignment="center">
+                            </dxo-legend>
+                            <dxo-tooltip
+                                [enabled]="true"
+                                location="edge"
+                                [customizeTooltip]="customizeTooltip">
+                            </dxo-tooltip>
+                        </dx-chart>  
                         
-                        <div class="gradient-card-header blue-gradient"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
+                        <!-- <div class="gradient-card-header blue-gradient"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
 
                             <div style="display: block" *ngIf='expenditureWaitChart.length > 0'>
                                 <canvas mdbChart 
@@ -91,9 +185,22 @@
                                     >
                                 </canvas>
                             </div>
-                        </div>
+                        </div> -->
                     </mdb-card-text>
             </mdb-card-body>
         </mdb-card>
     </div>
 </div>
+
+<div class="row margin-top">
+        <div class="col-md-6">
+            <mdb-card class="card margin-top">  
+                <mdb-card-header class="card-header">Przychód rok</mdb-card-header>
+                    <mdb-card-body class="card-body">
+                        <mdb-card-text> 
+                            <app-income-year></app-income-year> 
+                        </mdb-card-text>
+                    </mdb-card-body>
+                </mdb-card>
+        </div>
+    </div>

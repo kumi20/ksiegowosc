@@ -37,7 +37,16 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <button class="btn blue-gradient" rounded="true" mdbWavesEffect>Zapisz</button>
+                    <dx-button
+                        icon="check"
+                        stylingMode="contained"
+                        text="Zapisz"
+                        type="default"
+                        [width]="150"
+                        (onClick)="onSubmited(indywidualZus)"
+                    >
+                    </dx-button>
+                    <!-- <button class="btn blue-gradient" rounded="true" mdbWavesEffect>Zapisz</button> -->
                 </div>    
             </div>
           </form>

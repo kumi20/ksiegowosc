@@ -3,19 +3,38 @@
   <mdb-card-body class="card-body">
     <mdb-card-text>  
         
-        <div class="row">
+         <div class="row">
             <div class="col-md-6 col-6 col-sm-6">
-                <button class="btn blue-gradient" [routerLink]="['/panel/',{outlets: { 'panel-outlet': ['add-company','0'] } }]">Dodaj dostawce</button>
+                <dx-button
+                    stylingMode="contained"
+                    text="Dodaj dostawce"
+                    type="default"
+                    [width]="150"
+                    [routerLink]="['/panel/',{outlets: { 'panel-outlet': ['add-company','0'] } }]"
+                >
+                </dx-button>
+                <!-- <button class="btn blue-gradient" [routerLink]="['/panel/',{outlets: { 'panel-outlet': ['add-company','0'] } }]">Dodaj dostawce</button> -->
             </div>
             <div class="col-md-6 col-6 col-sm-6">
-                <button class="btn blue-gradient" style="position: relative; float: right;" [routerLink]="['/panel/',{outlets: { 'panel-outlet': ['add-company','1'] } }]">Dodaj odbiorce</button>
+                <dx-button
+                    stylingMode="contained"
+                    text="Dodaj odbiorce"
+                    type="default"
+                    [width]="150"
+                    [routerLink]="['/panel/',{outlets: { 'panel-outlet': ['add-company','1'] } }]"
+                    style="position: relative; float: right;"
+                >
+                </dx-button>
+                <!-- <button class="btn blue-gradient" style="position: relative; float: right;" >Dodaj odbiorce</button> -->
             </div>
         </div>
         
-        <br><br>
-        <app-search></app-search>
+        <br>
+
+       <!-- <br><br>
+        <app-search></app-search> -->
         
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-md-12">
                 <table class="table">
                     <thead>
@@ -41,6 +60,79 @@
                 <div class="d-flex justify-content-center">
                     <pagination-controls (pageChange)="page = pageChanged($event)"  directionLinks="true"  previousLabel="Poprzednia" nextLabel="Następna" autoHide="true" class="pagination"></pagination-controls>
                 </div>
+            </div>
+        </div> -->
+
+        <div class="row">
+            <div class="col-md-12 col-12">
+                <dx-data-grid
+                    #grid
+                    id="gridContainer"
+                    [dataSource]="company"
+                    keyExpr="id"
+                    [allowColumnReordering]="true"
+                    [allowColumnResizing]="true"
+                    [columnAutoWidth]="true"
+                    [selectedRowKeys]="[]"
+                    (onSelectionChanged)="selectionChangedHandler($event.selectedRowKeys)"
+                    (onRowRemoving)="delete($event.key)"
+                    (onRowUpdating)="update($event.key)"
+                    (onOptionChanged)="onClickPager($event)"
+                    >
+                    <dxo-selection mode="single"></dxo-selection>
+                    <dxo-paging [pageSize]="pageSize"></dxo-paging>
+                    <dxo-pager 
+                        [showPageSizeSelector]="true"
+                        [allowedPageSizes]="[5, 10, 20]"
+                        [showInfo]="true">
+                    </dxo-pager>
+                    
+                    <dxo-editing
+                        mode="row"
+                        [allowUpdating]="true"
+                        [allowDeleting]="true"
+                        [allowAdding]="false"
+                        [useIcons]="true"
+                       >
+                    </dxo-editing>
+                    <dxo-filter-row 
+                        [visible]="true" 
+                        [applyFilter]="true"></dxo-filter-row>
+                    <dxo-search-panel 
+                        [visible]="true" 
+                        [width]="240" 
+                        placeholder="Szukaj..."></dxo-search-panel>
+                    <dxi-column 
+                        dataField="name" 
+                        caption="Nazwa">
+                        <dxo-header-filter [allowSearch]="true"></dxo-header-filter>
+                    </dxi-column>
+                    <dxi-column 
+                        dataField="street" 
+                        caption="Ulica">
+                        <dxo-header-filter [allowSearch]="true"></dxo-header-filter>
+                    </dxi-column>
+                    <dxi-column 
+                        dataField="home_number" 
+                        caption="Nr domu">
+                        <dxo-header-filter [allowSearch]="true"></dxo-header-filter>
+                    </dxi-column>
+                    <dxi-column 
+                        dataField="local_number" 
+                        caption="Nr lokalu">
+                        <dxo-header-filter [allowSearch]="true"></dxo-header-filter>
+                    </dxi-column>
+                    <dxi-column 
+                        dataField="city" 
+                        caption="Miejscowość">
+                        <dxo-header-filter [allowSearch]="true"></dxo-header-filter>
+                    </dxi-column>
+                    <dxi-column 
+                        dataField="nip" 
+                        caption="Nip">
+                        <dxo-header-filter [allowSearch]="true"></dxo-header-filter>
+                    </dxi-column>
+                </dx-data-grid>
             </div>
         </div>
     </mdb-card-text>

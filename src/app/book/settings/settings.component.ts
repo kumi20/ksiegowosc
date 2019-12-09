@@ -52,7 +52,7 @@ export class SettingsComponent implements OnInit {
               res.forEach(el=>{
                 this.year.push({value: el.year, label:el.year})
             });
-            this.yearList.updateOptionsList();
+
           }
       )
       .then(

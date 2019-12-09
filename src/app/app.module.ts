@@ -78,6 +78,14 @@ import { SearchComponent } from './book/company/search/search.component';
 import { SearchFvComponent } from './book/fv/search-fv/search-fv.component';
 import { ConfigMaileComponent } from './book/settings/config-maile/config-maile.component';
 
+import { DxButtonModule, DxSelectBoxModule, DxDataGridModule, DxTextBoxModule, DxDateBoxModule, DxNumberBoxModule, DxChartModule} from 'devextreme-angular';
+
+import { Locale } from './api.service';
+
+import { locale, loadMessages, formatMessage } from 'devextreme/localization';
+import 'devextreme-intl';
+import { IncomeYearComponent } from './book/content/income-year/income-year.component';
+
 // Configs 
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig(
@@ -135,11 +143,19 @@ export function getAuthServiceConfigs() {
         SearchComponent,
         SearchFvComponent,
         ConfigMaileComponent,
+        IncomeYearComponent,
 	],
 	imports: [
 		BrowserModule,
         HttpClientModule,
         FileUploadModule,
+        DxButtonModule,
+        DxDataGridModule,
+        DxDateBoxModule,
+        DxSelectBoxModule,
+        DxTextBoxModule,
+        DxNumberBoxModule,
+        DxChartModule,
         FormsModule,
         HttpModule,
         routerModule,

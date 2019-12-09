@@ -7,22 +7,40 @@
                 <div class="col-lg-12">
                     <label>Wybierz rok i miesiąc</label>
                     <div class="row">
-                        <div class="col-md-3">
-                            <div class="md-form">
-                                <mdb-select class="select" [options]="year" [filterEnabled]="true" placeholder="-- wybierz rok --" [(ngModel)]="actualYear" #yearSelected></mdb-select>
-                                <label class="active">Rok:</label>
+                            <div class="col-md-3">
+                                    <label class="active">Rok:</label>
+                                    <dx-select-box *ngIf="year.length > 0"
+                                        [dataSource]="year"
+                                        [searchEnabled]="true"
+                                        displayExpr="label"
+                                        valueExpr="value"
+                                        [value]="actualYear"
+                                        [(ngModel)]="actualYear"
+                                    ></dx-select-box>    
                             </div>
-                        </div>
+                            <div class="col-md-3">
+                                    <label class="active">Miesiąc:</label>
+                                    <dx-select-box *ngIf="month.length > 0"
+                                        [dataSource]="month"
+                                        [searchEnabled]="true"
+                                        displayExpr="label"
+                                        valueExpr="value"
+                                        [value]="actualMonth"
+                                        [(ngModel)]="actualMonth"
+                                    ></dx-select-box>    
+                
+                            </div>
 
                         <div class="col-md-3">
-
-                            <div class="md-form">
-                                <mdb-select class="select" [options]="month" [filterEnabled]="true" placeholder="-- wybierz miesiąc --" [(ngModel)]="actualMonth" #monthSelected ></mdb-select>
-                                <label class="active">Miesiąc:</label>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <button class="btn blue-gradient" (click)="countTax()">Oblicz</button>
+                            <dx-button
+                                stylingMode="contained"
+                                text="Oblicz"
+                                type="default"
+                                [width]="150"
+                                (onClick)="countTax()"
+                            >
+                            </dx-button>
+                            <!-- <button class="btn blue-gradient" (click)="countTax()">Oblicz</button> -->
                         </div>
                     </div>
                 </div>              
@@ -76,7 +94,16 @@
             <br>
             <div class="row">
                 <div class="col-md-12">
-                    <button class="btn blue-gradient" (click)="save()">Zapisz</button>
+                    <dx-button
+                        icon="check"
+                        stylingMode="contained"
+                        text="Zapisz"
+                        type="default"
+                        [width]="150"
+                        (onClick)="save()"
+                    >
+                    </dx-button>
+                    <!-- <button class="btn blue-gradient" (click)="save()">Zapisz</button> -->
                 </div>
             </div>
         </mdb-card-text>

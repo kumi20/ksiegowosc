@@ -5,50 +5,88 @@
         
         <div class="row">
            <div class="col-md-3">
-               
-                <div class="md-form">
-                    <mdb-select class="select" [options]="year" [filterEnabled]="true" placeholder="-- wybierz rok --" [(ngModel)]="actualYear" #yearSelected (selected)="showInternalEvidence()"></mdb-select>
                     <label class="active">Rok:</label>
-                </div>
+                    <dx-select-box *ngIf="year.length > 0"
+                        [dataSource]="year"
+                        [searchEnabled]="true"
+                        displayExpr="label"
+                        valueExpr="value"
+                        [value]="actualYear"
+                        [(ngModel)]="actualYear"
+                        (onSelectionChanged)="showInternalEvidence();"
+                    ></dx-select-box>    
             </div>
             <div class="col-md-3">
-  
-                <div class="md-form">
-                    <mdb-select class="select" [options]="month" [filterEnabled]="true" placeholder="-- wybierz miesiąc --" [(ngModel)]="actualMonth" #monthSelected (selected)="showInternalEvidence()"></mdb-select>
                     <label class="active">Miesiąc:</label>
-                </div>
+                    <dx-select-box *ngIf="month.length > 0"
+                        [dataSource]="month"
+                        [searchEnabled]="true"
+                        displayExpr="label"
+                        valueExpr="value"
+                        [value]="actualMonth"
+                        [(ngModel)]="actualMonth"
+                        (onSelectionChanged)="showInternalEvidence();"
+                    ></dx-select-box>    
+
             </div>
             <div class="col-md-6">
-                <button class="btn blue-gradient" style="position:relatice; float:right;" [routerLink]="['/panel/',{outlets: { 'panel-outlet': ['internal-evidence-add'] } }]">Dodaj dowód</button>
+                <dx-button
+                    stylingMode="contained"
+                    text="Dodaj dowód"
+                    type="default"
+                    [width]="150"
+                    [routerLink]="['/panel/',{outlets: { 'panel-outlet': ['internal-evidence-add'] } }]"
+                    style="position:relatice; float:right;"
+                >
+                </dx-button>
+                <!-- <button class="btn blue-gradient" style="position:relatice; float:right;" [routerLink]="['/panel/',{outlets: { 'panel-outlet': ['internal-evidence-add'] } }]">Dodaj dowód</button> -->
             </div>
        </div>
 
         <br><br>
         
         <div class="row">
-            <div class="col-md-12">
-                <table class="table" responsive="true">
-                  <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th >data dokumentu</th>
-                        <th>nr dokumentu.</th>
-                        <th>opis</th>
-                        <th>kwota</th>
-                        <th></th>
-                    </tr>
-                  </thead>
-                    <tbody>
-                        <tr *ngFor="let evidence of internalEvidence; let i = index" [routerLink]="['/panel/', { outlets: { 'panel-outlet': ['internal-evidence-add', evidence.id]}}]">
-                            <td>{{i+1}}</td>
-                            <td>{{evidence.data}}</td>
-                            <td>{{evidence.number}}</td>
-                            <td>{{evidence.description}}</td>
-                            <td>{{evidence.sum}}</td>
-                            <td><i class="fa fa-trash-o" style="cursor: pointer" (click)="delete(evidence.id)"></i></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="col-lg-12">
+
+                <dx-data-grid
+                    #grid
+                    id="gridContainer"
+                    [dataSource]="internalEvidence"
+                    keyExpr="id"
+                    [sorting] = "false"
+                    [allowColumnReordering]="false"
+                    [allowColumnResizing]="true"
+                    [columnAutoWidth]="true"
+                    [selectedRowKeys]="[]"
+                    (onSelectionChanged)="onSelectionChanged($event.selectedRowKeys)"
+                    (onRowRemoving)="delete($event.key)"
+                    >
+                    <dxo-selection mode="single"></dxo-selection>
+                    <dxo-editing
+                        mode="row"
+                        [allowUpdating]="false"
+                        [allowDeleting]="true"
+                        [allowAdding]="false"
+                        [useIcons]="true"
+                       >
+                    </dxo-editing>
+                    <dxi-column 
+                        dataField="data" 
+                        caption="data dokumentu">
+                    </dxi-column> 
+                    <dxi-column 
+                        dataField="number" 
+                        caption="nr dokumentu.">
+                    </dxi-column>  
+                    <dxi-column 
+                        dataField="description" 
+                        caption="opis">
+                    </dxi-column> 
+                    <dxi-column 
+                        dataField="sum" 
+                        caption="kwota">
+                    </dxi-column> 
+                </dx-data-grid>
             </div>
         </div>
       </mdb-card-text>

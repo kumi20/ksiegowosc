@@ -4,19 +4,32 @@
     <mdb-card-text> 
         
         <div class="row">
-            <div class="col-md-3">
-                <div class="md-form">
-                    <mdb-select class="select" [options]="year" [filterEnabled]="true" placeholder="-- wybierz rok --" [(ngModel)]="actualYear" #yearSelected (selected)="counfTax()"></mdb-select>
-                    <label class="active">Rok:</label>
+                <div class="col-md-3">
+                        <label class="active">Rok:</label>
+                        <dx-select-box *ngIf="year.length > 0"
+                            [dataSource]="year"
+                            [searchEnabled]="true"
+                            displayExpr="label"
+                            valueExpr="value"
+                            [value]="actualYear"
+                            [(ngModel)]="actualYear"
+                            (onSelectionChanged)="counfTax();"                            
+                        ></dx-select-box>    
                 </div>
-            </div>
-            <div class="col-md-3">
-  
-                <div class="md-form">
-                    <mdb-select class="select" [options]="month" [filterEnabled]="true" placeholder="-- wybierz miesiąc --" [(ngModel)]="actualMonth" #monthSelected (selected)="counfTax()"></mdb-select>
-                    <label class="active">Miesiąc:</label>
+                <div class="col-md-3">
+                        <label class="active">Miesiąc:</label>
+                        <dx-select-box *ngIf="month.length > 0"
+                            [dataSource]="month"
+                            [searchEnabled]="true"
+                            displayExpr="label"
+                            valueExpr="value"
+                            [value]="actualMonth"
+                            [(ngModel)]="actualMonth"
+                            (onSelectionChanged)="counfTax();"
+                        ></dx-select-box>    
+    
                 </div>
-            </div>
+
         </div>  
         
         <br><br>
@@ -331,7 +344,16 @@
         
         <div class="row">
             <div class="col-md-12">
-                <button class="btn blue-gradient" rounded="true" mdbWavesEffect (click)="save()">Zapisz</button>
+                <dx-button
+                    icon="check"
+                    stylingMode="contained"
+                    text="Zapisz"
+                    type="default"
+                    [width]="150"
+                    (onClick)="save()"
+                >
+                </dx-button>
+                <!-- <button class="btn blue-gradient" rounded="true" mdbWavesEffect (click)="save()">Zapisz</button> -->
             </div>    
         </div>
         

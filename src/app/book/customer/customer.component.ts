@@ -26,6 +26,10 @@ export class CustomerComponent implements OnInit {
             resolve(this.customerList);
         })
     })
-}    
+}  
+
+onSelectionChange(id){
+  this._route.navigate(['/panel/', { outlets: { 'panel-outlet': ['customer',id[0]]}}]);
+}
 
 }

@@ -28,9 +28,19 @@ export class ContentComponent implements OnInit {
   
   incomeWaitChart:Array<any> = [];   
   expenditureWaitChart: Array<any> = [];
+
+  dataChartttt = [];
+  incomeWaitCharttt = [];
+  expenditureWaitCharttt = [];
     
     
-  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) {}
+  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) { }
+
+  customizeTooltip(arg: any) {
+    return {        
+        text: arg.seriesName + ': ' + arg.value + 'zł'
+    };
+  }
 
   ngOnInit() {
       this.actualYear = String(new Date().getFullYear());
@@ -40,7 +50,7 @@ export class ContentComponent implements OnInit {
             response.forEach(el=>{
                 this.year.push({value: el.year, label:el.year})
             });
-            this.yearList.updateOptionsList();
+            //this.yearList.updateOptionsList();
             this.actualYear = String(new Date().getFullYear());
         }
       )
@@ -207,6 +217,28 @@ export class ContentComponent implements OnInit {
                                     {data: this.incomeYear, label: 'Przychód'},
                                     {data: this.expenditureYear, label: 'koszt uzyskania przychodu'}
                                 ];
+
+                                this.dataChartttt.length = 0;
+                                for(let i = 0; i < 12; i ++){
+                                    let month = '';
+                                    if(i===0) month = 'styczen';
+                                    if(i===1) month = 'luty';
+                                    if(i===2) month = 'marzec';
+                                    if(i===3) month = 'kwiecień';
+                                    if(i===4) month = 'maj';
+                                    if(i===5) month = 'czerwiec';
+                                    if(i===6) month = 'lipiec';
+                                    if(i===7) month = 'sierpień';
+                                    if(i===8) month = 'wrzesień';
+                                    if(i===9) month = 'październik';
+                                    if(i===10) month = 'listopad';
+                                    if(i===11) month = 'grudzień';
+    
+                                    this.dataChartttt.push({month: month, przychod: this.chartDatasets[0].data[i], rozchod: 0});
+                                }
+                                for(let i = 0; i < 12; i ++){    
+                                    this.dataChartttt[i].rozchod = this.chartDatasets[1].data[i];
+                                }
                             }
                         )
                    }
@@ -218,6 +250,7 @@ export class ContentComponent implements OnInit {
     
     
     changeYear(year){
+        this.actualYear = year.selectedItem.value;
         this.getYearStatistic();
         this.getMonthStatistic();
         this.unpaidInvoicesGet();
@@ -292,6 +325,27 @@ export class ContentComponent implements OnInit {
                             
                     }
                 })
+
+                this.incomeWaitCharttt.length = 0;
+                this.expenditureWaitCharttt.length = 0;
+                
+                for(let i = 0; i < 12; i ++){
+                    let month = '';
+                    if(i===0) month = 'styczen';
+                    if(i===1) month = 'luty';
+                    if(i===2) month = 'marzec';
+                    if(i===3) month = 'kwiecień';
+                    if(i===4) month = 'maj';
+                    if(i===5) month = 'czerwiec';
+                    if(i===6) month = 'lipiec';
+                    if(i===7) month = 'sierpień';
+                    if(i===8) month = 'wrzesień';
+                    if(i===9) month = 'październik';
+                    if(i===10) month = 'listopad';
+                    if(i===11) month = 'grudzień';
+                    this.incomeWaitCharttt.push({month: month, przychod: this.incomeWaitChart[i]});
+                    this.expenditureWaitCharttt.push({month: month, rozchod: this.expenditureWaitChart[i]});
+                }
                 this.incomeWaitChart = [{data: this.incomeWaitChart, label: 'Oczekujące na zapłatę'}];
                 this.expenditureWaitChart = [{data: this.expenditureWaitChart, label: 'Oczekujące na zapłatę'}];
             }
@@ -302,5 +356,28 @@ export class ContentComponent implements OnInit {
         if(event.active.length !=0){ 
             this._route.navigate(['/panel/',{ outlets: { 'panel-outlet': ['not-paid', event.active[0]._index] } }]);
         }
+    }
+
+    test(event){
+        console.log(event.selectedItem.value)
+    }
+
+    onPointClick(event){
+        let month = 0;
+        switch(event.target.initialArgument){
+            case 'styczeń': month = 0; break;
+            case 'luty': month = 1; break;
+            case 'marzec': month = 2; break;
+            case 'kwiecień': month = 3; break;
+            case 'maj': month = 4; break;
+            case 'czerwiec': month = 5; break;
+            case 'lipiec': month = 6; break;
+            case 'sierpień': month = 7; break;
+            case 'wrzesień': month = 8; break;
+            case 'październik': month = 9; break;
+            case 'listopad': month = 10; break;
+            case 'grudzień': month = 11; break;
+        }
+        this._route.navigate(['/panel/',{ outlets: { 'panel-outlet': ['not-paid', month] } }]);
     }
 }

@@ -13,12 +13,13 @@ export class FixedAssetsComponent implements OnInit {
   constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) {}
 
   fixedAssets = [];   
-  page;    
+  page;
+  pageSize = 10;
     
   ngOnInit() {
-      this.getList().then(
-        response=>{console.log(this.fixedAssets)}
-      )
+      this.getList();
+      if(localStorage.getItem('countFixedPage')) this.pageSize = Number(localStorage.getItem('countFixedPage'));
+
   }
 
     
@@ -36,5 +37,13 @@ export class FixedAssetsComponent implements OnInit {
   pageChanged(page){
       //this._route.navigate(['/content-24',page]);
       return page;
+  }
+
+  onClickPager(event){
+    if(event.name === 'paging') localStorage.setItem('countFixedPage', event.value);
+  }
+
+  onSelectionChange(id){
+    this._route.navigate(['/panel/', { outlets: { 'panel-outlet': ['add-fixxed-assets',id[0]]}}]);
   }
 }

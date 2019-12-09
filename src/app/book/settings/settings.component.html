@@ -19,10 +19,25 @@
                                 <label for="smallZus"></label>
                             </td>
                             <td>
-                                <mdb-select class="select" mdbActive [options]="month" placeholder="-- wybierz --" class="form-control" style="height:40px!important" [disabled]="!settings.smallZus" [(ngModel)]="settings.monthSmallZus"></mdb-select>
+                                    <dx-select-box *ngIf="month.length > 0"
+                                            [dataSource]="month"
+                                            [searchEnabled]="true"
+                                            displayExpr="label"
+                                            valueExpr="value"
+                                            [disabled]="!settings.smallZus" 
+                                            [(ngModel)]="settings.monthSmallZus"
+                                    ></dx-select-box> 
+            
                             </td>
                             <td>
-                                <mdb-select class="select" mdbActive [options]="year" placeholder="-- wybierz --" class="form-control" style="height:40px!important" #yearList [disabled]="!settings.smallZus" [(ngModel)]="settings.yearSmallZus"></mdb-select>
+                                    <dx-select-box *ngIf="year.length > 0"
+                                            [dataSource]="year"
+                                            [searchEnabled]="true"
+                                            displayExpr="label"
+                                            valueExpr="value"
+                                            [disabled]="!settings.smallZus" 
+                                            [(ngModel)]="settings.yearSmallZus"
+                                    ></dx-select-box>                         
                             </td>
                         </tr>
                         <tr>
@@ -78,10 +93,25 @@
                     <tbody>
                         <tr>
                             <td>
-                                <mdb-select class="select" mdbActive [options]="vat" placeholder="-- wybierz --" class="form-control" style="height:40px!important" [(ngModel)]="settings.vatDeclaration"></mdb-select>
+                                    <dx-select-box *ngIf="vat.length > 0"
+                                            [dataSource]="vat"
+                                            [searchEnabled]="true"
+                                            displayExpr="label"
+                                            valueExpr="value"
+                                            [(ngModel)]="settings.vatDeclaration"
+                                    ></dx-select-box>  
+                        
                             </td>
                             <td>
-                                <mdb-select class="select" mdbActive [options]="periodVat" placeholder="-- wybierz --" class="form-control" style="height:40px!important" [(ngModel)]="settings.periodVat" [disabled]="settings.vatDeclaration===0"></mdb-select>
+                                    <dx-select-box *ngIf="periodVat.length > 0"
+                                            [dataSource]="periodVat"
+                                            [searchEnabled]="true"
+                                            displayExpr="label"
+                                            valueExpr="value"        
+                                            [(ngModel)]="settings.periodVat"
+                                            [disabled]="settings.vatDeclaration===0"
+                                    ></dx-select-box> 
+                              
                             </td>
                         </tr>
                     </tbody>
@@ -129,7 +159,16 @@
 <br>
 <div class="row">
     <div class="col-md-12">
-        <button class="btn blue-gradient" rounded="true" mdbWavesEffect (click)="save()">Zapisz</button>
+        <dx-button
+            icon="check"
+            stylingMode="contained"
+            text="Zapisz"
+            type="default"
+            [width]="150"
+            (onClick)="save()"
+        >
+        </dx-button>
+        <!-- <button class="btn blue-gradient" rounded="true" mdbWavesEffect (click)="save()">Zapisz</button> -->
     </div>    
 </div>
 

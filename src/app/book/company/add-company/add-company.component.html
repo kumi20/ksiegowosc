@@ -57,7 +57,16 @@
 
         <div class="row">
             <div class="col-md-12">
-                <button (click)="save()" class="btn o-button--primary">zapisz</button>
+                <dx-button
+                    icon="check"
+                    stylingMode="contained"
+                    text="Zapisz"
+                    type="default"
+                    [width]="150"
+                    (onClick)="save()"
+                >
+                </dx-button>
+                <!-- <button (click)="save()" class="btn o-button--primary">zapisz</button> -->
             </div>
         </div>
         

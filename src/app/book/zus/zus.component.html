@@ -5,43 +5,80 @@
 
         <div class="row">
             <div class="col-md-3">
-                <div class="md-form">
-                    <mdb-select class="select" [options]="year" [filterEnabled]="true" placeholder="-- wybierz rok --" [(ngModel)]="actualYear" #yearSelected (selected)="showZus()"></mdb-select>
                     <label class="active">Rok:</label>
-                </div>
+                    <dx-select-box *ngIf="year.length > 0"
+                            [dataSource]="year"
+                            [searchEnabled]="true"
+                            displayExpr="label"
+                            valueExpr="value"
+                            [value]="actualYear"
+                            [(ngModel)]="actualYear"
+                            (onSelectionChanged)="showZus();"
+                    ></dx-select-box> 
             </div>
             <div class="col-md-9">
-                <button class="btn blue-gradient" style="position:relatice; float:right;" [routerLink]="['/panel/',{outlets: { 'panel-outlet': ['add-zus'] } }]">Dodaj składke</button>
+                <dx-button
+                    stylingMode="contained"
+                    text="Dodaj składke"
+                    type="default"
+                    [width]="150"
+                    style="position:relatice; float:right;" 
+                    [routerLink]="['/panel/',{outlets: { 'panel-outlet': ['add-zus'] } }]"
+                >
+                </dx-button>
+                <!-- <button class="btn blue-gradient" style="position:relatice; float:right;" [routerLink]="['/panel/',{outlets: { 'panel-outlet': ['add-zus'] } }]">Dodaj składke</button> -->
             </div>
         </div>    
         
         <br><br>
         <div class="row">
-            <div class="col-md-12">
-                <table class="table">
-                    <thead>
-                        <th>#</th>
-                        <th>Rok</th>
-                        <th>Miesiąc</th>
-                        <th>Termin płatności</th>
-                        <th>Składka społeczna</th>
-                        <th>Składka zdrowotna</th>
-                        <th>Składka na fundusz pracy</th>
-                        <th></th>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let month of zus; let i = index">
-                            <td>{{ i + 1 }}</td>
-                            <td>{{month.rok}}</td>
-                            <td>{{month.miesiac}}</td>
-                            <td>{{month.termin_platnosci}}</td>
-                            <td>{{month.skladka_spoleczne}} zł</td>
-                            <td>{{month.skladka_zdrowotne}} zł</td>
-                            <td>{{month.skladka_fundusz_pracy}} zł</td>
-                            <td><i class="fa fa-trash-o" style="cursor: pointer" (click)="delete(month.id)"></i></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="col-lg-12">
+                    <dx-data-grid
+                    #grid
+                    id="gridContainer"
+                    [dataSource]="zus"
+                    keyExpr="id"
+                    [sorting] = "false"
+                    [allowColumnReordering]="false"
+                    [allowColumnResizing]="true"
+                    [columnAutoWidth]="true"
+                    [selectedRowKeys]="[]"
+                    (onRowRemoving)="delete($event.key)"
+                    >
+                    <dxo-selection mode="single"></dxo-selection>
+                    <dxo-editing
+                        mode="row"
+                        [allowUpdating]="false"
+                        [allowDeleting]="true"
+                        [allowAdding]="false"
+                        [useIcons]="true"
+                       >
+                    </dxo-editing>
+                    <dxi-column 
+                        dataField="rok" 
+                        caption="Rok">
+                    </dxi-column> 
+                    <dxi-column 
+                        dataField="miesiac" 
+                        caption="Miesiąc">
+                    </dxi-column> 
+                    <dxi-column 
+                        dataField="termin_platnosci" 
+                        caption="Termin płatności">
+                    </dxi-column>
+                    <dxi-column 
+                        dataField="skladka_spoleczne" 
+                        caption="Składka społeczna">
+                    </dxi-column> 
+                    <dxi-column 
+                        dataField="skladka_zdrowotne" 
+                        caption="Składka zdrowotna">
+                    </dxi-column>   
+                    <dxi-column 
+                        dataField="skladka_fundusz_pracy" 
+                        caption="Składka na fundusz prac">
+                    </dxi-column> 
+                </dx-data-grid>
             </div>
         </div>
         

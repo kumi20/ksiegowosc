@@ -5,42 +5,80 @@
 
         <div class="row">
             <div class="col-md-3">
-                <div class="md-form">
-                    <mdb-select class="select" [options]="year" [filterEnabled]="true" placeholder="-- wybierz rok --" [(ngModel)]="actualYear" #yearSelected (selected)="getTax()"></mdb-select>
                     <label class="active">Rok:</label>
-                </div>
+                    <dx-select-box *ngIf="year.length > 0"
+                        [dataSource]="year"
+                        [searchEnabled]="true"
+                        displayExpr="label"
+                        valueExpr="value"
+                        [value]="actualYear"
+                        [(ngModel)]="actualYear"
+                        (onSelectionChanged)="getTax();"
+                    ></dx-select-box>    
             </div>
             <div class="col-md-9">
-                <button class="btn blue-gradient" style="position:relatice; float:right;" [routerLink]="['/panel/',{outlets: { 'panel-outlet': ['count-tax'] } }]">Oblicz podatek</button>
+                <dx-button
+                    stylingMode="contained"
+                    text="Oblicz podatek"
+                    type="default"
+                    [width]="150"
+                    style="position:relatice; float:right;" 
+                    [routerLink]="['/panel/',{outlets: { 'panel-outlet': ['count-tax'] } }]"
+                >
+                </dx-button>
+                <!-- <button class="btn blue-gradient" style="position:relatice; float:right;" [routerLink]="['/panel/',{outlets: { 'panel-outlet': ['count-tax'] } }]">Oblicz podatek</button> -->
             </div>
         </div>  
         
         <br><br>
         <div class="row">
-            <div class="col-md-12">
-                <table class="table">
-                    <thead>
-                        <th>#</th>
-                        <th>Rok</th>
-                        <th>Miesiąc</th>
-                        <th>Przychód</th>
-                        <th>Koszt uzyskania przychodu</th>
-                        <th>Dochód</th>
-                        <th>Kwota zaliczki</th>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let tax of tax; let i = index">
-                            <td>{{i + 1}}</td>
-                            <td>{{tax.rok}}</td>
-                            <td>{{tax.miesiac}}</td>
-                            <td>{{tax.suma_przychodow| currency:'PLN '}}</td>
-                            <td>{{tax.suma_kosztow| currency:'PLN '}}</td>
-                            <td>{{tax.suma_przychodow - tax.suma_kosztow| currency:'PLN '}}</td>
-                            <td>{{tax.kwota_zaliczki| currency:'PLN '}}</td>
-                            <td><i class="fa fa-trash-o" style="cursor: pointer" (click)="delete(tax.id)"></i></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="col-lg-12">
+                <dx-data-grid
+                    #grid
+                    id="gridContainer"
+                    [dataSource]="tax"
+                    keyExpr="id"
+                    [sorting] = "false"
+                    [allowColumnReordering]="false"
+                    [allowColumnResizing]="true"
+                    [columnAutoWidth]="true"
+                    [selectedRowKeys]="[]"
+                    (onRowRemoving)="delete($event.key)"
+                    >
+                    <dxo-selection mode="single"></dxo-selection>
+                    <dxo-editing
+                        mode="row"
+                        [allowUpdating]="false"
+                        [allowDeleting]="true"
+                        [allowAdding]="false"
+                        [useIcons]="true"
+                       >
+                    </dxo-editing>
+                    <dxi-column 
+                        dataField="rok" 
+                        caption="Rok">
+                    </dxi-column> 
+                    <dxi-column 
+                        dataField="miesiac" 
+                        caption="Miesiąc">
+                    </dxi-column> 
+                    <dxi-column 
+                        dataField="suma_przychodow" 
+                        caption="Przychód">
+                    </dxi-column> 
+                    <dxi-column 
+                        dataField="suma_kosztow" 
+                        caption="Koszt uzyskania przychodu">
+                    </dxi-column> 
+                    <dxi-column 
+                        dataField="dochod" 
+                        caption="Dochód">
+                    </dxi-column> 
+                    <dxi-column 
+                        dataField="kwota_zaliczki" 
+                        caption="Kwota zaliczki">
+                    </dxi-column> 
+                </dx-data-grid>
             </div>
         </div>
         

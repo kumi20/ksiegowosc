@@ -7,12 +7,18 @@
     <mdb-card-body class="card-body">
         <mdb-card-text>
             <div class="row">
-                <div class="col-xl-12">
-                    <div class="md-form">
-                         <mdb-select class="select" [options]="year" [filterEnabled]="true" placeholder="-- wybierz rok --" [(ngModel)]="actualYear" (selected)="onGetCustomerFV()" #selectedYear></mdb-select>
-                         <label class="active">Rok:</label>
-                     </div>
-                </div>
+                    <div class="col-md-3">
+                            <label class="active">Rok:</label>
+                            <dx-select-box *ngIf="year.length > 0"
+                                [dataSource]="year"
+                                [searchEnabled]="true"
+                                displayExpr="label"
+                                valueExpr="value"
+                                [value]="actualYear"
+                                [(ngModel)]="actualYear"
+                                (onSelectionChanged)="onGetCustomerFV();"
+                            ></dx-select-box>    
+                    </div>
             </div>
             
             <div class="row">

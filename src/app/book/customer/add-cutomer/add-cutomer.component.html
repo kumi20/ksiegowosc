@@ -80,7 +80,16 @@
   
                 <div class="row">
                     <div class="col-md-12">
-                        <button type="submit" class="btn blue-gradient">Zapisz</button>
+                        <dx-button
+                            icon="check"
+                            stylingMode="contained"
+                            text="Zapisz"
+                            type="default"
+                            [width]="150"
+                            (onClick)="onSubmitCustomer(customerForm)"
+                        >
+                        </dx-button>
+                        <!-- <button type="submit" class="btn blue-gradient">Zapisz</button> -->
                     </div>
                 </div>
           </form>

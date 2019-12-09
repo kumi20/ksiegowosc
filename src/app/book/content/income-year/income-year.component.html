@@ -1,0 +1,28 @@
+<dx-chart
+    id="chartYear"
+    [dataSource]="dataChart">
+    
+    <dxi-series valueField="przychod" name="przychod"></dxi-series>   
+    <dxi-series valueField="rozchod" name="rozchod"></dxi-series>
+    <dxo-zoom-and-pan
+        argumentAxis="both"
+    ></dxo-zoom-and-pan>
+    <dxo-argument-axis [visualRange]="{startValue:2016, endValue:2100}">
+    </dxo-argument-axis>
+    <dxo-common-series-settings
+        argumentField="rok"
+        type="bar"
+        hoverMode="allArgumentPoints"
+        selectionMode="allArgumentPoints">
+    </dxo-common-series-settings>
+    <dxo-scroll-bar [visible]="true"></dxo-scroll-bar>
+    <dxo-legend
+        verticalAlignment="bottom"
+        horizontalAlignment="center">
+    </dxo-legend>
+    <dxo-tooltip
+        [enabled]="true"
+        location="edge"
+        [customizeTooltip]="customizeTooltip">
+    </dxo-tooltip>
+</dx-chart> 

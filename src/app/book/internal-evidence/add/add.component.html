@@ -38,15 +38,29 @@
         <div class="row">
             <div class="col-sm-12">
                 <label>Dostawca:</label>
-                <mdb-select class="select form-control" [options]="contractor" [filterEnabled]="true" placeholder="-- wybierz dostawcę --" [(ngModel)]="evidence.customerId" #constructorList 
-                        style="border: none!important"></mdb-select>
+                <dx-select-box *ngIf="contractor.length > 0"
+                        [dataSource]="contractor"
+                        [searchEnabled]="true"
+                        displayExpr="label"
+                        valueExpr="value"
+                        [(ngModel)]="evidence.customerId"
+                    ></dx-select-box> 
             </div>
         </div>
         
         <br>
         <div class="row">
             <div class="col-md-12">
-                <button class="btn blue-gradient" (click)="save()">Zapisz</button>
+                <dx-button
+                    icon="check"
+                    stylingMode="contained"
+                    text="Zapisz"
+                    type="default"
+                    [width]="150"
+                    (onClick)="save()"
+                >
+                </dx-button>
+                <!-- <button class="btn blue-gradient" (click)="save()">Zapisz</button> -->
             </div>
         </div>
         

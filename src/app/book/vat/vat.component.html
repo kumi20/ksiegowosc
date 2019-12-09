@@ -4,40 +4,73 @@
     <mdb-card-text> 
         
         <div class="row">
-            <div class="col-md-3">
-                <div class="md-form">
-                    <mdb-select class="select" [options]="year" [filterEnabled]="true" placeholder="-- wybierz rok --" [(ngModel)]="actualYear" #yearSelected (selected)="getVat()"></mdb-select>
-                    <label class="active">Rok:</label>
-                </div>
-            </div>
+                    <div class="col-md-3">
+                            <label class="active">Rok:</label>
+                            <dx-select-box *ngIf="year.length > 0"
+                                [dataSource]="year"
+                                [searchEnabled]="true"
+                                displayExpr="label"
+                                valueExpr="value"
+                                [value]="actualYear"
+                                [(ngModel)]="actualYear"
+                                (onSelectionChanged)="getVat();"
+                            ></dx-select-box>    
+                    </div>
             <div class="col-md-9">
-                <button class="btn blue-gradient" style="position:relatice; float:right;" [routerLink]="['/panel/',{outlets: { 'panel-outlet': ['count-vat'] } }]">Oblicz podatek</button>
+                <dx-button
+                    stylingMode="contained"
+                    text="Oblicz podatek"
+                    type="default"
+                    [width]="150"
+                    style="position:relatice; float:right;" 
+                    [routerLink]="['/panel/',{outlets: { 'panel-outlet': ['count-vat'] } }]"
+                >
+                </dx-button>
+                <!-- <button class="btn blue-gradient" style="position:relatice; float:right;" [routerLink]="['/panel/',{outlets: { 'panel-outlet': ['count-vat'] } }]">Oblicz podatek</button> -->
             </div>
         </div>  
         
         <br><br>
         <div class="row">
-            <div class="col-md-12">
-                <table class="table">
-                    <thead>
-                        <th>#</th>
-                        <th>Od</th>
-                        <th>Opis</th>
-                        <th>Do</th>
-                        <th>Kwota</th>
-                        <th></th>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let tax of vatDeclaration; let i = index">
-                            <td>{{i + 1}}</td>
-                            <td>{{tax.from}}</td>
-                            <td>{{tax.name}}</td>
-                            <td>{{tax.to}}</td>
-                            <td>{{tax.count| currency:'PLN '}}</td>
-                            <td><i class="fa fa-trash-o" style="cursor: pointer" (click)="delete(tax.id)"></i></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="col-lg-12">
+                    <dx-data-grid
+                    #grid
+                    id="gridContainer"
+                    [dataSource]="vatDeclaration"
+                    keyExpr="id"
+                    [sorting] = "false"
+                    [allowColumnReordering]="false"
+                    [allowColumnResizing]="true"
+                    [columnAutoWidth]="true"
+                    [selectedRowKeys]="[]"
+                    (onRowRemoving)="delete($event.key)"
+                    >
+                    <dxo-selection mode="single"></dxo-selection>
+                    <dxo-editing
+                        mode="row"
+                        [allowUpdating]="false"
+                        [allowDeleting]="true"
+                        [allowAdding]="false"
+                        [useIcons]="true"
+                       >
+                    </dxo-editing>
+                    <dxi-column 
+                        dataField="from" 
+                        caption="Od">
+                    </dxi-column> 
+                    <dxi-column 
+                        dataField="to" 
+                        caption="Do">
+                    </dxi-column> 
+                    <dxi-column 
+                        dataField="name" 
+                        caption="Opis">
+                    </dxi-column>                     
+                    <dxi-column 
+                        dataField="count" 
+                        caption="Kwota">
+                    </dxi-column> 
+                    </dx-data-grid>
             </div>
         </div>
     </mdb-card-text>

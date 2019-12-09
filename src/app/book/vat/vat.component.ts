@@ -33,7 +33,6 @@ export class VatComponent implements OnInit {
             response.forEach(el=>{
                 this.year.push({value: el.year, label:el.year})
             });
-            this.yearList.updateOptionsList();
             this.actualYear = String(new Date().getFullYear());
             
         }

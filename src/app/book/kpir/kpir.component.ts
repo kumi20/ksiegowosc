@@ -13,9 +13,6 @@ import { statistic } from './kpir';
   styleUrls: ['./kpir.component.scss']
 })
 export class KpirComponent implements OnInit {
-
-  @ViewChild('yearSelected', {static: false}) yearList;
-  @ViewChild('monthSelected', {static: false}) monthSelected;
     
   kpir;
   year = [];
@@ -42,7 +39,6 @@ export class KpirComponent implements OnInit {
               res.forEach(el=>{
                 this.year.push({value: el.year, label:el.year})
             });
-            this.yearList.updateOptionsList();
             this.actualYear = String(new Date().getFullYear());
           }
       )
@@ -82,7 +78,6 @@ export class KpirComponent implements OnInit {
         this.CmsService.delete(`kpir/delete.php?id=${id}`).subscribe(
             response =>{
                 if(response.kod < 0) this.event.showInfo('error', response.description);
-                this.showKPiR();
             }
         )
     }

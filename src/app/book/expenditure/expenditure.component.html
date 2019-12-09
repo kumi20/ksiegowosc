@@ -5,7 +5,9 @@
             <table>
                 <tr>
                     <td>Nr:</td>
-                    <td><input type="text" class="fv_input" style="border-bottom: 1px solid #111" [(ngModel)]="expenditure.number"></td>
+                    <td>
+                        <dx-text-box [(ngModel)]="expenditure.number" [showClearButton]="true"></dx-text-box>
+                    </td>
                 </tr>
                 <tr>
                     <td><p class="income_date">Data wystawienia dokumentu:</p></td>
@@ -26,8 +28,16 @@
              <table style="width:100%;">
                 <tr>
                     <td style="width:70px;"><p class="income_number">Sprzedawca:</p></td>
-                    <td><mdb-select class="select" [options]="contractor" [filterEnabled]="true" placeholder="-- wybierz dostawcę --" [(ngModel)]="expenditure.customerId" (selected)="changeConstructor($event)" class="mdb_income" #constructorList 
-                        style="border: none!important"></mdb-select></td>
+                    <td>
+                        <dx-select-box *ngIf="contractor.length > 0"
+                                [dataSource]="contractor"
+                                [searchEnabled]="true"
+                                displayExpr="label"
+                                valueExpr="value"
+                                (onSelectionChanged)="changeConstructor($event);"
+                                [(ngModel)]="expenditure.customerId" 
+                            ></dx-select-box>  
+                        </td>
                 </tr>
                 <tr>
                     <td></td>
@@ -126,14 +136,54 @@
               <tbody>
                 <tr mdbTableCol *ngFor="let el of expenditure.servicesList; let i = index;">
                   <td scope="row">{{i+1}}.</td>    
-                  <td scope="row"><input type="text" [(ngModel)]="el.name" class="fv_input"></td>
-                  <td><mdb-select class="select" [options]="jm" placeholder="-- jm --" [(ngModel)]="el.jm" class="mdb_income" style="border: none!important"></mdb-select></td>
-                  <td style="width:10px;"><input type="number" [(ngModel)]="el.count" min="0" class="fv_input" (change)="changeNumber(i)" (keydown.Tab)="changeNumber(i)"></td>
-                  <td><input type="text" [(ngModel)]="el.netto" class="fv_input" (keyup.enter)="changeNumber(i)" (keydown.Tab)="changeNumber(i)"></td>
-                  <td><input type="text" [(ngModel)]="el.countNetto" class="fv_input" (keydown.Tab)="changeNumber(i)" (keyup.enter)="changeNumber(i)" autocapitalize="none"></td>
-                  <td><mdb-select class="select" [options]="vat" placeholder="-- VAT --" [(ngModel)]="el.vat" class="mdb_income" style="border: none!important" (selected)="changeNumber(i)"></mdb-select></td>
-                  <td><input type="text" [(ngModel)]="el.countVat" class="fv_input" (input)="inputVat(i)"></td>
-                  <td>{{el.brutto}}</td>
+                  <td scope="row">
+                      <dx-text-box [(ngModel)]="el.name" [showClearButton]="true"></dx-text-box>
+                      <!-- <input type="text" [(ngModel)]="el.name" class="fv_input"> -->
+                  </td>
+                  <td>
+                        <dx-select-box *ngIf="jm.length > 0"
+                            [dataSource]="jm"
+                            [searchEnabled]="true"
+                            displayExpr="label"
+                            valueExpr="value"
+                            [(ngModel)]="el.jm" 
+                        ></dx-select-box>        
+                  </td>
+                  <td style="width:10px;">
+                        <dx-number-box [(ngModel)]="el.count" [showSpinButtons]="true" [min]="0" (ngModelChange)="changeNumber(i)" (keydown.Tab)="changeNumber(i)"></dx-number-box>  
+                  </td>
+                  <td>
+                      <dx-text-box [(ngModel)]="el.netto" [showClearButton]="true" (keyup.enter)="changeNumber(i)" autocapitalize="none" (keydown.Tab)="changeNumber(i)"></dx-text-box>
+                  </td>
+                  <td>
+                    <dx-number-box
+                        [(ngModel)]="el.countNetto"
+                        (keydown.Tab)="changeNumber(i)" (keyup.enter)="changeNumber(i)" autocapitalize="none"
+                    ></dx-number-box>
+                      <!-- <input type="text" [(ngModel)]="el.countNetto" class="fv_input" (keydown.Tab)="changeNumber(i)" (keyup.enter)="changeNumber(i)" autocapitalize="none"> -->
+                  </td>
+                  <td>
+                        <dx-select-box *ngIf="vat.length > 0"
+                                [dataSource]="vat"
+                                [searchEnabled]="true"
+                                displayExpr="label"
+                                valueExpr="value"
+                                (onSelectionChanged)="changeNumber(i);"
+                                [(ngModel)]="el.vat" 
+                            ></dx-select-box>
+                  </td>
+                  <td>
+                        <dx-number-box
+                            [(ngModel)]="el.countVat"
+                            (ngModelChange)="inputVat(i)"
+                        ></dx-number-box>
+                  </td>
+                  <td>
+                        <dx-number-box
+                            [(ngModel)]="el.brutto"
+                            [readOnly]="true"
+                        ></dx-number-box>
+                  </td>
                   <td><i class="fa fa-trash" (click)="deleted(i)"></i></td>
                 </tr>
               </tbody>
@@ -184,6 +234,15 @@
 
 <div class="row">
     <div class="col-md-12">
-        <button class="btn blue-gradient" rounded="true" mdbWavesEffect (click)="save()">Zapisz dokument</button>
+        <dx-button
+            icon="check"
+            stylingMode="contained"
+            text="Zapisz dokument"
+            type="default"
+            [width]="150"
+            (onClick)="save()"
+        >
+        </dx-button>
+        <!-- <button class="btn blue-gradient" rounded="true" mdbWavesEffect (click)="save()">Zapisz dokument</button> -->
     </div>    
 </div>

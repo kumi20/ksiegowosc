@@ -51,6 +51,13 @@ export class CustomerPanelComponent implements OnInit {
     this.route.params.subscribe(params => this.idCustomer = parseInt(params['id']));  
       
       this.month = this.event.month;
+      this.CmsService.getAuthorization(`customer/read_year.php`).subscribe(response=>{
+        response.records.forEach(field=>{
+            this.year.push({value: Number(field.year_name), label: field.year_name})
+        })
+        this.actualYear = String(new Date().getFullYear());
+
+      })         
       this.onGetYear()
       .then(()=>this.onGetCustomerFV());    
       
@@ -68,14 +75,16 @@ export class CustomerPanelComponent implements OnInit {
  
   onGetYear(){
       return new Promise(resolve=>{
-        this.CmsService.getAuthorization(`customer/read_year.php`).subscribe(response=>{
-            response.records.forEach(field=>{
-                this.year.push({value: Number(field.year_name), label: field.year_name})
-            })
-            this.selectedYear.updateOptionsList();
-            this.actualYear = new Date().getFullYear().toString();
-            resolve(this.year);
-        })                       
+        this.CmsService.getYear().subscribe(
+          response=>{
+              response.forEach(el=>{
+                  this.year.push({value: el.year, label:el.year})
+              });
+              this.actualYear = String(new Date().getFullYear());
+              
+              resolve(this.year)
+          }
+        )
       })
   }
     

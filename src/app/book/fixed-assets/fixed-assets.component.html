@@ -4,36 +4,62 @@
     <mdb-card-text> 
        <div class="row">
             <div class="col-md-12">
-                <button class="btn blue-gradient" [routerLink]="['/panel/',{outlets: { 'panel-outlet': ['add-fixxed-assets'] } }]">Dodaj środek trwały</button>
+                <dx-button
+                    stylingMode="contained"
+                    text="Dodaj środek trwały"
+                    type="default"
+                    [width]="200"
+                    [routerLink]="['/panel/',{outlets: { 'panel-outlet': ['add-fixxed-assets'] } }]"
+                >
+                </dx-button>
+                <!-- <button class="btn blue-gradient" [routerLink]="['/panel/',{outlets: { 'panel-outlet': ['add-fixxed-assets'] } }]">Dodaj środek trwały</button> -->
             </div>
         </div>   
         
         <br><br>
         <div class="row">
-            <div class="col-md-12">
-                <table class="table">
-                    <thead>
-                        <th></th>
-                        <th>Numer dokumentu</th>
-                        <th>Nazwa</th>
-                        <th>Data nabycia</th>
-                        <th>Data likwidacji</th>
-                        <th>Wartość początkowa</th>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let field of fixedAssets| paginate: { itemsPerPage: 15, currentPage:  page }; let i = index" [routerLink]="['/panel/',{outlets: { 'panel-outlet': ['add-fixxed-assets',field.id] } }]">
-                            <td>{{i + 1}}</td>    
-                            <td>{{field.numer_dokumentu}}</td>
-                            <td>{{field.nazwa}}</td>
-                            <td>{{field.data_nabycia}}</td>
-                            <td>{{field.data_likwidacji}}</td>
-                            <td>{{field.warotsc_poczatkowa}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="d-flex justify-content-center">
-                    <pagination-controls (pageChange)="page = pageChanged($event)"  directionLinks="true"  previousLabel="Poprzednia" nextLabel="Następna" autoHide="true" class="pagination"></pagination-controls>
-                </div>
+            <div class="col-lg-12">
+                    <dx-data-grid
+                    #grid
+                    id="gridContainer"
+                    [dataSource]="fixedAssets"
+                    keyExpr="id"
+                    [sorting] = "false"
+                    [allowColumnReordering]="false"
+                    [allowColumnResizing]="true"
+                    [columnAutoWidth]="true"
+                    [selectedRowKeys]="[]"
+                    (onSelectionChanged)="onSelectionChange($event.selectedRowKeys)"
+                    (onOptionChanged)="onClickPager($event)"
+                    >
+                    <dxo-paging [pageSize]="pageSize"></dxo-paging>
+                    <dxo-pager 
+                        [showPageSizeSelector]="true"
+                        [allowedPageSizes]="[5, 10, 20]"
+                        [showInfo]="true">
+                    </dxo-pager>
+                    <dxo-selection mode="single"></dxo-selection>
+                    <dxi-column 
+                        dataField="numer_dokumentu" 
+                        caption="Numer dokumentu">
+                    </dxi-column> 
+                    <dxi-column 
+                        dataField="nazwa" 
+                        caption="Nazwa">
+                    </dxi-column> 
+                    <dxi-column 
+                        dataField="data_nabycia" 
+                        caption="Data nabycia">
+                    </dxi-column> 
+                    <dxi-column 
+                        dataField="data_likwidacji" 
+                        caption="Data likwidacji">
+                    </dxi-column> 
+                    <dxi-column 
+                        dataField="warotsc_poczatkowa" 
+                        caption="Wartość początkowa">
+                    </dxi-column> 
+                 </dx-data-grid>
             </div>
         </div>
     </mdb-card-text>

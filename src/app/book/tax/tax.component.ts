@@ -25,7 +25,6 @@ export class TaxComponent implements OnInit {
             response.forEach(el=>{
                 this.year.push({value: el.year, label:el.year})
             });
-            this.yearList.updateOptionsList();
             this.actualYear = String(new Date().getFullYear());
             
             this.getTax();
@@ -38,6 +37,9 @@ export class TaxComponent implements OnInit {
       this.CmsService.getAuthorization(`tax/getList.php?year=${this.actualYear}`).subscribe(
             response=>{
                 this.tax = response;
+                this.tax.forEach(field => {
+                    field.dochod = (field.suma_przychodow - field.suma_kosztow).toFixed(2);
+                });
             }
       )
   } 

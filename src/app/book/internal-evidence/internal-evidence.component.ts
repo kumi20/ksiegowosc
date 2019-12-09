@@ -30,7 +30,6 @@ export class InternalEvidenceComponent implements OnInit {
             response.forEach(el=>{
                 this.year.push({value: el.year, label:el.year})
             });
-            this.yearList.updateOptionsList();
             this.actualYear = String(new Date().getFullYear());
         }
       )
@@ -38,7 +37,7 @@ export class InternalEvidenceComponent implements OnInit {
       this.month = this.CmsService.month;
       this.actualDate = new Date();
       this.actualYear = this.actualDate.getFullYear().toString();
-      this.actualMonth = this.event.formatMonth(this.actualDate.getMonth());
+      this.actualMonth = String(this.event.formatMonth(this.actualDate.getMonth()));
       
       
       this.showInternalEvidence();
@@ -65,7 +64,10 @@ export class InternalEvidenceComponent implements OnInit {
     
     addInternal(){
         this._route.navigate(['/(panel-outlet:internal-evidence-add)']);
-        console.log('gggg')
+    }
+
+    onSelectionChanged(id){
+        this._route.navigate(['/panel/', { outlets: { 'panel-outlet': ['internal-evidence-add',id[0]]}}]);
     }
 
 }

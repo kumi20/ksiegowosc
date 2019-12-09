@@ -39,14 +39,13 @@ export class CountTaxComponent implements OnInit {
       this.month = this.CmsService.month;
       this.actualDate = new Date();
       this.actualYear = this.actualDate.getFullYear().toString();
-      this.actualMonth = this.event.formatMonth(this.actualDate.getMonth());
+      this.actualMonth = String(this.event.formatMonth(this.actualDate.getMonth()));
       
       this.CmsService.getYear().subscribe(
         response=>{
             response.forEach(el=>{
                 this.year.push({value: el.year, label:el.year})
             });
-            this.yearList.updateOptionsList();
             this.actualYear = String(new Date().getFullYear()); 
         }
       )

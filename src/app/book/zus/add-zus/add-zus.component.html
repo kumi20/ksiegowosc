@@ -5,18 +5,28 @@
 
         <div class="row">
             <div class="col-md-3">
-                <div class="md-form">
-                    <mdb-select class="select" [options]="year" [filterEnabled]="true" placeholder="-- wybierz rok --" [(ngModel)]="actualYear" #yearSelected (selected)="setDataPayment()"></mdb-select>
-                    <label class="active">Rok:</label>
-                </div>
+                <label class="active">Rok:</label>
+                <dx-select-box *ngIf="year.length > 0"
+                    [dataSource]="year"
+                    [searchEnabled]="true"
+                    displayExpr="label"
+                    valueExpr="value"
+                    [value]="actualYear"
+                    [(ngModel)]="actualYear"
+                    (onSelectionChanged)="setDataPayment();"
+                ></dx-select-box>    
             </div>
-            
             <div class="col-md-3">
-  
-                <div class="md-form">
-                    <mdb-select class="select" [options]="month" [filterEnabled]="true" placeholder="-- wybierz miesiąc --" [(ngModel)]="actualMonth" #monthSelected (click)="setDataPayment()"></mdb-select>
-                    <label class="active">Miesiąc:</label>
-                </div>
+                <label class="active">Miesiąc:</label>
+                <dx-select-box *ngIf="month.length > 0"
+                    [dataSource]="month"
+                    [searchEnabled]="true"
+                    displayExpr="label"
+                    valueExpr="value"
+                    [value]="actualMonth"
+                    [(ngModel)]="actualMonth"
+                    (onSelectionChanged)="setDataPayment();"
+                ></dx-select-box>    
             </div>
         </div>
         
@@ -98,7 +108,16 @@
         <br>
         <div class="row">
             <div class="col-md-12">
-                <button class="btn blue-gradient" (click)="save()">Zapisz</button>
+                <dx-button
+                    icon="check"
+                    stylingMode="contained"
+                    text="Dodaj składke"
+                    type="default"
+                    [width]="150"
+                    (onClick)="save()"
+                >
+                </dx-button>
+                <!-- <button class="btn blue-gradient" (click)="save()">Zapisz</button> -->
             </div>
         </div>
         

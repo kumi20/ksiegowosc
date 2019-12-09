@@ -46,7 +46,6 @@ export class AddComponent implements OnInit {
                 response.forEach(el=>{
                     this.contractor.push({value: el.id, label:el.name});
                 })
-                this.constructorList.updateOptionsList();
                 
                 if (!isNaN(this.idDocumnet)){
                   this.CmsService.getAuthorization(`internal-evidence/getOne.php?id=${this.idDocumnet}`).subscribe(

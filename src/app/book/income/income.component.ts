@@ -91,7 +91,7 @@ export class IncomeComponent implements OnInit {
                 response.forEach(el=>{
                     this.contractor.push({value: el.id, label:el.name});
                 })
-                this.constructorList.updateOptionsList();
+                //this.constructorList.updateOptionsList();
             }    
       );
       
@@ -99,7 +99,7 @@ export class IncomeComponent implements OnInit {
 
     changeConstructor(event){
         this.contractorList.forEach(el=>{
-            if (el.id === event.value ){
+            if (el.id === event.selectedItem.value ){
                 let street = (el.local_number !='')?'/'+el.local_number: '';
                 this.constractorSelected = {name: el.name, street: el.street + ' ' + el.home_number + street, city: el.post_code + ' ' + el.city, nip:el.nip};
             }    
