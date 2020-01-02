@@ -1,0 +1,37 @@
+<dx-data-grid
+                    #grid
+                    id="fvServicesList"
+                    [dataSource]="fvServicesList"
+                    keyExpr="id"
+                    [allowColumnReordering]="true"
+                    [allowColumnResizing]="true"
+                    [columnAutoWidth]="true"
+                    [selectedRowKeys]="[]"
+                    >
+                    <dxo-selection mode="single"></dxo-selection>
+                    <dxi-column 
+                        dataField="name" 
+                        caption="Nazwa">
+                        <dxo-header-filter [allowSearch]="true"></dxo-header-filter>
+                    </dxi-column>  
+                    <dxi-column 
+                        dataField= "count" 
+                        caption="Ilość">
+                        <dxo-header-filter [allowSearch]="true"></dxo-header-filter>
+                    </dxi-column>  
+                    <dxi-column 
+                        dataField="netto" 
+                        caption="Cena jednostkowa">
+                        <dxo-header-filter [allowSearch]="true"></dxo-header-filter>
+                    </dxi-column>   
+                    <dxi-column 
+                        dataField="countNetto" 
+                        caption="Wartość netto">
+                        <dxo-header-filter [allowSearch]="true"></dxo-header-filter>
+                    </dxi-column>  
+                    <dxi-column 
+                        dataField="brutto" 
+                        caption="Wartość brutto">
+                        <dxo-header-filter [allowSearch]="true"></dxo-header-filter>
+                    </dxi-column>     
+                </dx-data-grid>

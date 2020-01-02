@@ -78,13 +78,21 @@ import { SearchComponent } from './book/company/search/search.component';
 import { SearchFvComponent } from './book/fv/search-fv/search-fv.component';
 import { ConfigMaileComponent } from './book/settings/config-maile/config-maile.component';
 
-import { DxButtonModule, DxSelectBoxModule, DxDataGridModule, DxTextBoxModule, DxDateBoxModule, DxNumberBoxModule, DxChartModule} from 'devextreme-angular';
+import { DxButtonModule, DxSelectBoxModule, DxDataGridModule, DxTextBoxModule, DxDateBoxModule, DxNumberBoxModule, DxChartModule,
+  DxPopupModule} from 'devextreme-angular';
 
 import { Locale } from './api.service';
 
 import { locale, loadMessages, formatMessage } from 'devextreme/localization';
 import 'devextreme-intl';
 import { IncomeYearComponent } from './book/content/income-year/income-year.component';
+import { MonityComponent } from './book/monity/monity.component';
+import { AddUserCustomerComponent } from './book/customer/add-user-customer/add-user-customer.component';
+import { ContactCustomerListComponent } from './book/customer/contact-customer-list/contact-customer-list.component';
+import { ContactCustomerAddComponent } from './book/customer/contact-customer-add/contact-customer-add.component';
+import { CustomerFileComponent } from './book/customer/customer-file/customer-file.component';
+import { ServicesComponent } from './book/fv/services/services.component';
+import { CustomerFileListComponent } from './book/customer/customer-file-list/customer-file-list.component';
 
 // Configs 
 export function getAuthServiceConfigs() {
@@ -144,6 +152,13 @@ export function getAuthServiceConfigs() {
         SearchFvComponent,
         ConfigMaileComponent,
         IncomeYearComponent,
+        MonityComponent,
+        AddUserCustomerComponent,
+        ContactCustomerListComponent,
+        ContactCustomerAddComponent,
+        CustomerFileComponent,
+        ServicesComponent,
+        CustomerFileListComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -154,6 +169,7 @@ export function getAuthServiceConfigs() {
         DxDateBoxModule,
         DxSelectBoxModule,
         DxTextBoxModule,
+        DxPopupModule,
         DxNumberBoxModule,
         DxChartModule,
         FormsModule,

@@ -9,10 +9,9 @@
                     text="Dodaj klienta"
                     type="default"
                     [width]="150"
-                    [routerLink]="['/panel/',{outlets: { 'panel-outlet': ['add-customer'] } }]"
+                    (onClick)="popupVisible = true"
                 >
                 </dx-button>
-                <!-- <button class="btn blue-gradient" [routerLink]="['/panel/',{outlets: { 'panel-outlet': ['add-customer'] } }]">Dodaj klienta</button> -->
             </div>
         </div>
 
@@ -45,8 +44,30 @@
                     </dxi-column> 
                     </dx-data-grid>
            </div>
-     </div>
+        </div>
     </mdb-card-text>
   </mdb-card-body>
 </mdb-card>
+
+<br>
+
+<dx-popup
+        [width]="900"
+        [height]="600"
+        [showTitle]="true"
+        title="Dodaj klienta"
+        [dragEnabled]="false"
+        [closeOnOutsideClick]="true"
+        (visibleChange) = closeOnOutsideClickChange()
+        [(visible)]="popupVisible">
+        <div class="row">
+             <div class="col-md-12">
+                 <app-add-cutomer (onAddingCustomer)="popupVisible = false; onGetListCustomer();"></app-add-cutomer>
+             </div>   
+        </div>
+</dx-popup>
+
+<app-wraper-component [idCustomer]="idCustomer" *ngIf="idCustomer !== 0"></app-wraper-component>
+
+
       

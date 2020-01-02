@@ -1,0 +1,39 @@
+<form [formGroup]="formContact" (ngSubmit)="onSendContact(formContact)">
+    <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="contact_name">Nazwa</label>
+                    <input class="form-control" [ngClass]="(submitted && formError.contact_name)?'form-control in-valid' : 'form-control'" name="contact_name"
+                     mdbActive id="contact_name" formControlName="contact_name">   
+                    <small class="text-danger" *ngIf="submitted && formError.contact_name">
+                        <p>{{ formError.contact_name}}</p>
+                    </small>                  
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="contact_email">Email:</label>
+                    <input class="form-control" [ngClass]="(submitted && formError.contact_email)?'form-control in-valid' : 'form-control'" name="contact_email"
+                     mdbActive id="contact_email" formControlName="contact_email">   
+                    <small class="text-danger" *ngIf="submitted && formError.contact_email">
+                        <p>{{ formError.contact_email}}</p>
+                    </small>                  
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <dx-button
+                        icon="check"
+                        stylingMode="contained"
+                        text="Zapisz"
+                        type="default"
+                        [width]="150"
+                        (onClick)="onSendContact(formContact)"
+                    >
+                    </dx-button>
+                </div>
+            </div>
+    </div>
+</form>

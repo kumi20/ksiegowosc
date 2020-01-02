@@ -15,11 +15,11 @@ export class SearchComponent implements OnInit {
   constructor(private CmsService: ApiService, private event: EventService) { }
 
   ngOnInit() {
-      this.event.searchingCompany(this.date);
+     // this.event.searchingCompany(this.date);
   }
 
   onSearch(){
-    this.event.searchingCompany(this.date);
+   // this.event.searchingCompany(this.date);
   }
 
 }

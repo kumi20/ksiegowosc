@@ -8,13 +8,15 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './fv.component.html',
   styleUrls: ['./fv.component.scss']
 })
-export class FvComponent implements OnInit, OnDestroy{
+export class FvComponent implements OnInit{
 
   onSearchFv;
   actualDate: Date = new Date();
+  popupVisible: boolean = false;
+  idFV: string = '';
 
   constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) {
-    this.onSearchFv = this.event.onSearchCompany.subscribe((number)=>this.getFv(number.number));
+    
   }
 
   number = '';
@@ -40,9 +42,11 @@ export class FvComponent implements OnInit, OnDestroy{
       )
   } 
 
-  ngOnDestroy(){
-    this.onSearchFv.unsubscribe();
+  selectionChangedHandler(id){
+    this.idFV = id[0];
+    this.popupVisible = true;
   }
+
     
   delete(id){
       this.number = '';

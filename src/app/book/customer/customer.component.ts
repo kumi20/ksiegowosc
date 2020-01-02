@@ -10,10 +10,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class CustomerComponent implements OnInit {
 
+  @Output() onClosemodat = new EventEmitter<boolean>();
+
   customerList = [];
   page;
+  idCustomer: number = 0;
+  popupVisible = false;
 
-  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) { }
+  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router,
+  ) { }
 
   ngOnInit() {
     this.onGetListCustomer();
@@ -28,8 +33,13 @@ export class CustomerComponent implements OnInit {
     })
 }  
 
+closeOnOutsideClickChange(){
+    this.event.searchingCompany();
+}
+
 onSelectionChange(id){
-  this._route.navigate(['/panel/', { outlets: { 'panel-outlet': ['customer',id[0]]}}]);
+  this.idCustomer = id[0];
+  //this._route.navigate(['/panel/', { outlets: { 'panel-outlet': ['customer',id[0]]}}]);
 }
 
 }

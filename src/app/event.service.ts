@@ -21,14 +21,14 @@ export class EventService {
       {value:'12', label: 'grudzień'}
     ];  
     
-  @Output()	onSearchCompany: EventEmitter<any> = new EventEmitter<any>();
+  @Output()	onClosemodat: EventEmitter<any> = new EventEmitter<any>();
     
   constructor(private toastrService: ToastService, private _route: Router) {
 
   }
   
-  public searchingCompany(nip){
-		this.onSearchCompany.emit(nip);
+  public searchingCompany(){
+		this.onClosemodat.emit(true);
 	}
     
   showInfo(typ, tresc){

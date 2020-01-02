@@ -1,0 +1,71 @@
+<mdb-card class="card">  
+    <mdb-card-header class="card-header">Monity</mdb-card-header>
+    <mdb-card-body class="card-body">
+        <mdb-card-text>  
+            <div class="row">
+                <div class="col-lg-12">
+                    <dx-data-grid
+                        #grid
+                        id="gridContainer"
+                        [dataSource]="monitList"
+                        keyExpr="id"
+                        [allowColumnReordering]="true"
+                        [allowColumnResizing]="true"
+                        [columnAutoWidth]="true"
+                        [selectedRowKeys]="[]"
+                        (onSelectionChanged)="selectionChangedHandler($event.selectedRowKeys)"
+                        >
+                        <dxo-selection mode="single"></dxo-selection>
+                        <dxo-paging [pageSize]="10"></dxo-paging>
+                        <dxo-pager 
+                            [showPageSizeSelector]="true"
+                            [allowedPageSizes]="[5, 10, 20]"
+                            [showInfo]="true">
+                        </dxo-pager>
+
+                        <dxo-filter-row 
+                            [visible]="true" 
+                            [applyFilter]="true"></dxo-filter-row>
+                        <dxo-search-panel 
+                            [visible]="true" 
+                            [width]="240" 
+                            placeholder="Szukaj..."></dxo-search-panel>
+                    
+                        <dxi-column 
+                            dataField="customer_name" 
+                            caption="Nazwa klienta">
+                            <dxo-header-filter [allowSearch]="true"></dxo-header-filter>
+                        </dxi-column>
+
+                        <dxi-column 
+                            dataField="maile_to_send" 
+                            caption="Maile klienta">
+                            <dxo-header-filter [allowSearch]="true"></dxo-header-filter>
+                        </dxi-column>
+
+                        <dxi-column 
+                            dataField="date" 
+                            caption="Data">
+                            <dxo-header-filter [allowSearch]="true"></dxo-header-filter>
+                        </dxi-column>
+
+                    </dx-data-grid>
+
+                    <br>
+                    <ng-container *ngIf="isShowMsg">
+                        <p [innerHtml]="text_msg"></p>
+                        <dx-button
+                            stylingMode="contained"
+                            text="Zamknij"
+                            type="default"
+                            [width]="150"
+                            (onClick)="closeMsg()"
+                        >
+                        </dx-button>
+                    </ng-container>
+                </div>
+            </div>
+
+        </mdb-card-text>
+    </mdb-card-body>
+</mdb-card>

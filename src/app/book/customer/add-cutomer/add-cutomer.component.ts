@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Input, ViewChild, Output, EventEmitter, ViewChildren, AfterViewInit, OnDestroy} from '@angular/core';
+import { Component, OnInit, Injector, ElementRef, Input, ViewChild, Output, EventEmitter, ViewChildren, AfterViewInit, OnDestroy} from '@angular/core';
 import { EventService } from '../../../event.service';
 import { ApiService } from '../../../api.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -10,7 +10,8 @@ import {FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angu
   templateUrl: './add-cutomer.component.html',
   styleUrls: ['./add-cutomer.component.scss']
 })
-export class AddCutomerComponent implements OnInit {
+export class AddCutomerComponent implements OnInit, OnDestroy {
+    @Output() onAddingCustomer = new EventEmitter<boolean>();
 
   customerForm;
   submitted: boolean = false;
@@ -21,7 +22,7 @@ export class AddCutomerComponent implements OnInit {
     customerCity: '',
     customerStreet: '',
     customerNip: '',
-    customerLogin: ''
+    customerRegon: ''
   }
 
   validationMessages = {
@@ -40,13 +41,19 @@ export class AddCutomerComponent implements OnInit {
       customerNip:{
           required: 'Nip jest wymagany'
       },
-      customerLogin:{
-          required: 'Login jest wymagany',
-          email: 'Podaj poprawny adres email'
+      customerRegon:{
+          required: 'Regon jest wymagany',
       }
   }
 
-  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router, private formBuilder: FormBuilder) { }
+  idCustomer;
+  onCloseModal;
+ 
+
+  constructor(private injector: Injector, private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router,
+     private formBuilder: FormBuilder) {
+        this.onCloseModal = this.event.onClosemodat.subscribe(()=>this.submitted = false);
+      }
 
   ngOnInit() {
     this.onCreateForm();
@@ -56,6 +63,10 @@ export class AddCutomerComponent implements OnInit {
       });
   }
 
+  ngOnDestroy(){
+    this.onCloseModal.unsubscribe();
+  }
+
   onCreateForm(){
     this.customerForm = this.formBuilder.group({
         customerName: ['', Validators.required],
@@ -63,7 +74,7 @@ export class AddCutomerComponent implements OnInit {
         customerCity:['', Validators.required],
         customerStreet:['', Validators.required],
         customerNip:['', Validators.required],
-        customerLogin:['', [Validators.email, Validators.required]],
+        customerRegon:['', Validators.required]
     })
 }
 
@@ -77,7 +88,7 @@ onSubmitCustomer(event){
         this.CmsService.postAuthorization(`customer/create_customer.php`, event.value).subscribe(response=>{
           if(response.code === 200){
               this.event.showInfo('success', "Dodano klienta");
-              this._route.navigate(['/panel/', {outlets: { 'panel-outlet': ['customer'] } }]);
+              this.onAddingCustomer.emit(true);
               this.customerForm.reset();
               this.submitted = false;
           }

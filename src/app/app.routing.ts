@@ -32,6 +32,7 @@ import { CustomerComponent } from './book/customer/customer.component';
 import { CustomerPanelComponent} from './book/customer/customer-panel/customer-panel.component';
 import { AddCutomerComponent } from './book/customer/add-cutomer/add-cutomer.component';
 import { IndywidualZusComponent } from './book/indywidual-zus/indywidual-zus.component';
+import { MonityComponent } from './book/monity/monity.component';
 
 import { HomeComponent } from './home/home.component';
 
@@ -77,7 +78,8 @@ const routesConfig: Routes = [
             {path: 'customer', component: CustomerComponent, outlet:'panel-outlet', canActivate: [AuthGuard, AlwaysAuthChildrenGuard]},
             {path: 'customer/:id', component: CustomerPanelComponent, outlet:'panel-outlet', canActivate: [AuthGuard, AlwaysAuthChildrenGuard]},
             {path: 'add-customer', component: AddCutomerComponent, outlet:'panel-outlet', canActivate: [AuthGuard, AlwaysAuthChildrenGuard]},
-            {path: 'indywidual-zus', component: IndywidualZusComponent, outlet:'panel-outlet', canActivate: [AuthGuard, AlwaysAuthChildrenGuard]}
+            {path: 'indywidual-zus', component: IndywidualZusComponent, outlet:'panel-outlet', canActivate: [AuthGuard, AlwaysAuthChildrenGuard]},
+            {path: 'monity', component: MonityComponent, outlet:'panel-outlet', canActivate: [AuthGuard, AlwaysAuthChildrenGuard]}
         ]          
     },
     { path: '**', component: PageNotFoundComponent }

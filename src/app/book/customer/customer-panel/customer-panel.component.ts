@@ -5,12 +5,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { FileUploader } from 'ng2-file-upload';
 
+import { CustomerFileListComponent } from '../customer-file-list/customer-file-list.component';
+
 const URL = '';
 
 @Component({
   selector: 'app-customer-panel',
   templateUrl: './customer-panel.component.html',
-  styleUrls: ['./customer-panel.component.scss']
+  styleUrls: ['./customer-panel.component.scss'],
+  inputs:['idCustomer'],
+  providers: [CustomerFileListComponent]
 })
 export class CustomerPanelComponent implements OnInit {
   @ViewChild('selectedYear', {static: false}) selectedYear;    
@@ -45,33 +49,27 @@ export class CustomerPanelComponent implements OnInit {
     this.hasAnotherDropZoneOver = e;
   }   
 
-  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) { }
+  constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router, private CustomerFileListComponent:CustomerFileListComponent) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params => this.idCustomer = parseInt(params['id']));  
-      
-      this.month = this.event.month;
-      this.CmsService.getAuthorization(`customer/read_year.php`).subscribe(response=>{
-        response.records.forEach(field=>{
-            this.year.push({value: Number(field.year_name), label: field.year_name})
-        })
-        this.actualYear = String(new Date().getFullYear());
+    this.CmsService.getYear().toPromise()
+      .then(
+          res=>{
+              res.forEach(el=>{
+                this.year.push({value: el.year, label:el.year})
+            });
+            this.actualYear = String(new Date().getFullYear());
+          }
+      )
 
-      })         
-      this.onGetYear()
-      .then(()=>this.onGetCustomerFV());    
+      
+      this.month = this.CmsService.month;
+      this.actualYear = new Date().getFullYear().toString();
+
       
       this.configFileUploud();
   }
 
-  onGetCustomerFV(){
-    return new Promise(resolve=>{
-        this.CmsService.getAuthorization(`customer/read_customer_fv.php?id=${this.idCustomer}&year=${this.actualYear}`).subscribe(response=>{
-            this.customerFVList = response.records;
-            resolve(this.customerFVList);
-        })
-    })
-  } 
  
   onGetYear(){
       return new Promise(resolve=>{
@@ -92,7 +90,6 @@ export class CustomerPanelComponent implements OnInit {
       this.CmsService.putAuthorization(`customer/update_fv_pay.php?id=${id}`, id).subscribe(response=>{
           if(response.code === 200) {
               this.event.showInfo('success', 'Faktura opłacona');
-              this.onGetCustomerFV();
           }
       })
   }
@@ -103,7 +100,7 @@ export class CustomerPanelComponent implements OnInit {
             let name = new Date().getTime() + Math.round(Math.random() * 10000000);
             item.file.name = name+'.pdf';
             let datapay = (<any>item.file).datapay;
-            item.url = `${this.CmsService.uri}customer/create_fv.php?idUser=${this.idCustomer}&name=${fvName}&year=${(<any>item.file).year}&mounth=${(<any>item.file).month}&datapay=${datapay}&countFV=${this.countFV}&sendMail=${this.sendMail}`;
+            item.url = `${this.CmsService.uri}customer/create_fv.php?idUser=${this.idCustomer.value}&name=${fvName}&year=${(<any>item.file).year}&mounth=${(<any>item.file).month}&datapay=${datapay}&countFV=${this.countFV}`;
             item.upload();
         }
     }
@@ -127,8 +124,8 @@ export class CustomerPanelComponent implements OnInit {
         
         this.uploader.onCompleteAll = () =>{
             this.event.showInfo('success', 'zapisano faktury');
+            this.CustomerFileListComponent.onGetFileList();
             this.uploader.queue.length = 0;
-            this.onGetCustomerFV();
         }
      }
 

@@ -44,6 +44,7 @@
                     [selectedRowKeys]="[]"
                     (onRowRemoving)="delete($event.key)"
                     (onOptionChanged)="onClickPager($event)"
+                    (onSelectionChanged)="selectionChangedHandler($event.selectedRowKeys)"
                     >
                     <dxo-selection mode="single"></dxo-selection>
                     <dxo-paging [pageSize]="pageSize"></dxo-paging>
@@ -95,3 +96,18 @@
       </mdb-card-text>
     </mdb-card-body>
 </mdb-card>
+
+<dx-popup
+        [width]="900"
+        [height]="600"
+        [showTitle]="true"
+        title="Faktura"
+        [dragEnabled]="false"
+        [closeOnOutsideClick]="true"
+        [(visible)]="popupVisible">
+        <div class="row">
+             <div class="col-md-12">
+                <app-services [id]="idFV"></app-services>
+             </div>   
+        </div>
+</dx-popup>

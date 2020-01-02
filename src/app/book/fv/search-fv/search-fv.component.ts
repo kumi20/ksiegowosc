@@ -17,6 +17,6 @@ export class SearchFvComponent implements OnInit {
   }
 
   onSearch(){
-    this.event.searchingCompany(this.date);
+    //this.event.searchingCompany(this.date);
   }
 }

@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  domanie: "https://kumi20.webd.pl/",
+  uri: "api/ksiega/",
 };

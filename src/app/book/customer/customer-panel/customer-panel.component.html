@@ -1,52 +1,4 @@
-<mdb-card class="card">  
-    <mdb-card-header class="card-header">
-      <div class="row">
-          <div class="col-md-10">Klient</div>
-      </div>      
-    </mdb-card-header>
-    <mdb-card-body class="card-body">
-        <mdb-card-text>
-            <div class="row">
-                    <div class="col-md-3">
-                            <label class="active">Rok:</label>
-                            <dx-select-box *ngIf="year.length > 0"
-                                [dataSource]="year"
-                                [searchEnabled]="true"
-                                displayExpr="label"
-                                valueExpr="value"
-                                [value]="actualYear"
-                                [(ngModel)]="actualYear"
-                                (onSelectionChanged)="onGetCustomerFV();"
-                            ></dx-select-box>    
-                    </div>
-            </div>
-            
-            <div class="row">
-             <table class="table table-hover">
-                  <thead>
-                      <tr>
-                          <th style="width:5%">#</th>
-                          <th style="width:10%">Rok</th>
-                          <th >Miesiąc</th>
-                          <th>Numer faktury</th>
-                          <th>Opłacona</th>
-                          <th></th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      <tr *ngFor="let faktura of customerFVList; let i = index">
-                          <td>{{i+1}}</td>
-                          <td>{{faktura.fv_year}}</td>
-                          <td>{{faktura.fv_mounth}}</td>    
-                          <td><a href="https://kumi20.webd.pl/customersFiles/{{faktura.fv_url}}" target="_blank" >{{faktura.fv_name}}</a></td>
-                          <td>{{faktura.date_pay}}</td>
-                          <td><button class="btn btn-outline-success waves-effect" *ngIf="faktura.date_pay == null" (click)="onPay(faktura.id)">Opłacona</button></td>
-                      </tr>
-                  </tbody>
-              </table>
-           </div>
-           
-           
+  
            <div class="row">
                   <div class="col-lg-12">
                       <label class="my-drop-zone little" for="uploader-input" ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}" (fileOver)="fileOverAnother($event)" [uploader]="uploader" style="height:200px; padding-top: 70px;">
@@ -72,8 +24,27 @@
                           <tr *ngFor="let item of uploader.queue">
                               <td><strong>{{ item?.file?.name }}</strong></td>
                               <td  nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
-                              <td><mdb-select class="select" [options]="year" [filterEnabled]="true" placeholder="-- wybierz rok --" [(ngModel)]="item.file.year"></mdb-select></td>
-                              <td><mdb-select class="select" [options]="month" [filterEnabled]="true" placeholder="-- wybierz rok --" [(ngModel)]="item.file.month"></mdb-select></td>
+                              <td>
+                                <dx-select-box *ngIf="year.length > 0"
+                                    [dataSource]="year"
+                                    [searchEnabled]="true"
+                                    displayExpr="label"
+                                    valueExpr="value"
+                                    [value]="actualYear"
+                                    [(ngModel)]="item.file.year"
+                                ></dx-select-box>       
+
+                               </td>
+                              <td>
+                                <dx-select-box *ngIf="month.length > 0"
+                                    [dataSource]="month"
+                                    [searchEnabled]="true"
+                                    displayExpr="label"
+                                    valueExpr="value"
+                                    [value]="actualMonth"
+                                    [(ngModel)]="item.file.month"
+                                ></dx-select-box>     
+                                </td>
                               <td><mdb-date-picker name="dataPublication" [options]="myDatePickerOptions" [placeholder]="'Wybierz date'" [(ngModel)]="item.file.datapay"></mdb-date-picker></td>
                               <td >
                                   <div class="progress" style="margin-bottom: 0;">
@@ -105,26 +76,22 @@
                     <div class="col-md-6">
                         <div class="mf-form">
                             <label for="countFV">Wartość faktury</label>
-                            <input type="text" class="form-control" [(ngMOdel)]="countFV" id="countFV">
+                            <input type="text" class="form-control" [(ngModel)]="countFV" id="countFV">
                         </div>
                     </div>
                 </div>
-
-              <div class="row"  *ngIf="uploader.queue.length!=0">
-                    <div class="col-md-6">
-                        <div class="mf-form">
-                            <label for="emailSend">Email</label>
-                            <input type="email" class="form-control" [(ngModel)]="sendMail" id="emailSend">
-                        </div>
-                    </div>
-              </div>
-              
+              <br>
               <div class="row">
                     <div class="col-lg-12">
-                        <button class="btn btn-outline-success waves-effect" (click)="upload()" [disabled]="!uploader.getNotUploadedItems().length">Zapisz</button>
+                        <dx-button
+                            icon="check"
+                            stylingMode="contained"
+                            text="Zapisz"
+                            type="default"
+                            [width]="150"
+                            (onClick)="upload()"
+                        >
+                    </dx-button>
+                       
                     </div>
               </div> 
-         
-        </mdb-card-text>
-    </mdb-card-body>
-</mdb-card>

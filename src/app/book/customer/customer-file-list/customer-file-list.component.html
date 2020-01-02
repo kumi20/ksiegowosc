@@ -1,0 +1,42 @@
+<mdb-card class="card">  
+    <mdb-card-header class="card-header">Lista pliki</mdb-card-header>
+    <mdb-card-body class="card-body">
+        <mdb-card-text>  
+            <div class="row">
+                <div class="col-lg-12">
+                        <dx-data-grid
+                        #grid
+                        id="customerFileList"
+                        [dataSource]="customerFileList"
+                        keyExpr="id"
+                        [sorting] = "false"
+                        [allowColumnReordering]="false"
+                        [allowColumnResizing]="true"
+                        [columnAutoWidth]="true"
+                        [selectedRowKeys]="[]"
+                        >
+                        <dxo-paging [pageSize]="15"></dxo-paging>
+                        <dxo-pager 
+                            [showPageSizeSelector]="true"
+                            [allowedPageSizes]="[5, 10, 20]"
+                            [showInfo]="true">
+                        </dxo-pager>
+                        <dxo-selection mode="single"></dxo-selection>
+                        <dxi-column 
+                            dataField="fv_year" 
+                            caption="Rok">
+                        </dxi-column> 
+                        <dxi-column 
+                            dataField="fv_mounth" 
+                            caption="Miesiąc">
+                        </dxi-column> 
+                        <dxi-column 
+                            dataField="fv_name" 
+                            caption="Numer faktury">
+                        </dxi-column> 
+                    </dx-data-grid>
+               </div>
+            </div>
+        </mdb-card-text>
+    </mdb-card-body>
+</mdb-card>

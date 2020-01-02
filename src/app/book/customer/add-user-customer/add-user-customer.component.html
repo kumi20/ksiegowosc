@@ -1,0 +1,104 @@
+<mdb-card class="card">  
+    <mdb-card-header class="card-header">
+      <div class="row">
+          <div class="col-md-10">Użytkownicy</div>
+      </div>      
+    </mdb-card-header>
+    <mdb-card-body class="card-body">
+        <mdb-card-text>
+            <div class="row">
+                <div class="col-md-6">
+                    <dx-button
+                        stylingMode="contained"
+                        text="Dodaj użytkownika"
+                        type="default"
+                        [width]="150"
+                        (onClick)="popupVisible = true"
+                    >
+                    </dx-button>
+                </div>
+            </div>
+    
+            <br>
+            
+            <div class="row">
+                <div class="col-lg-12">
+                        <dx-data-grid
+                        #grid
+                        id="userList"
+                        [dataSource]="userList"
+                        keyExpr="customer_login"
+                        [sorting] = "false"
+                        [allowColumnReordering]="false"
+                        [allowColumnResizing]="true"
+                        [columnAutoWidth]="true"
+                        [selectedRowKeys]="[]"
+                        >
+                        <dxo-paging [pageSize]="15"></dxo-paging>
+                        <dxo-pager 
+                            [showPageSizeSelector]="true"
+                            [allowedPageSizes]="[5, 10, 20]"
+                            [showInfo]="true">
+                        </dxo-pager>
+                        <dxo-selection mode="single"></dxo-selection>
+                        <dxi-column 
+                            dataField="customer_login" 
+                            caption="Login">
+                        </dxi-column> 
+                        </dx-data-grid>
+               </div>
+            </div>
+        </mdb-card-text>
+    </mdb-card-body>
+</mdb-card>
+
+
+<dx-popup
+    [width]="600"
+    [height]="220"
+    [showTitle]="true"
+    title="Dodaj użytkownika"
+    [dragEnabled]="false"
+    [closeOnOutsideClick]="true"
+    (visibleChange) = closeOnOutsideClickChange()
+    [(visible)]="popupVisible">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmitCustomer(userForm)">
+        <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="loginUser">Login</label>
+                        <input class="form-control" [ngClass]="(submitted && formError.loginUser)?'form-control in-valid' : 'form-control'" name="loginUser"
+                         mdbActive id="loginUser" formControlName="loginUser">   
+                        <small class="text-danger" *ngIf="submitted && formError.loginUser">
+                            <p>{{ formError.loginUser}}</p>
+                        </small>                  
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="pswUser">Hasło:</label>
+                        <input class="form-control" [ngClass]="(submitted && formError.pswUser)?'form-control in-valid' : 'form-control'" name="pswUser"
+                         mdbActive id="pswUser" formControlName="pswUser">   
+                        <small class="text-danger" *ngIf="submitted && formError.pswUser">
+                            <p>{{ formError.pswUser}}</p>
+                        </small>                  
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <dx-button
+                            icon="check"
+                            stylingMode="contained"
+                            text="Zapisz"
+                            type="default"
+                            [width]="150"
+                            (onClick)="onSubmitCustomer(userForm)"
+                        >
+                        </dx-button>
+                    </div>
+                </div>
+        </div>
+    </form>
+</dx-popup>

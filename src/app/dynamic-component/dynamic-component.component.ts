@@ -1,46 +1,44 @@
-import {Component, Input,Type, ViewContainerRef, ViewChild, ReflectiveInjector, ComponentFactoryResolver, OnDestroy, ElementRef, ComponentRef, isDevMode, OnInit} from '@angular/core';
+import {Component, Injector, Input,Type, ViewContainerRef, ViewChild, ReflectiveInjector, ComponentFactoryResolver, OnDestroy, ElementRef, ComponentRef, isDevMode, OnInit} from '@angular/core';
 
-import { StaticComponent } from '../template/static/static.component';
-import { NewsComponentView } from '../template/news/news.component';
-import { MenuParent } from '../template/menu/menu/menu.component';
-import { MapyComponent } from '../template/mapy/mapy.component';
-import { CformTemplateComponent } from '../template/cform/cform.component';
-import { PoolComponent } from '../template/pool/pool.component';
-import { GalleryComponent } from '../template/gallery/gallery.component';
-import { NewsletterComponent } from '../template/newsletter/newsletter.component';
-import { CalendarTemplateComponent } from '../template/calendar/calendar.component';
+import { AddUserCustomerComponent } from '../book/customer/add-user-customer/add-user-customer.component';
+import { ContactCustomerListComponent } from '../book/customer/contact-customer-list/contact-customer-list.component';
+import { CustomerFileComponent } from '../book/customer/customer-file/customer-file.component';
+import { CustomerFileListComponent } from '../book/customer/customer-file-list/customer-file-list.component';
 
 @Component({
   selector: 'app-dynamic-component',
   entryComponents:[
-    StaticComponent,
-    NewsComponentView,
-    MenuParent,
-    MapyComponent,
-    CformTemplateComponent,
-    PoolComponent,
-    GalleryComponent,
-    NewsletterComponent,
-    CalendarTemplateComponent
+    AddUserCustomerComponent,
+    ContactCustomerListComponent,
+    CustomerFileComponent,
+    CustomerFileListComponent
   ],
   templateUrl: './dynamic-component.component.html',
   styleUrls: ['./dynamic-component.component.scss'],
-  inputs: ['idTresci','pageElement']
+  inputs: ['idCustomer']
 })
 export class DynamicComponentComponent implements OnInit {
 
   @ViewChild('dynamicComponentContainer', {static: true, read: ViewContainerRef}) dynamicComponentContainer;
   @Input() componentData; 
-  idTresci;
-  pageElement;
+
+  injector: Injector;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver, viewContainerRef: ViewContainerRef) { }
 
   ngOnInit() {
+    this.injector = ReflectiveInjector.resolveAndCreate([
+      {
+        provide: 'idCustomer',
+        useValue: {
+          value: this.componentData.idCustomer
+        }
+      }
+    ]);   
     const factory = this.componentFactoryResolver.resolveComponentFactory(this.componentData.component);
-    const componentRef = this.dynamicComponentContainer.createComponent(factory);
-    componentRef.instance.idtresci = this.idTresci;
-    componentRef.instance.pageElement = this.pageElement;
+    const componentRef = this.dynamicComponentContainer.createComponent(factory, 0 , this.injector);
+    componentRef.instance.idtresci = this.componentData.idTresci;
+    componentRef.instance.pageElement = this.componentData.pageElement;
     //componentRef.instance.callMeFromParent;
     componentRef.changeDetectorRef.detectChanges();
   }

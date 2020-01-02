@@ -4,11 +4,13 @@ import { Observable } from "rxjs/Observable";
 import { catchError, map } from 'rxjs/operators';
 import { EventService } from './event.service';
 
+import { environment } from '../environments/environment';
+
 @Injectable()
 export class ApiService {
 
-  domanie = 'https://kumi20.webd.pl'; 
-  uri =  this.domanie + '/api/ksiega/';
+  domanie = environment.domanie
+  uri =  this.domanie + environment.uri;
     
     
   uriGallery = this.domanie + '/cms/assets/gallery';
@@ -98,16 +100,28 @@ export class ApiService {
   )
 }  
     
-  delete(uri){
-      return this._http.delete<any[]|any>(this.uri+uri, {headers: {
-          'Authorizationtoken':localStorage.getItem('ksiegaQumiToken')
-      }}).pipe(
-        catchError((err, caught)=>{
-            this.event.showInfo('error',err.message);
-            throw new Error(err.message)
-        })
-    )   
-  }    
+deleteAuthorization(uri){
+  return this._http.delete<any[]|any>(this.uri+uri,{headers: {
+        'Authorizationtoken':localStorage.getItem('ksiegaQumiToken')
+    }})
+  .pipe(
+      catchError((err, caught)=>{
+          this.event.showInfo('error',err.message);
+          throw new Error(err.message)
+      })
+  )
+}    
+ 
+delete(uri){
+  return this._http.delete<any[]|any>(this.uri+uri, {headers: {
+      'Authorizationtoken':localStorage.getItem('ksiegaQumiToken')
+  }}).pipe(
+    catchError((err, caught)=>{
+        this.event.showInfo('error',err.message);
+        throw new Error(err.message)
+    })
+)   
+} 
     
   logOn(user, psw){
       const json = JSON.stringify({
