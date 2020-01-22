@@ -50,6 +50,8 @@
                     (onRowRemoving)="delete($event.key)"
                     >
                     <dxo-selection mode="single"></dxo-selection>
+                    <dxo-group-panel [visible]="true"></dxo-group-panel>
+
                     <dxo-editing
                         mode="row"
                         [allowUpdating]="false"
@@ -94,6 +96,11 @@
                         dataField="opis_zdarzenia" 
                         caption="opis zd. gosp.">
                     </dxi-column> 
+                    <dxi-column 
+                        dataField="czy_przy" 
+                        caption="">
+                    </dxi-column> 
+                    
                 </dx-data-grid>
             </div>
         </div>

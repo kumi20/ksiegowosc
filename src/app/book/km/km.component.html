@@ -1,0 +1,105 @@
+<mdb-card class="card" >  
+    <mdb-card-header class="card-header">
+        Kilometrówka
+    </mdb-card-header>
+    <mdb-card-body class="card-body">
+        <mdb-card-text>
+            <div class="row">
+                <div class="col-md-12">
+                    <dx-button
+                        stylingMode="contained"
+                        text="Dodaj wyjazd"
+                        type="default"
+                        [width]="150"
+                        (onClick)="popupVisible = true"
+                    >
+                    </dx-button>
+
+                    <br>
+
+                    <dx-data-grid
+                    #grid
+                    id="gridContainerkmList"
+                    [dataSource]="kmList"
+                    keyExpr="id"
+                    [allowColumnReordering]="true"
+                    [allowColumnResizing]="true"
+                    [columnAutoWidth]="true"
+                    [selectedRowKeys]="[]"
+                    (onRowRemoving)="delete($event.key)"
+                    >
+                    <dxo-selection mode="single"></dxo-selection>
+                    <dxo-paging [pageSize]="10"></dxo-paging>
+                    <dxo-pager 
+                        [showPageSizeSelector]="true"
+                        [allowedPageSizes]="[5, 10, 20]"
+                        [showInfo]="true"
+                        >
+                    </dxo-pager>
+                    <dxo-editing
+                        mode="row"
+                        [allowUpdating]="false"
+                        [allowDeleting]="true"
+                        [allowAdding]="false"
+                        [useIcons]="true"
+                       >
+                    </dxo-editing>
+                    <dxo-filter-row 
+                        [visible]="true" 
+                        [applyFilter]="true"></dxo-filter-row>
+                    <dxo-search-panel 
+                        [visible]="true" 
+                        [width]="240" 
+                        placeholder="Szukaj..."></dxo-search-panel>
+                    <dxi-column 
+                        dataField="data" 
+                        caption="Data wyjzadu">
+                        <dxo-header-filter [allowSearch]="true"></dxo-header-filter>
+                    </dxi-column>  
+                    <dxi-column 
+                        dataField= "opis" 
+                        caption="Opis trasy (skąd - dokąd)">
+                        <dxo-header-filter [allowSearch]="true"></dxo-header-filter>
+                    </dxi-column>  
+                    <dxi-column 
+                        dataField="cel" 
+                        caption="Cel wyjazdu">
+                        <dxo-header-filter [allowSearch]="true"></dxo-header-filter>
+                    </dxi-column>   
+                    <dxi-column 
+                        dataField="kilometry" 
+                        caption="Liczba faktycznie przejechanych kilometrów">
+                        <dxo-header-filter [allowSearch]="true"></dxo-header-filter>
+                    </dxi-column>     
+                    <dxi-column 
+                        dataField="stawka" 
+                        caption="Stawka za 1 km przebiegu">
+                        <dxo-header-filter [allowSearch]="true"></dxo-header-filter>
+                    </dxi-column> 
+                    <dxi-column 
+                        dataField="wartosc" 
+                        caption="Wartość">
+                        <dxo-header-filter [allowSearch]="true"></dxo-header-filter>
+                    </dxi-column> 
+                </dx-data-grid>
+                </div>
+            </div>  
+        </mdb-card-text>
+    </mdb-card-body>
+</mdb-card>
+
+
+<dx-popup
+        [width]="900"
+        [height]="650"
+        [showTitle]="true"
+        title="Wyjazd"
+        [dragEnabled]="false"
+        [closeOnOutsideClick]="true"
+        [(visible)]="popupVisible">
+        <div class="row">
+             <div class="col-md-12">
+                <app-add-km></app-add-km>
+             </div>   
+        </div>
+</dx-popup>

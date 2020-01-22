@@ -45,7 +45,17 @@
                                     [(ngModel)]="item.file.month"
                                 ></dx-select-box>     
                                 </td>
-                              <td><mdb-date-picker name="dataPublication" [options]="myDatePickerOptions" [placeholder]="'Wybierz date'" [(ngModel)]="item.file.datapay"></mdb-date-picker></td>
+                              <td>
+                                  <!-- <mdb-date-picker name="dataPublication" [options]="myDatePickerOptions" [placeholder]="'Wybierz date'" [(ngModel)]="item.file.datapay"></mdb-date-picker> -->
+                                  <dx-date-box
+                                        placeholder=""
+                                        [showClearButton]="true"
+                                        [useMaskBehavior]="true"
+                                        displayFormat="yyyy-MM-dd"
+                                        type="date"
+                                        [(ngModel)]="item.file.datapay">
+                                    </dx-date-box>
+                                </td>
                               <td >
                                   <div class="progress" style="margin-bottom: 0;">
                                       <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>

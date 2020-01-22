@@ -1,7 +1,7 @@
 import { Injectable, Output, EventEmitter} from '@angular/core';
 import { ToastService } from './typescripts/pro/alerts'
 import { Router } from '@angular/router';
-
+import notify from 'devextreme/ui/notify';
 
 @Injectable()
 export class EventService {
@@ -33,9 +33,9 @@ export class EventService {
     
   showInfo(typ, tresc){
     switch(typ){
-        case 'info': this.toastrService.info(tresc); break;
-        case 'success': this.toastrService.success(tresc); break;
-        case 'error': this.toastrService.error(tresc); break;
+        case 'info': notify(tresc, 'info', 600);  break;
+        case 'success': notify(tresc, 'success', 600); break;
+        case 'error': notify(tresc, 'error', 600); break;
     }
   }
     

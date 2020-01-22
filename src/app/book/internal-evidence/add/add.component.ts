@@ -66,6 +66,7 @@ export class AddComponent implements OnInit {
     
     save(){
         this.evidence.sum = this.evidence.sum.replace(',','.');
+        this.evidence.data = new Date(this.evidence.data).getFullYear()+'-'+this.event.formatMonth(new Date(this.evidence.data).getMonth())+'-'+this.event.formatDay(new Date(this.evidence.data).getDate());
         if (!isNaN(this.idDocumnet)){
             this.CmsService.postAuthorization(`internal-evidence/put.php`, this.evidence).subscribe(
                 response =>{

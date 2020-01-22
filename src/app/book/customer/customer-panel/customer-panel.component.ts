@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FileUploader } from 'ng2-file-upload';
 
 import { CustomerFileListComponent } from '../customer-file-list/customer-file-list.component';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 const URL = '';
 
@@ -99,7 +100,8 @@ export class CustomerPanelComponent implements OnInit {
             let fvName = item.file.name;
             let name = new Date().getTime() + Math.round(Math.random() * 10000000);
             item.file.name = name+'.pdf';
-            let datapay = (<any>item.file).datapay;
+            let datapay = (<any>item.file).datapay;            
+            datapay = new Date(datapay).getFullYear()+'-'+this.event.formatMonth(new Date(datapay).getMonth())+'-'+this.event.formatDay(new Date(datapay).getDate());
             item.url = `${this.CmsService.uri}customer/create_fv.php?idUser=${this.idCustomer.value}&name=${fvName}&year=${(<any>item.file).year}&mounth=${(<any>item.file).month}&datapay=${datapay}&countFV=${this.countFV}`;
             item.upload();
         }

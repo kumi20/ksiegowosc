@@ -11,11 +11,31 @@
                 </tr>
                 <tr>
                     <td><p class="income_date">Data wystawienia dokumentu:</p></td>
-                    <td><mdb-date-picker name="mydate" [options]="myDatePickerOptions" [placeholder]="'Wybierz date'" [(ngModel)]="expenditure.documentData" class="mdb_income"></mdb-date-picker></td>
+                    <td>
+                        <!-- <mdb-date-picker name="mydate" [options]="myDatePickerOptions" [placeholder]="'Wybierz date'" [(ngModel)]="expenditure.documentData" class="mdb_income"></mdb-date-picker> -->
+                        <dx-date-box
+                            placeholder=""
+                            [showClearButton]="true"
+                            [useMaskBehavior]="true"
+                            displayFormat="yyyy-MM-dd"
+                            type="date"
+                            [(ngModel)]="expenditure.documentData">
+                        </dx-date-box>
+                    </td>
                 </tr>
                 <tr>
                     <td><p class="income_date">Data wykonania usługi lub dostarczenia towaru:</p></td>
-                    <td><mdb-date-picker name="mydate" [options]="myDatePickerOptions" [placeholder]="'Wybierz date'"  [(ngModel)]="expenditure .dataSales"  class="mdb_income"></mdb-date-picker></td>
+                    <td>
+                        <!-- <mdb-date-picker name="mydate" [options]="myDatePickerOptions" [placeholder]="'Wybierz date'"  [(ngModel)]="expenditure .dataSales"  class="mdb_income"></mdb-date-picker> -->
+                        <dx-date-box
+                            placeholder=""
+                            [showClearButton]="true"
+                            [useMaskBehavior]="true"
+                            displayFormat="yyyy-MM-dd"
+                            type="date"
+                            [(ngModel)]="expenditure.dataSales">
+                        </dx-date-box>
+                    </td>
                 </tr>
             </table>
         </div>
@@ -86,7 +106,17 @@
             <table>
                 <tr>
                     <td>Termin płatności:</td>
-                    <td><mdb-date-picker name="mydate" [options]="myDatePickerOptions" [placeholder]="'Wybierz date'" [(ngModel)]="expenditure.dataToPay" class="mdb_income"></mdb-date-picker></td>
+                    <td>
+                        <!-- <mdb-date-picker name="mydate" [options]="myDatePickerOptions" [placeholder]="'Wybierz date'" [(ngModel)]="expenditure.dataToPay" class="mdb_income"></mdb-date-picker> -->
+                        <dx-date-box
+                            placeholder=""
+                            [showClearButton]="true"
+                            [useMaskBehavior]="true"
+                            displayFormat="yyyy-MM-dd"
+                            type="date"
+                            [(ngModel)]="expenditure.dataToPay">
+                        </dx-date-box>
+                    </td>
                 </tr>                        
             </table>   
             <div class="form-group checkbox-primary">
@@ -97,7 +127,17 @@
             <table *ngIf="expenditure.boolPay">
                 <tr>
                     <td>Data dokonania płatności:</td>
-                    <td><mdb-date-picker name="mydate" [options]="myDatePickerOptions" [(ngModel)]="expenditure.dataPay" [placeholder]="'Wybierz date'" class="mdb_income"></mdb-date-picker></td>
+                    <td>
+                        <!-- <mdb-date-picker name="mydate" [options]="myDatePickerOptions" [(ngModel)]="expenditure.dataPay" [placeholder]="'Wybierz date'" class="mdb_income"></mdb-date-picker> -->
+                        <dx-date-box
+                            placeholder=""
+                            [showClearButton]="true"
+                            [useMaskBehavior]="true"
+                            displayFormat="yyyy-MM-dd"
+                            type="date"
+                            [(ngModel)]="expenditure.dataPay">
+                        </dx-date-box>
+                    </td>
                 </tr>
             </table>   
             
@@ -137,7 +177,16 @@
                 <tr mdbTableCol *ngFor="let el of expenditure.servicesList; let i = index;">
                   <td scope="row">{{i+1}}.</td>    
                   <td scope="row">
-                      <dx-text-box [(ngModel)]="el.name" [showClearButton]="true"></dx-text-box>
+                    <dx-select-box 
+                        [dataSource]="editableProducts"
+                        [searchEnabled]="true"
+                        [acceptCustomValue]="true"
+                        displayExpr="label"
+                        valueExpr="value"
+                        [(ngModel)]="el.name" 
+                        (onCustomItemCreating)="onCustomItemCreating($event, i)"
+                    ></dx-select-box>  
+                      <!-- <dx-text-box [(ngModel)]="el.name" [showClearButton]="true"></dx-text-box> -->
                       <!-- <input type="text" [(ngModel)]="el.name" class="fv_input"> -->
                   </td>
                   <td>

@@ -28,7 +28,15 @@
             <div class="row">
                 <div class="col-md-12">
                     <label class="active">Data nabycia:</label> 
-                    <mdb-date-picker name="dataSet" id="dataSet" [options]="myDatePickerOptions" [placeholder]="'Wybierz date'" formControlName="dataSet" class="mdb_income" [ngClass]="(submited && formErrors.dataSet)?'form-control in-valid' : 'form-control'"></mdb-date-picker>
+                    <!-- <mdb-date-picker name="dataSet" id="dataSet" [options]="myDatePickerOptions" [placeholder]="'Wybierz date'" formControlName="dataSet" class="mdb_income" [ngClass]="(submited && formErrors.dataSet)?'form-control in-valid' : 'form-control'"></mdb-date-picker> -->
+                    <dx-date-box
+                                        placeholder=""
+                                        [showClearButton]="true"
+                                        [useMaskBehavior]="true"
+                                        displayFormat="yyyy-MM-dd"
+                                        type="date"
+                                        formControlName="dataSet">
+                                    </dx-date-box>
                     <small class="text-danger" *ngIf="submited && formErrors.dataSet">
                         {{ formErrors.dataSet}}
                     </small>
@@ -67,7 +75,15 @@
             <div class="row">
                 <div class="col-md-12">
                     <label class="active">Data likwidacji:</label> 
-                    <mdb-date-picker name="dataOfLiquidated" id="dataOfLiquidated" [options]="myDatePickerOptions" [placeholder]="'Wybierz date'" formControlName="dataOfLiquidated" class="mdb_income" class="form-control"></mdb-date-picker>
+                    <!-- <mdb-date-picker name="dataOfLiquidated" id="dataOfLiquidated" [options]="myDatePickerOptions" [placeholder]="'Wybierz date'" formControlName="dataOfLiquidated" class="mdb_income" class="form-control"></mdb-date-picker> -->
+                    <dx-date-box
+                                        placeholder=""
+                                        [showClearButton]="true"
+                                        [useMaskBehavior]="true"
+                                        displayFormat="yyyy-MM-dd"
+                                        type="date"
+                                        formControlName="dataOfLiquidated">
+                                    </dx-date-box>
                 </div>    
             </div>
             

@@ -4,6 +4,7 @@ import { ApiService } from '../../api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { invoice, company, fv } from './income';
+import DataSource from "devextreme/data/data_source";
 
  const currentDate = new Date();
     
@@ -62,7 +63,10 @@ export class IncomeComponent implements OnInit {
       {value: 'usługa', label: 'usługa'},
   ];
     
-     
+  currencyFormat = "PLN #.##";   
+
+  editableProducts = new DataSource({
+    store: []});
     
   constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) {}
 
@@ -72,7 +76,7 @@ export class IncomeComponent implements OnInit {
         this.company.city = localStorage.getItem('companyCity');
         this.company.nip = localStorage.getItem('companyNip');
       
-      
+        this.getListServices();
         let services = {name:'', jm: '', count: 0 ,netto:'0.00' ,countNetto:0.00, vat:'23', countVat:0.00,brutto:0.00}; 
         this.invoice.servicesList.push(services);
       
@@ -116,6 +120,10 @@ export class IncomeComponent implements OnInit {
             this.invoice.toPay === 0 
            ) this.event.showInfo('error', 'Uzupełnij wszystkie wymagane pola');
         else{
+            this.invoice.documentData = new Date(this.invoice.documentData).getFullYear()+'-'+this.event.formatMonth(new Date(this.invoice.documentData).getMonth())+'-'+this.event.formatDay(new Date(this.invoice.documentData).getDate());
+            this.invoice.dataSales = new Date(this.invoice.dataSales).getFullYear()+'-'+this.event.formatMonth(new Date(this.invoice.dataSales).getMonth())+'-'+this.event.formatDay(new Date(this.invoice.dataSales).getDate());
+            this.invoice.dataToPay = new Date(this.invoice.dataToPay).getFullYear()+'-'+this.event.formatMonth(new Date(this.invoice.dataToPay).getMonth())+'-'+this.event.formatDay(new Date(this.invoice.dataToPay).getDate());
+            this.invoice.dataPay = new Date(this.invoice.dataPay).getFullYear()+'-'+this.event.formatMonth(new Date(this.invoice.dataPay).getMonth())+'-'+this.event.formatDay(new Date(this.invoice.dataPay).getDate());
             this.CmsService.postAuthorization(`income/postFV.php`, this.invoice).subscribe(
                 response =>{
                     if (response.kod != "0") this.event.showInfo('error', response.description);
@@ -218,5 +226,28 @@ export class IncomeComponent implements OnInit {
     deleted(i){
         this.invoice.servicesList.splice(i, 1);
         this.sumVatServices();
+    }
+
+    onCustomItemCreating(event, i){
+
+        event.customItem = { value: event.text, label: event.text };
+        // Adds the entry to the data source
+        this.editableProducts.store().insert(event.customItem);
+        // Reloads the data source
+        this.editableProducts.reload();
+        
+        this.CmsService.postAuthorization(`services/create.php`, JSON.stringify(event.text)).subscribe(()=>{});
+
+    }
+
+
+    getListServices(){
+        this.CmsService.getAuthorization(`services/getList.php`).subscribe(response=>{
+            response.forEach(field => {
+                 field.customItem = { value: field.name, label: field.name };
+                 this.editableProducts.store().insert(field.customItem);
+                 this.editableProducts.reload();
+            });
+        })
     }
 }

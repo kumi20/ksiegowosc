@@ -1,0 +1,96 @@
+<form [formGroup]="kmForm" (ngSubmit)="onSubmittedForm(kmForm)">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="kmForm.data">Data wyjazdu</label>
+                <dx-date-box
+                    placeholder=""
+                    id="kmForm.data"
+                    [showClearButton]="true"
+                    [useMaskBehavior]="true"
+                    displayFormat="yyyy-MM-dd"
+                    type="date"
+                    formControlName="data">
+                </dx-date-box>
+            
+                <small class="text-danger" *ngIf="submitted && formError.data">
+                    {{ formError.data}}
+                </small>  
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="opis">Opis trasy (skąd - dokąd)</label>
+                <input class="form-control" name="opis" id="opis" formControlName="opis" >            
+                <small class="text-danger" *ngIf="submitted && formError.opis">
+                    {{ formError.opis}}
+                </small>  
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="cel">Cel wyjazdy</label>
+                <input class="form-control" name="cel" id="cel" formControlName="cel" >            
+                <small class="text-danger" *ngIf="submitted && formError.cel">
+                    {{ formError.cel}}
+                </small>  
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="kilometry">Liczba faktycznie przejechanych kilometrów</label>
+                <input class="form-control" name="kilometry" id="kilometry" formControlName="kilometry" (keyup.enter)="countValue()">            
+                <small class="text-danger" *ngIf="submitted && formError.kilometry">
+                    {{ formError.kilometry}}
+                </small>  
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="stawka">Stawka za 1km przebiegu</label>
+                <input class="form-control" name="stawka" id="stawka" formControlName="stawka" (keyup.enter)="countValue()">            
+                <small class="text-danger" *ngIf="submitted && formError.stawka">
+                    {{ formError.stawka}}
+                </small>  
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="wartosc">Wartość</label>
+                <input class="form-control" name="wartosc" id="wartosc" formControlName="wartosc" readonly>            
+                <small class="text-danger" *ngIf="submitted && formError.wartosc">
+                    {{ formError.wartosc}}
+                </small>  
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <dx-button
+                icon="check"
+                stylingMode="contained"
+                text="Zapisz"
+                type="default"
+                [width]="150"
+                (onClick)="onSubmittedForm(kmForm)"
+            >
+            </dx-button>
+        </div>
+    </div>
+</form>

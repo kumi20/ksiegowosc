@@ -46,14 +46,33 @@
       <div class="modal-body mx-4">
         <!--Body-->
         <form [formGroup]="userAuthorization" (ngSubmit)="logON(userAuthorization.value)">
-            <div class="md-form mb-5">
-              <input type="email" id="Form-email1" class="form-control" formControlName="email" mdbActive>
+            <div class="form-group mb-5">
               <label data-error="wrong" data-success="right" for="Form-email1">Twój email</label>
+              <dx-text-box 
+                    id="Form-email1" 
+                    stylingMode="filled"
+                    formControlName="email"
+                    
+              ></dx-text-box>
+              <!-- <input type="email" id="Form-email1" class="form-control" formControlName="email" mdbActive> -->
+              
             </div>
 
-            <div class="md-form pb-3">
-              <input type="password" id="Form-pass1" class="form-control" formControlName="psw" mdbActive>
+            <div class="form-group pb-3">
               <label data-error="wrong" data-success="right" for="Form-pass1" >Twoje hasło</label>
+              <dx-text-box 
+                    id="Form-pass1" 
+                    placeholder="password"
+                    stylingMode="filled"
+                    [(mode)]="passwordMode"
+                    formControlName="psw"
+                    
+                >
+                    <dxi-button name="today" location="after" [options]="passwordButton"></dxi-button>
+                </dx-text-box>
+
+              <!-- <input type="password" id="Form-pass1" class="form-control" formControlName="psw" mdbActive> -->
+              
               <p class="font-small blue-text d-flex justify-content-end">Zapomniałem
                 <a href="#" class="blue-text ml-1"> hasło?</a>
               </p>

@@ -44,7 +44,7 @@ export class IncomeNotPaidComponent implements OnInit {
   }    
     
   pay(id, date){
-      
+      date = new Date(date).getFullYear()+'-'+this.event.formatMonth(new Date(date).getMonth())+'-'+this.event.formatDay(new Date(date).getDate());
       this.CmsService.getAuthorization(`noPay/pay.php?date=${date}&id=${id}`).subscribe(
         response=>{
             this.showList();

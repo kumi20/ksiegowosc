@@ -3,6 +3,7 @@ import { EventService } from '../../event.service';
 import { ApiService } from '../../api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import DataSource from "devextreme/data/data_source";
 import { invoice, company, fv } from '../income/income';
 
 
@@ -60,6 +61,9 @@ export class ExpenditureComponent implements OnInit {
     
   suma = []; //suma netto z podziałem na stawki vat       
     
+  editableProducts = new DataSource({
+    store: []});
+
   constructor(private CmsService: ApiService, private event: EventService, private route: ActivatedRoute, private _route: Router) {}
 
   ngOnInit() {
@@ -67,6 +71,8 @@ export class ExpenditureComponent implements OnInit {
       this.company.street = localStorage.getItem('companyAdres');
       this.company.city = localStorage.getItem('companyCity');
       this.company.nip = localStorage.getItem('companyNip');
+
+      this.getListServices();
       
       this.CmsService.getAuthorization(`expenditure/getContractor.php`).subscribe(
             response =>{
@@ -203,6 +209,10 @@ export class ExpenditureComponent implements OnInit {
             this.expenditure.toPay === 0 
            ) this.event.showInfo('error', 'Uzupełnij wszystkie wymagane pola');
         else{
+            this.expenditure.documentData = new Date(this.expenditure.documentData).getFullYear()+'-'+this.event.formatMonth(new Date(this.expenditure.documentData).getMonth())+'-'+this.event.formatDay(new Date(this.expenditure.documentData).getDate());
+            this.expenditure.dataSales = new Date(this.expenditure.dataSales).getFullYear()+'-'+this.event.formatMonth(new Date(this.expenditure.dataSales).getMonth())+'-'+this.event.formatDay(new Date(this.expenditure.dataSales).getDate());
+            this.expenditure.dataToPay = new Date(this.expenditure.dataToPay).getFullYear()+'-'+this.event.formatMonth(new Date(this.expenditure.dataToPay).getMonth())+'-'+this.event.formatDay(new Date(this.expenditure.dataToPay).getDate());
+            this.expenditure.dataPay = new Date(this.expenditure.dataPay).getFullYear()+'-'+this.event.formatMonth(new Date(this.expenditure.dataPay).getMonth())+'-'+this.event.formatDay(new Date(this.expenditure.dataPay).getDate());
             this.CmsService.postAuthorization(`expenditure/postFV.php`, this.expenditure).subscribe(
                 response =>{
                     if (response.kod != "0") this.event.showInfo('error', response.description);
@@ -219,5 +229,28 @@ export class ExpenditureComponent implements OnInit {
     {
         var factor = Math.pow(10, k);
         return Math.round(n*factor)/factor;
+    }
+
+    onCustomItemCreating(event, i){
+
+        event.customItem = { value: event.text, label: event.text };
+        // Adds the entry to the data source
+        this.editableProducts.store().insert(event.customItem);
+        // Reloads the data source
+        this.editableProducts.reload();
+        
+        this.CmsService.postAuthorization(`services/create.php`, JSON.stringify(event.text)).subscribe(()=>{});
+
+    }
+
+
+    getListServices(){
+        this.CmsService.getAuthorization(`services/getList.php`).subscribe(response=>{
+            response.forEach(field => {
+                 field.customItem = { value: field.name, label: field.name };
+                 this.editableProducts.store().insert(field.customItem);
+                 this.editableProducts.reload();
+            });
+        })
     }
 }

@@ -1,0 +1,45 @@
+<br>
+<mdb-card class="card">  
+    <mdb-card-header class="card-header">Historia</mdb-card-header>
+        <mdb-card-body class="card-body">
+            <mdb-card-text> 
+
+                <dx-data-grid
+                    #grid
+                    id="gridContainer"
+                    [dataSource]="historyList"
+                    keyExpr="id_history"
+                    [allowColumnReordering]="true"
+                    [allowColumnResizing]="true"
+                    [columnAutoWidth]="true"
+                    [selectedRowKeys]="[]"
+                    >
+                    <dxo-selection mode="single"></dxo-selection>
+                    <dxo-paging [pageSize]="20"></dxo-paging>
+                    <dxo-pager 
+                        [showPageSizeSelector]="true"
+                        [allowedPageSizes]="[5, 10, 20]"
+                        [showInfo]="true"
+                        >
+                    </dxo-pager>
+                    <dxo-filter-row 
+                        [visible]="true" 
+                        [applyFilter]="true"></dxo-filter-row>
+                    <dxo-search-panel 
+                        [visible]="true" 
+                        [width]="240" 
+                        placeholder="Szukaj..."></dxo-search-panel>
+                    <dxi-column 
+                        dataField="data_history" 
+                        caption="Data">
+                        <dxo-header-filter [allowSearch]="true"></dxo-header-filter>
+                    </dxi-column>  
+                    <dxi-column 
+                        dataField= "description_history" 
+                        caption="Opis">
+                        <dxo-header-filter [allowSearch]="true"></dxo-header-filter>
+                    </dxi-column>  
+                </dx-data-grid>
+            </mdb-card-text>
+        </mdb-card-body>
+</mdb-card>

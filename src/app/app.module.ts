@@ -79,7 +79,7 @@ import { SearchFvComponent } from './book/fv/search-fv/search-fv.component';
 import { ConfigMaileComponent } from './book/settings/config-maile/config-maile.component';
 
 import { DxButtonModule, DxSelectBoxModule, DxDataGridModule, DxTextBoxModule, DxDateBoxModule, DxNumberBoxModule, DxChartModule,
-  DxPopupModule} from 'devextreme-angular';
+  DxPopupModule, DxTagBoxModule} from 'devextreme-angular';
 
 import { Locale } from './api.service';
 
@@ -93,6 +93,9 @@ import { ContactCustomerAddComponent } from './book/customer/contact-customer-ad
 import { CustomerFileComponent } from './book/customer/customer-file/customer-file.component';
 import { ServicesComponent } from './book/fv/services/services.component';
 import { CustomerFileListComponent } from './book/customer/customer-file-list/customer-file-list.component';
+import { HistoryComponent } from './book/history/history.component';
+import { KmComponent } from './book/km/km.component';
+import { AddKmComponent } from './book/km/add-km/add-km.component';
 
 // Configs 
 export function getAuthServiceConfigs() {
@@ -159,6 +162,9 @@ export function getAuthServiceConfigs() {
         CustomerFileComponent,
         ServicesComponent,
         CustomerFileListComponent,
+        HistoryComponent,
+        KmComponent,
+        AddKmComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -172,6 +178,7 @@ export function getAuthServiceConfigs() {
         DxPopupModule,
         DxNumberBoxModule,
         DxChartModule,
+        DxTagBoxModule,
         FormsModule,
         HttpModule,
         routerModule,

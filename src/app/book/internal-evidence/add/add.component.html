@@ -6,7 +6,15 @@
         <div class="row">
             <div class="col-md-12">
                 <label>Data dokumentu:</label>
-                <mdb-date-picker name="mydate" [options]="myDatePickerOptions" [placeholder]="'Wybierz date'" [(ngModel)]="evidence.data"></mdb-date-picker>
+                <!-- <mdb-date-picker name="mydate" [options]="myDatePickerOptions" [placeholder]="'Wybierz date'" [(ngModel)]="evidence.data"></mdb-date-picker> -->
+                <dx-date-box
+                    placeholder=""
+                    [showClearButton]="true"
+                    [useMaskBehavior]="true"
+                    displayFormat="yyyy-MM-dd"
+                    type="date"
+                    [(ngModel)]="evidence.data">
+                </dx-date-box>
             </div>
         </div>
         
