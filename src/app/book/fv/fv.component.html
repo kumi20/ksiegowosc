@@ -46,6 +46,7 @@
                     (onOptionChanged)="onClickPager($event)"
                     (onSelectionChanged)="selectionChangedHandler($event.selectedRowKeys)"
                     >
+                    <dxo-export [enabled]="true" fileName="Faktury" [allowExportSelectedData]="true"></dxo-export>
                     <dxo-selection mode="single"></dxo-selection>
                     <dxo-paging [pageSize]="pageSize"></dxo-paging>
                     <dxo-pager 

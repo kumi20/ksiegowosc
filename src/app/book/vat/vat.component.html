@@ -45,6 +45,7 @@
                     [selectedRowKeys]="[]"
                     (onRowRemoving)="delete($event.key)"
                     >
+                    <dxo-export [enabled]="true" fileName="Podatek VAT" [allowExportSelectedData]="true"></dxo-export>
                     <dxo-selection mode="single"></dxo-selection>
                     <dxo-editing
                         mode="row"

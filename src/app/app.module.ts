@@ -96,6 +96,8 @@ import { CustomerFileListComponent } from './book/customer/customer-file-list/cu
 import { HistoryComponent } from './book/history/history.component';
 import { KmComponent } from './book/km/km.component';
 import { AddKmComponent } from './book/km/add-km/add-km.component';
+import { UserPasswordComponent } from './book/customer/user-password/user-password.component';
+import { AddingComponent } from './book/customer/user-password/adding/adding.component';
 
 // Configs 
 export function getAuthServiceConfigs() {
@@ -165,6 +167,8 @@ export function getAuthServiceConfigs() {
         HistoryComponent,
         KmComponent,
         AddKmComponent,
+        UserPasswordComponent,
+        AddingComponent,
 	],
 	imports: [
 		BrowserModule,

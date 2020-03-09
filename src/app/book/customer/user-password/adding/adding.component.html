@@ -1,0 +1,61 @@
+<form [formGroup]="systemForm" (ngSubmit)="onSendSystem(systemForm)">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="system_name">Nazwa</label>
+                <input class="form-control" [ngClass]="(submitted && formError.name)?'form-control in-valid' : 'form-control'" name="name"
+                 mdbActive id="system_name" formControlName="name">   
+                <small class="text-danger" *ngIf="submitted && formError.name" style="font-size: ;">
+                    {{ formError.name}}
+                </small>                  
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="system_login">login</label>
+                <input class="form-control" [ngClass]="(submitted && formError.login)?'form-control in-valid' : 'form-control'" name="system_login"
+                 mdbActive id="system_login" formControlName="login">   
+                <small class="text-danger" *ngIf="submitted && formError.login">
+                    {{ formError.login}}
+                </small>                  
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="system_haslo">Hasło</label>
+                <input class="form-control" [ngClass]="(submitted && formError.password)?'form-control in-valid' : 'form-control'" name="system_haslo"
+                 mdbActive id="system_haslo" formControlName="password">   
+                <small class="text-danger" *ngIf="submitted && formError.password">
+                    {{ formError.password}}
+                </small>                  
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="coments">Uwagi</label>
+                <textarea class="form-control" name="coments"
+                 mdbActive id="coments" formControlName="coments"></textarea>              
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <dx-button
+                icon="check"
+                stylingMode="contained"
+                text="Zapisz"
+                type="default"
+                [width]="150"
+                (onClick)="onSendSystem(systemForm)"
+            >
+            </dx-button>
+        </div>
+    </div>
+</form>

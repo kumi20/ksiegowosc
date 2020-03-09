@@ -10,7 +10,8 @@ import { AddUserCustomerComponent } from '../book/customer/add-user-customer/add
 import { ContactCustomerListComponent } from '../book/customer/contact-customer-list/contact-customer-list.component';
 import { CustomerFileComponent } from '../book/customer/customer-file/customer-file.component';
 import { CustomerFileListComponent } from '../book/customer/customer-file-list/customer-file-list.component';
-
+import { UserPasswordComponent } from '../book/customer/user-password/user-password.component';
+ 
 @Component({
   selector: 'app-wraper-component',
   templateUrl: './wraper-component.component.html',
@@ -54,6 +55,7 @@ export class WraperComponentComponent implements OnInit ,OnChanges{
               case 'ContactCustomerListComponent': k = ContactCustomerListComponent; break;
               case 'CustomerFileComponent': k = CustomerFileComponent; break;
               case 'CustomerFileListComponent': k = CustomerFileListComponent; break;
+              case 'UserPasswordComponent': k = UserPasswordComponent; break;
           }
   
           this.kontrolkiDoWyswietlenia[index] = {

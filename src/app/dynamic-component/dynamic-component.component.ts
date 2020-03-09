@@ -4,6 +4,7 @@ import { AddUserCustomerComponent } from '../book/customer/add-user-customer/add
 import { ContactCustomerListComponent } from '../book/customer/contact-customer-list/contact-customer-list.component';
 import { CustomerFileComponent } from '../book/customer/customer-file/customer-file.component';
 import { CustomerFileListComponent } from '../book/customer/customer-file-list/customer-file-list.component';
+import { UserPasswordComponent } from '../book/customer/user-password/user-password.component';
 
 @Component({
   selector: 'app-dynamic-component',
@@ -11,7 +12,8 @@ import { CustomerFileListComponent } from '../book/customer/customer-file-list/c
     AddUserCustomerComponent,
     ContactCustomerListComponent,
     CustomerFileComponent,
-    CustomerFileListComponent
+    CustomerFileListComponent,
+    UserPasswordComponent
   ],
   templateUrl: './dynamic-component.component.html',
   styleUrls: ['./dynamic-component.component.scss'],

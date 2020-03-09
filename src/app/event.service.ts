@@ -33,9 +33,9 @@ export class EventService {
     
   showInfo(typ, tresc){
     switch(typ){
-        case 'info': notify(tresc, 'info', 600);  break;
-        case 'success': notify(tresc, 'success', 600); break;
-        case 'error': notify(tresc, 'error', 600); break;
+        case 'info': notify(tresc, 'info', 1000);  break;
+        case 'success': notify(tresc, 'success', 1000); break;
+        case 'error': notify(tresc, 'error', 1000); break;
     }
   }
     
